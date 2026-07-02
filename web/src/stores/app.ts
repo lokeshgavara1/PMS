@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { User, Notification } from '../types';
+import type { User } from '../types/index';
 
 interface AppState {
   // Current user
