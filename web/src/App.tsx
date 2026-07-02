@@ -8,6 +8,7 @@ import { useAppStore } from './stores/app';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
 
 // Layouts
 import DashboardLayout from './layouts/DashboardLayout';
@@ -74,6 +75,14 @@ function AppRoutes() {
             <DashboardLayout>
               <ProjectsPage />
             </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/projects/:projectId"
+        element={
+          <ProtectedRoute>
+            <ProjectDetailPage />
           </ProtectedRoute>
         }
       />
