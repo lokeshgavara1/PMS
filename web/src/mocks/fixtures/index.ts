@@ -1,4 +1,4 @@
-import {
+import type {
   Department,
   Batch,
   User,
@@ -13,6 +13,8 @@ import {
   WorkflowConfig,
   Notification,
   ActivityLogEntry,
+} from '../../types/index';
+import {
   SystemRole,
   ProjectRole,
   ProjectCategory,
@@ -24,7 +26,7 @@ import {
   DependencyType,
   SyncStatus,
   NotificationType,
-} from '../../types';
+} from '../../types/index';
 
 // ============================================================================
 // DEPARTMENTS

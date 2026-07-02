@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useProjects, useCreateProject } from '../api';
 import { useAppStore } from '../stores/app';
 import { Link } from 'react-router-dom';
-import { ProjectCategory, ProjectVisibility } from '../types';
+import { ProjectCategory, ProjectVisibility } from '../types/index';
 
 export default function ProjectsPage() {
   const { data: projectsData, isLoading } = useProjects(1, 20);

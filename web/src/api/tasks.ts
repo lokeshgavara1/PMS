@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { apiClient } from './client';
-import { Task, CreateTaskRequest, UpdateTaskStatusRequest, PaginatedResponse, TaskStatus } from '../types';
+import type { Task, CreateTaskRequest, UpdateTaskStatusRequest, PaginatedResponse } from '../types/index';
+import { TaskStatus } from '../types/index';
 
 /**
  * GET /api/v2/projects/:projectId/tasks

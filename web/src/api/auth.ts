@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from 'react-query';
 import { apiClient } from './client';
-import { User, AuthTokens, LoginRequest, LoginResponse } from '../types';
+import type { User, AuthTokens, LoginRequest, LoginResponse } from '../types/index';
 
 /**
  * POST /api/v2/auth/login

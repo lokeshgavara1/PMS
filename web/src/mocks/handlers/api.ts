@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 import { fixtures } from '../fixtures';
-import {
+import type {
   ApiErrorResponse,
   ApiSuccessResponse,
   User,
@@ -9,11 +9,11 @@ import {
   Comment,
   TimeLog,
   Notification,
-  TaskStatus,
   PaginatedResponse,
   LoginResponse,
   AuthTokens,
-} from '../../types';
+} from '../../types/index';
+import { TaskStatus } from '../../types/index';
 
 const API_BASE = '/api/v2';
 

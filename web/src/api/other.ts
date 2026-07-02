@@ -1,12 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { apiClient } from './client';
-import {
+import type {
   Comment,
   TimeLog,
   Notification,
   CreateCommentRequest,
   LogTimeRequest,
-} from '../types';
+} from '../types/index';
 
 // ============================================================================
 // COMMENTS

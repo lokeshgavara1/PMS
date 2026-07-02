@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { apiClient } from './client';
-import { Project, CreateProjectRequest, PaginatedResponse } from '../types';
+import type { Project, CreateProjectRequest, PaginatedResponse } from '../types/index';
 
 /**
  * GET /api/v2/projects
