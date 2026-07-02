@@ -95,7 +95,7 @@ export enum NotificationType {
 }
 
 // ============================================================================
-// CORE ENTITIES (ordered by dependency)
+// CORE ENTITIES
 // ============================================================================
 
 export interface Department {
@@ -356,7 +356,7 @@ export interface LogTimeRequest {
 }
 
 // ============================================================================
-// API ERROR RESPONSE (SDD §6.6)
+// API ERROR RESPONSE
 // ============================================================================
 
 export interface ApiError {
