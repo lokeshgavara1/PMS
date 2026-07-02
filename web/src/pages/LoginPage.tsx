@@ -56,8 +56,6 @@ export default function LoginPage() {
   };
 
   const handleGoogleSignIn = () => {
-    // In production, this would initiate OAuth flow
-    // For now, show a message
     setLocalError('Google sign-in will be available soon. Use demo users to test.');
   };
 
@@ -71,15 +69,87 @@ export default function LoginPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        {/* Card */}
-        <div className="bg-white rounded-lg shadow-xl p-8">
+    <div className="min-h-screen flex">
+      {/* Left Section - Dark Blue Marketing */}
+      <div className="w-1/2 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white p-12 flex flex-col justify-between">
+        <div>
           {/* Logo */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">CUTM-PMS</h1>
-            <p className="text-gray-600 mt-2">Project Management System</p>
+          <div className="mb-12">
+            <div className="w-12 h-12 bg-white rounded-full mb-3"></div>
+            <h1 className="text-2xl font-bold">CUTM-PMS</h1>
+            <p className="text-blue-300 text-sm mt-1">Project Management System</p>
           </div>
+
+          {/* AI Badge */}
+          <div className="inline-block px-4 py-2 border border-blue-400 rounded-full text-sm text-blue-300 mb-12">
+            ⚡ Smart Project Management
+          </div>
+
+          {/* Main Heading */}
+          <div className="mb-8">
+            <h2 className="text-5xl font-bold leading-tight mb-4">
+              Manage Projects
+              <br />
+              <span className="text-blue-400">Smarter &</span>
+              <br />
+              Faster.
+            </h2>
+            <p className="text-blue-200 text-lg leading-relaxed">
+              CUTM-PMS gives your team intelligent task tracking, automated workflows,
+              real-time analytics, and seamless collaboration — all in one place.
+            </p>
+          </div>
+        </div>
+
+        {/* Features */}
+        <div>
+          <div className="flex gap-3 mb-12 flex-wrap">
+            <button className="px-6 py-2 border border-blue-400 text-blue-300 rounded-lg hover:bg-blue-900/50 transition">
+              📊 Task Management
+            </button>
+            <button className="px-6 py-2 border border-blue-400 text-blue-300 rounded-lg hover:bg-blue-900/50 transition">
+              📈 Real Analytics
+            </button>
+            <button className="px-6 py-2 border border-blue-400 text-blue-300 rounded-lg hover:bg-blue-900/50 transition">
+              🔄 Auto Workflows
+            </button>
+            <button className="px-6 py-2 border border-blue-400 text-blue-300 rounded-lg hover:bg-blue-900/50 transition">
+              🔒 Secure & Compliant
+            </button>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-6 pb-12 border-b border-blue-800">
+            <div className="border border-blue-700 rounded-lg p-6 text-center">
+              <p className="text-3xl font-bold mb-2">500+</p>
+              <p className="text-blue-300 text-sm">Projects Managed</p>
+            </div>
+            <div className="border border-blue-700 rounded-lg p-6 text-center">
+              <p className="text-3xl font-bold mb-2">99%</p>
+              <p className="text-blue-300 text-sm">Uptime</p>
+            </div>
+            <div className="border border-blue-700 rounded-lg p-6 text-center">
+              <p className="text-3xl font-bold mb-2">4.9★</p>
+              <p className="text-blue-300 text-sm">User Rating</p>
+            </div>
+          </div>
+
+          {/* Security Notice */}
+          <div className="mt-12 p-4 bg-blue-900/30 border border-blue-700 rounded-lg">
+            <p className="text-blue-300 text-sm">
+              🔐 <span className="font-semibold">Restricted Access</span>
+              <br />
+              Login is limited to official cutm.ac.in / cutmap.ac.in accounts.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Section - Login Form */}
+      <div className="w-1/2 bg-white p-12 flex flex-col justify-center items-center">
+        <div className="w-full max-w-md">
+          <h3 className="text-3xl font-bold text-gray-900 mb-3">Welcome back</h3>
+          <p className="text-gray-600 mb-8">Sign in to your project dashboard</p>
 
           {/* Error Message */}
           {(localError || error) && (
@@ -90,11 +160,11 @@ export default function LoginPage() {
             </div>
           )}
 
-          {/* Google Sign In */}
+          {/* Google Sign In Button */}
           <button
             type="button"
             onClick={handleGoogleSignIn}
-            className="w-full flex items-center justify-center gap-3 px-4 py-2 border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium text-gray-700 mb-4"
+            className="w-full flex items-center justify-center gap-3 px-6 py-3 border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium text-gray-700 mb-6"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -164,7 +234,7 @@ export default function LoginPage() {
 
           {/* Demo Users */}
           <div className="border-t border-gray-200 pt-6">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Demo Users (use password: password123)</h3>
+            <h3 className="text-sm font-semibold text-gray-900 mb-3">Demo Users (Development Only)</h3>
             <div className="space-y-2">
               {demoUsers.map((demoUser) => (
                 <button

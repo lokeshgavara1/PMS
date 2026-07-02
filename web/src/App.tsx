@@ -60,6 +60,7 @@ function AppRoutes() {
   return (
     <Routes>
       {/* Public routes */}
+      <Route path="/landing" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
 
       {/* Protected routes */}
@@ -136,8 +137,7 @@ function AppRoutes() {
         }
       />
 
-      {/* Landing page and root redirect */}
-      <Route path="/landing" element={<LandingPage />} />
+      {/* Root redirect */}
       <Route path="/" element={<Navigate to={isAuthenticated() ? '/dashboard' : '/landing'} replace />} />
 
       {/* 404 */}
