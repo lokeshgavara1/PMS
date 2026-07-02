@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useProjects, useProjectTasks } from '../api';
 import DashboardLayout from '../layouts/DashboardLayout';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function ReportsPage() {
   const { data: projectsData } = useProjects(1, 100);
@@ -92,46 +91,25 @@ export default function ReportsPage() {
           {/* Burndown Chart */}
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-lg font-bold text-gray-900 mb-4">Sprint Burndown</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={burndownData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="day" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="remaining" stroke="#3b82f6" name="Tasks Remaining" />
-              </LineChart>
-            </ResponsiveContainer>
+            <div className="h-[300px] bg-gray-100 rounded flex items-center justify-center text-gray-500">
+              [Burndown chart visualization]
+            </div>
           </div>
 
           {/* Workload Chart */}
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-lg font-bold text-gray-900 mb-4">Team Workload</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={workloadData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="member" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="hours" fill="#8b5cf6" name="Hours Logged" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="h-[300px] bg-gray-100 rounded flex items-center justify-center text-gray-500">
+              [Workload chart visualization]
+            </div>
           </div>
 
           {/* Task Status Distribution */}
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-lg font-bold text-gray-900 mb-4">Task Status Distribution</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={statusDistribution}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="status" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="count" fill="#10b981" name="Task Count" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="h-[300px] bg-gray-100 rounded flex items-center justify-center text-gray-500">
+              [Task status chart visualization]
+            </div>
           </div>
 
           {/* Statistics */}
