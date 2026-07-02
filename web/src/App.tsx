@@ -5,6 +5,7 @@ import { useCurrentUser, isAuthenticated } from './api';
 import { useAppStore } from './stores/app';
 
 // Pages
+import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import ProjectsPage from './pages/ProjectsPage';
@@ -135,8 +136,9 @@ function AppRoutes() {
         }
       />
 
-      {/* Redirect root to dashboard or login */}
-      <Route path="/" element={<Navigate to={isAuthenticated() ? '/dashboard' : '/login'} replace />} />
+      {/* Landing page and root redirect */}
+      <Route path="/landing" element={<LandingPage />} />
+      <Route path="/" element={<Navigate to={isAuthenticated() ? '/dashboard' : '/landing'} replace />} />
 
       {/* 404 */}
       <Route path="*" element={<Navigate to="/" replace />} />
