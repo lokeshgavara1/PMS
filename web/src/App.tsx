@@ -1,51 +1,134 @@
 import { QueryClientProvider, QueryClient } from 'react-query';
-import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useCurrentUser, isAuthenticated } from './api';
+import { useAppStore } from './stores/app';
 
-const queryClient = new QueryClient();
+// Pages
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import ProjectsPage from './pages/ProjectsPage';
 
-function App() {
-  const [health, setHealth] = useState<{ status: string } | null>(null);
-  const [loading, setLoading] = useState(true);
+// Layouts
+import DashboardLayout from './layouts/DashboardLayout';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
+
+// Protected route wrapper
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { data: user, isLoading } = useCurrentUser();
+  const setCurrentUser = useAppStore((state) => state.setCurrentUser);
 
   useEffect(() => {
-    fetch('/api/v2/health')
-      .then(res => res.json())
-      .then(data => {
-        setHealth(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Health check failed:', err);
-        setLoading(false);
-      });
-  }, []);
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, [user, setCurrentUser]);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-gray-50">
-        <div className="container mx-auto p-8">
-          <h1 className="text-3xl font-bold mb-4">CUTM-PMS</h1>
-          <p className="text-gray-600 mb-4">Performance Management System</p>
-
-          <div className="bg-white rounded-lg shadow p-6 mb-4">
-            <h2 className="text-xl font-semibold mb-2">MSW Health Check</h2>
-            {loading ? (
-              <p className="text-gray-500">Checking API...</p>
-            ) : health ? (
-              <p className="text-green-600">✓ API Status: {health.status}</p>
-            ) : (
-              <p className="text-red-600">✗ API Connection Failed</p>
-            )}
-          </div>
-
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <p className="text-sm text-gray-600">
-              ℹ️ Waiting for SRS.md and SDD.md specification files.
-              Once provided, the full frontend will be built with all screens, types, fixtures, and mock handlers.
-            </p>
-          </div>
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 rounded-full border-4 border-gray-200 border-t-blue-500 animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
+    );
+  }
+
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <>{children}</>;
+}
+
+function AppRoutes() {
+  return (
+    <Routes>
+      {/* Public routes */}
+      <Route path="/login" element={<LoginPage />} />
+
+      {/* Protected routes */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <DashboardPage />
+            </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/projects"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <ProjectsPage />
+            </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/my-tasks"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <div className="text-center py-12">
+                <p className="text-gray-600">My Tasks - Coming Soon</p>
+              </div>
+            </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/reports"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <div className="text-center py-12">
+                <p className="text-gray-600">Reports - Coming Soon</p>
+              </div>
+            </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <div className="text-center py-12">
+                <p className="text-gray-600">Admin - Coming Soon</p>
+              </div>
+            </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Redirect root to dashboard or login */}
+      <Route path="/" element={<Navigate to={isAuthenticated() ? '/dashboard' : '/login'} replace />} />
+
+      {/* 404 */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <AppRoutes />
+      </Router>
     </QueryClientProvider>
   );
 }
