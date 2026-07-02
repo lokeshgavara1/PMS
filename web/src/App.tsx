@@ -1,6 +1,5 @@
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { useState, useEffect } from 'react';
-import './App.css';
 
 const queryClient = new QueryClient();
 
