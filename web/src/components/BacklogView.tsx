@@ -1,6 +1,27 @@
 import React, { useState } from 'react';
 import { useCreateTask, useUpdateTask } from '../api';
-import { Task } from '../types/index';
+
+interface Task {
+  id: number;
+  project_id: number;
+  sprint_id?: number;
+  parent_id?: number;
+  title: string;
+  description?: string;
+  type: string;
+  priority: string;
+  status: string;
+  assignee_id?: number;
+  reporter_id: number;
+  milestone_id?: number;
+  due_date?: string;
+  estimate_hours?: number;
+  position: number;
+  is_archived: boolean;
+  submission_status?: string;
+  created_at: string;
+  updated_at: string;
+}
 
 interface BacklogViewProps {
   projectId: number;

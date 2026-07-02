@@ -1,6 +1,35 @@
 import React, { useState } from 'react';
 import { useUpdateTaskStatus } from '../api';
-import { Task, TaskStatus } from '../types/index';
+
+enum TaskStatus {
+  BACKLOG = 'backlog',
+  TODO = 'todo',
+  IN_PROGRESS = 'in_progress',
+  REVIEW = 'review',
+  DONE = 'done',
+}
+
+interface Task {
+  id: number;
+  project_id: number;
+  sprint_id?: number;
+  parent_id?: number;
+  title: string;
+  description?: string;
+  type: string;
+  priority: string;
+  status: TaskStatus;
+  assignee_id?: number;
+  reporter_id: number;
+  milestone_id?: number;
+  due_date?: string;
+  estimate_hours?: number;
+  position: number;
+  is_archived: boolean;
+  submission_status?: string;
+  created_at: string;
+  updated_at: string;
+}
 
 interface KanbanBoardProps {
   projectId: number;
