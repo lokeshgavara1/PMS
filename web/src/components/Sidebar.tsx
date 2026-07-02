@@ -27,6 +27,8 @@ export default function Sidebar() {
     { label: 'My Tasks', path: '/my-tasks', icon: '✓' },
     { label: 'Projects', path: '/projects', icon: '📊' },
     { label: 'Reports', path: '/reports', icon: '📈' },
+    { label: 'Timesheet', path: '/timesheet', icon: '⏱️' },
+    { label: 'Workflow', path: '/workflow', icon: '📋' },
   ];
 
   // Add Admin menu only for admins

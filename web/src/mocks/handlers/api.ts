@@ -510,6 +510,61 @@ export const handlers = [
 
     return sendSuccess(dashboard);
   }),
+
+  // ============================================================================
+  // USER MANAGEMENT
+  // ============================================================================
+  http.get(`${API_BASE}/users`, (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    return sendSuccess({ data: fixtures.users });
+  }),
+
+  http.post(`${API_BASE}/users`, async (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    const body = await info.request.json();
+    const newUser: User = {
+      id: Math.max(...fixtures.users.map((u) => u.id)) + 1,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      ...body,
+    };
+
+    return sendSuccess(newUser, 201);
+  }),
+
+  http.put(`${API_BASE}/users/:id`, async (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    const userId = parseInt(info.params.id as string);
+    const body = await info.request.json();
+
+    const user = fixtures.users.find((u) => u.id === userId);
+    if (!user) {
+      return sendError(404, 'USER_NOT_FOUND', `User with ID ${userId} not found`);
+    }
+
+    const updated = { ...user, ...body, updated_at: new Date().toISOString() };
+    return sendSuccess(updated);
+  }),
+
+  // ============================================================================
+  // TIME LOGS - ADMIN
+  // ============================================================================
+  http.get(`${API_BASE}/time-logs`, (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    return sendSuccess({ data: store.timeLogs });
+  }),
 ];
 
 // Helper function to validate status transitions

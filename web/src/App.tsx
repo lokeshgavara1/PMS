@@ -9,6 +9,10 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
+import ReportsPage from './pages/ReportsPage';
+import TimesheetPage from './pages/TimesheetPage';
+import AcademicWorkflowPage from './pages/AcademicWorkflowPage';
+import AdminPanel from './pages/AdminPanel';
 
 // Layouts
 import DashboardLayout from './layouts/DashboardLayout';
@@ -102,11 +106,23 @@ function AppRoutes() {
         path="/reports"
         element={
           <ProtectedRoute>
-            <DashboardLayout>
-              <div className="text-center py-12">
-                <p className="text-gray-600">Reports - Coming Soon</p>
-              </div>
-            </DashboardLayout>
+            <ReportsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/timesheet"
+        element={
+          <ProtectedRoute>
+            <TimesheetPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/workflow"
+        element={
+          <ProtectedRoute>
+            <AcademicWorkflowPage />
           </ProtectedRoute>
         }
       />
@@ -114,11 +130,7 @@ function AppRoutes() {
         path="/admin"
         element={
           <ProtectedRoute>
-            <DashboardLayout>
-              <div className="text-center py-12">
-                <p className="text-gray-600">Admin - Coming Soon</p>
-              </div>
-            </DashboardLayout>
+            <AdminPanel />
           </ProtectedRoute>
         }
       />

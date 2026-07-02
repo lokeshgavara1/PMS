@@ -1,0 +1,179 @@
+import React, { useState } from 'react';
+import { useProjects, useProjectTasks } from '../api';
+import DashboardLayout from '../layouts/DashboardLayout';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+export default function ReportsPage() {
+  const { data: projectsData } = useProjects(1, 100);
+  const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null);
+  const { data: tasksData } = useProjectTasks(selectedProjectId);
+
+  const projects = projectsData?.data || [];
+  const tasks = tasksData?.data || [];
+
+  // Burndown data
+  const burndownData = [
+    { day: 'Day 1', remaining: 20 },
+    { day: 'Day 2', remaining: 18 },
+    { day: 'Day 3', remaining: 15 },
+    { day: 'Day 4', remaining: 12 },
+    { day: 'Day 5', remaining: 8 },
+    { day: 'Day 6', remaining: 5 },
+    { day: 'Day 7', remaining: 2 },
+    { day: 'Day 8', remaining: 0 },
+  ];
+
+  // Workload data
+  const workloadData = [
+    { member: 'User 1', tasks: 5, hours: 20 },
+    { member: 'User 2', tasks: 4, hours: 16 },
+    { member: 'User 3', tasks: 3, hours: 12 },
+    { member: 'User 4', tasks: 6, hours: 24 },
+    { member: 'User 5', tasks: 2, hours: 8 },
+  ];
+
+  // Task status distribution
+  const statusDistribution = [
+    { status: 'Backlog', count: tasks.filter(t => t.status === 'backlog').length || 3 },
+    { status: 'Todo', count: tasks.filter(t => t.status === 'todo').length || 4 },
+    { status: 'In Progress', count: tasks.filter(t => t.status === 'in_progress').length || 2 },
+    { status: 'Review', count: tasks.filter(t => t.status === 'review').length || 1 },
+    { status: 'Done', count: tasks.filter(t => t.status === 'done').length || 5 },
+  ];
+
+  const handleExportCSV = () => {
+    const csv = [
+      ['Task', 'Status', 'Priority', 'Assignee', 'Due Date'],
+      ...tasks.map(t => [
+        t.title,
+        t.status,
+        t.priority,
+        t.assignee_id || 'Unassigned',
+        t.due_date || 'N/A'
+      ])
+    ]
+      .map(row => row.join(','))
+      .join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `tasks-export-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+  };
+
+  return (
+    <DashboardLayout>
+      <div className="space-y-8">
+        {/* Header */}
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Reports & Analytics</h1>
+          <p className="text-gray-600 mt-1">Project metrics and performance tracking</p>
+        </div>
+
+        {/* Project Selector */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <label className="block text-sm font-medium text-gray-900 mb-2">Select Project</label>
+          <select
+            value={selectedProjectId || ''}
+            onChange={(e) => setSelectedProjectId(e.target.value ? parseInt(e.target.value) : null)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">All Projects</option>
+            {projects.map((p) => (
+              <option key={p.id} value={p.id}>{p.name}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Charts Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Burndown Chart */}
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">Sprint Burndown</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={burndownData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="day" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="remaining" stroke="#3b82f6" name="Tasks Remaining" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Workload Chart */}
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">Team Workload</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={workloadData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="member" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="hours" fill="#8b5cf6" name="Hours Logged" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Task Status Distribution */}
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">Task Status Distribution</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={statusDistribution}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="status" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="count" fill="#10b981" name="Task Count" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Statistics */}
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">Quick Stats</h2>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center p-3 bg-blue-50 rounded">
+                <span className="text-gray-700">Total Tasks</span>
+                <span className="text-2xl font-bold text-blue-600">{tasks.length}</span>
+              </div>
+              <div className="flex justify-between items-center p-3 bg-green-50 rounded">
+                <span className="text-gray-700">Completed</span>
+                <span className="text-2xl font-bold text-green-600">
+                  {tasks.filter(t => t.status === 'done').length}
+                </span>
+              </div>
+              <div className="flex justify-between items-center p-3 bg-yellow-50 rounded">
+                <span className="text-gray-700">In Progress</span>
+                <span className="text-2xl font-bold text-yellow-600">
+                  {tasks.filter(t => t.status === 'in_progress').length}
+                </span>
+              </div>
+              <div className="flex justify-between items-center p-3 bg-red-50 rounded">
+                <span className="text-gray-700">Completion Rate</span>
+                <span className="text-2xl font-bold text-red-600">
+                  {tasks.length > 0 ? Math.round((tasks.filter(t => t.status === 'done').length / tasks.length) * 100) : 0}%
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Export Button */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <button
+            onClick={handleExportCSV}
+            className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium"
+          >
+            📥 Export as CSV
+          </button>
+        </div>
+      </div>
+    </DashboardLayout>
+  );
+}

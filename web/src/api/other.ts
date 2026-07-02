@@ -4,6 +4,7 @@ import type {
   Comment,
   TimeLog,
   Notification,
+  User,
   CreateCommentRequest,
   LogTimeRequest,
 } from '../types/index';
@@ -166,6 +167,99 @@ export const useProjectSprints = (projectId: number | null) => {
     {
       enabled: !!projectId,
       staleTime: 5 * 60 * 1000, // 5 minutes
+    },
+  );
+};
+
+// ============================================================================
+// USERS
+// ============================================================================
+
+/**
+ * GET /api/v2/users
+ * Fetch all users (admin only)
+ */
+export const useUsers = () => {
+  return useQuery<{ data: User[] }>(
+    ['users'],
+    async () => {
+      const response = await apiClient.get<{ success: boolean; data: { data: User[] } }>(
+        '/users',
+      );
+      return response.data.data;
+    },
+    {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    },
+  );
+};
+
+/**
+ * POST /api/v2/users
+ * Create a new user (admin only)
+ */
+export const useCreateUser = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    async (userData: any) => {
+      const response = await apiClient.post<{ success: boolean; data: User }>(
+        '/users',
+        userData,
+      );
+      return response.data.data;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['users']);
+      },
+    },
+  );
+};
+
+/**
+ * PUT /api/v2/users/:id
+ * Update a user (admin only)
+ */
+export const useUpdateUser = (userId: number) => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    async (userData: Partial<User>) => {
+      const response = await apiClient.put<{ success: boolean; data: User }>(
+        `/users/${userId}`,
+        userData,
+      );
+      return response.data.data;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['users']);
+        queryClient.invalidateQueries(['user', userId]);
+      },
+    },
+  );
+};
+
+// ============================================================================
+// TIME LOGS - ADMIN
+// ============================================================================
+
+/**
+ * GET /api/v2/time-logs
+ * Fetch all time logs
+ */
+export const useTimeLogs = () => {
+  return useQuery<{ data: TimeLog[] }>(
+    ['allTimeLogs'],
+    async () => {
+      const response = await apiClient.get<{ success: boolean; data: { data: TimeLog[] } }>(
+        '/time-logs',
+      );
+      return response.data.data;
+    },
+    {
+      staleTime: 2 * 60 * 1000, // 2 minutes
     },
   );
 };
