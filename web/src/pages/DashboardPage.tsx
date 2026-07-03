@@ -29,22 +29,22 @@ export default function DashboardPage() {
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
-          <p className="text-gray-600 text-sm font-medium">Total Projects</p>
-          <p className="text-4xl font-bold text-gray-900 mt-2">{projectsData?.pagination.total || 0}</p>
-          <p className="text-gray-500 text-xs mt-2">Active projects in the system</p>
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow p-6 border border-blue-200">
+          <p className="text-blue-700 text-sm font-medium">Total Projects</p>
+          <p className="text-4xl font-bold text-blue-900 mt-2">{projectsData?.pagination.total || 0}</p>
+          <p className="text-blue-600 text-xs mt-2">Active projects in the system</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
-          <p className="text-gray-600 text-sm font-medium">My Projects</p>
-          <p className="text-4xl font-bold text-gray-900 mt-2">{projects.length}</p>
-          <p className="text-gray-500 text-xs mt-2">Projects you're involved in</p>
+        <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg shadow p-6 border border-slate-200">
+          <p className="text-slate-700 text-sm font-medium">My Projects</p>
+          <p className="text-4xl font-bold text-slate-900 mt-2">{projects.length}</p>
+          <p className="text-slate-600 text-xs mt-2">Projects you're involved in</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6 border-l-4 border-orange-500">
-          <p className="text-gray-600 text-sm font-medium">Active Tasks</p>
-          <p className="text-4xl font-bold text-gray-900 mt-2">0</p>
-          <p className="text-gray-500 text-xs mt-2">Tasks assigned to you</p>
+        <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg shadow p-6 border border-indigo-200">
+          <p className="text-indigo-700 text-sm font-medium">Active Tasks</p>
+          <p className="text-4xl font-bold text-indigo-900 mt-2">0</p>
+          <p className="text-indigo-600 text-xs mt-2">Tasks assigned to you</p>
         </div>
       </div>
 

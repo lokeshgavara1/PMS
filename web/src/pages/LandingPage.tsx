@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import centurionLogo from '../assets/cutm-logo.png';
+import teamIllustration from '../assets/landing_page_img.jpg';
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -17,10 +19,10 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white border-b border-gray-200 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-full"></div>
-            <span className="text-xl font-bold text-gray-900">CUTM-PMS</span>
+        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img src={centurionLogo} alt="Centurion University" className="h-12 w-auto" />
+            <span className="text-lg font-bold text-gray-900">CUTM-PMS</span>
           </div>
           <button
             onClick={() => navigate('/login')}
@@ -57,13 +59,7 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="hidden md:block">
-              <div className="bg-gradient-to-br from-blue-400 to-indigo-600 rounded-2xl p-8 h-96 flex items-center justify-center">
-                <div className="text-white text-center">
-                  <div className="text-6xl mb-4">📊</div>
-                  <p className="text-xl font-semibold">Project Dashboard</p>
-                  <p className="text-blue-100 mt-2">Visualize your projects in real-time</p>
-                </div>
-              </div>
+              <img src={teamIllustration} alt="Team collaboration" className="w-full rounded-2xl" />
             </div>
           </div>
         </div>
@@ -151,7 +147,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 bg-blue-600 rounded-full"></div>
+                <img src="/centurion-logo.png" alt="Centurion University" className="h-10 w-auto rounded-full" />
                 <span className="text-white font-bold">CUTM-PMS</span>
               </div>
               <p className="text-sm">Project Management System for Centurion University</p>

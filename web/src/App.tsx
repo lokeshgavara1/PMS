@@ -14,6 +14,8 @@ import ReportsPage from './pages/ReportsPage';
 import TimesheetPage from './pages/TimesheetPage';
 import AcademicWorkflowPage from './pages/AcademicWorkflowPage';
 import AdminPanel from './pages/AdminPanel';
+import MyTasksPage from './pages/MyTasksPage';
+import ProfilePage from './pages/ProfilePage';
 
 // Layouts
 import DashboardLayout from './layouts/DashboardLayout';
@@ -97,9 +99,7 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <DashboardLayout>
-              <div className="text-center py-12">
-                <p className="text-gray-600">My Tasks - Coming Soon</p>
-              </div>
+              <MyTasksPage />
             </DashboardLayout>
           </ProtectedRoute>
         }
@@ -133,6 +133,16 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <AdminPanel />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <ProfilePage />
+            </DashboardLayout>
           </ProtectedRoute>
         }
       />

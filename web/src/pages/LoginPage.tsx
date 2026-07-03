@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLogin, useCurrentUser } from '../api';
 import { useAppStore } from '../stores/app';
+import centurionLogo from '../assets/cutm-logo.png';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -75,7 +76,7 @@ export default function LoginPage() {
         <div>
           {/* Logo */}
           <div className="mb-12">
-            <div className="w-12 h-12 bg-white rounded-full mb-3"></div>
+            <img src={centurionLogo} alt="Centurion University" className="h-16 w-auto mb-3 rounded-full" />
             <h1 className="text-2xl font-bold">CUTM-PMS</h1>
             <p className="text-blue-300 text-sm mt-1">Project Management System</p>
           </div>

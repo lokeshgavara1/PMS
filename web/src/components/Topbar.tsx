@@ -11,10 +11,10 @@ export default function Topbar() {
   const unread = unreadCount?.unreadCount || 0;
 
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+    <header className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-800 border-b border-slate-700 px-6 py-4 flex items-center justify-between">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900">CUTM Project Management System</h2>
-        <p className="text-sm text-gray-500">Welcome back, {user?.name}</p>
+        <h2 className="text-2xl font-bold text-white">CUTM Project Management System</h2>
+        <p className="text-sm text-blue-200">Welcome back, {user?.name}</p>
       </div>
 
       <div className="flex items-center gap-4">
@@ -22,7 +22,7 @@ export default function Topbar() {
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
-            className="relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition"
+            className="relative p-2 text-blue-200 hover:bg-blue-800 rounded-lg transition"
             title="Notifications"
           >
             🔔
@@ -70,12 +70,12 @@ export default function Topbar() {
         {/* User Avatar */}
         {user && (
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-semibold">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 text-white flex items-center justify-center font-semibold">
               {user.name.charAt(0).toUpperCase()}
             </div>
             <div className="hidden sm:block text-sm">
-              <p className="font-semibold text-gray-900">{user.name}</p>
-              <p className="text-gray-500 capitalize text-xs">{user.system_role}</p>
+              <p className="font-semibold text-white">{user.name}</p>
+              <p className="text-blue-200 capitalize text-xs">{user.system_role}</p>
             </div>
           </div>
         )}

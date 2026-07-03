@@ -4,6 +4,38 @@ import type { Task, CreateTaskRequest, UpdateTaskStatusRequest, PaginatedRespons
 import { TaskStatus } from '../types/index';
 
 /**
+ * GET /api/v2/tasks
+ * Fetch all tasks (fetches from fixture data)
+ */
+export const useTasks = () => {
+  return useQuery<Task[]>(
+    ['all-tasks'],
+    async () => {
+      // Fetch projects first
+      const projectsRes = await apiClient.get<{ success: boolean; data: PaginatedResponse<any> }>(
+        `/projects`,
+      );
+      const projects = projectsRes.data.data.data || [];
+
+      const allTasks: Task[] = [];
+
+      // Fetch tasks for each project
+      for (const project of projects) {
+        const tasksRes = await apiClient.get<{ success: boolean; data: PaginatedResponse<Task> }>(
+          `/projects/${project.id}/tasks`,
+        );
+        allTasks.push(...(tasksRes.data.data.data || []));
+      }
+
+      return allTasks;
+    },
+    {
+      staleTime: 2 * 60 * 1000,
+    },
+  );
+};
+
+/**
  * GET /api/v2/projects/:projectId/tasks
  * Fetch tasks for a project (optionally filtered by sprint)
  */
