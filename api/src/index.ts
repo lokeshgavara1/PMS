@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
+import { Op } from 'sequelize';
 import sequelize from './config/database';
 import redisClient from './config/redis';
 import { initializeModels } from './models';
@@ -421,6 +422,348 @@ app.get('/api/v2/tasks/:taskId/comments', authMiddleware, async (req: AuthReques
     res.json({ success: true, data: { data: comments } });
   } catch (err: any) {
     res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+// ============= USERS ROUTES =============
+app.get('/api/v2/users', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const { count, rows } = await models.User.findAndCountAll({
+      limit,
+      offset: (page - 1) * limit,
+      attributes: { exclude: ['password_hash'] },
+    });
+    res.json({
+      success: true,
+      data: {
+        data: rows,
+        pagination: { total: count, page, limit, pages: Math.ceil(count / limit) },
+      },
+    });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+app.get('/api/v2/users/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const user = await models.User.findByPk(req.params.id, {
+      attributes: { exclude: ['password_hash'] },
+    });
+    if (!user) return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'User not found' } });
+    res.json({ success: true, data: user });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+app.post('/api/v2/users', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = await models.User.create({
+      ...req.body,
+      password_hash: hashedPassword,
+    });
+    res.status(201).json({ success: true, data: { ...user.toJSON(), password_hash: undefined } });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+app.patch('/api/v2/users/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const user = await models.User.findByPk(req.params.id);
+    if (!user) return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'User not found' } });
+
+    const updateData = { ...req.body };
+    if (updateData.password) {
+      updateData.password_hash = await bcrypt.hash(updateData.password, 10);
+      delete updateData.password;
+    }
+
+    await user.update(updateData);
+    res.json({ success: true, data: user });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+app.delete('/api/v2/users/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const user = await models.User.findByPk(req.params.id);
+    if (!user) return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'User not found' } });
+    await user.destroy();
+    res.json({ success: true, data: { message: 'User deleted' } });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+// ============= DEPARTMENTS ROUTES =============
+app.get('/api/v2/departments', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const departments = await models.Department.findAll();
+    res.json({ success: true, data: { data: departments } });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+app.get('/api/v2/departments/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const dept = await models.Department.findByPk(req.params.id);
+    if (!dept) return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Department not found' } });
+    res.json({ success: true, data: dept });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+app.post('/api/v2/departments', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const dept = await models.Department.create(req.body);
+    res.status(201).json({ success: true, data: dept });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+app.patch('/api/v2/departments/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const dept = await models.Department.findByPk(req.params.id);
+    if (!dept) return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Department not found' } });
+    await dept.update(req.body);
+    res.json({ success: true, data: dept });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+// ============= PROJECTS - COMPLETE CRUD =============
+app.post('/api/v2/projects', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const project = await models.Project.create({
+      ...req.body,
+      owner_id: req.user?.id,
+    });
+    res.status(201).json({ success: true, data: project });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+app.patch('/api/v2/projects/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const project = await models.Project.findByPk(req.params.id);
+    if (!project) return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Project not found' } });
+    await project.update(req.body);
+    res.json({ success: true, data: project });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+app.delete('/api/v2/projects/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const project = await models.Project.findByPk(req.params.id);
+    if (!project) return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Project not found' } });
+    await project.destroy();
+    res.json({ success: true, data: { message: 'Project deleted' } });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+// ============= TASKS - COMPLETE CRUD =============
+app.post('/api/v2/projects/:projectId/tasks', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const task = await models.Task.create({
+      ...req.body,
+      project_id: req.params.projectId,
+      reporter_id: req.user?.id,
+    });
+    res.status(201).json({ success: true, data: task });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+app.get('/api/v2/tasks/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const task = await models.Task.findByPk(req.params.id, {
+      include: [
+        { model: models.User, as: 'assignee' },
+        { model: models.User, as: 'reporter' },
+        { model: models.Project },
+      ],
+    });
+    if (!task) return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Task not found' } });
+    res.json({ success: true, data: task });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+app.patch('/api/v2/tasks/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const task = await models.Task.findByPk(req.params.id);
+    if (!task) return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Task not found' } });
+    await task.update(req.body);
+    res.json({ success: true, data: task });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+app.delete('/api/v2/tasks/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const task = await models.Task.findByPk(req.params.id);
+    if (!task) return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Task not found' } });
+    await task.destroy();
+    res.json({ success: true, data: { message: 'Task deleted' } });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+// ============= SPRINTS ROUTES =============
+app.get('/api/v2/sprints', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const sprints = await models.Sprint.findAll({
+      include: [{ model: models.Project }],
+    });
+    res.json({ success: true, data: { data: sprints } });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+app.get('/api/v2/projects/:projectId/sprints', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const sprints = await models.Sprint.findAll({
+      where: { project_id: req.params.projectId },
+    });
+    res.json({ success: true, data: { data: sprints } });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+app.post('/api/v2/projects/:projectId/sprints', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const sprint = await models.Sprint.create({
+      ...req.body,
+      project_id: req.params.projectId,
+    });
+    res.status(201).json({ success: true, data: sprint });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+app.patch('/api/v2/sprints/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const sprint = await models.Sprint.findByPk(req.params.id);
+    if (!sprint) return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Sprint not found' } });
+    await sprint.update(req.body);
+    res.json({ success: true, data: sprint });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+app.delete('/api/v2/sprints/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const sprint = await models.Sprint.findByPk(req.params.id);
+    if (!sprint) return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Sprint not found' } });
+    await sprint.destroy();
+    res.json({ success: true, data: { message: 'Sprint deleted' } });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+// ============= SEARCH & FILTER =============
+app.get('/api/v2/tasks/search', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const { q, status, priority, assignee_id } = req.query;
+    const where: any = {};
+
+    if (q) {
+      where[Op.or] = [
+        { title: { [Op.like]: `%${q}%` } },
+        { description: { [Op.like]: `%${q}%` } },
+      ];
+    }
+    if (status) where.status = status;
+    if (priority) where.priority = priority;
+    if (assignee_id) where.assignee_id = assignee_id;
+
+    const tasks = await models.Task.findAll({ where });
+    res.json({ success: true, data: { data: tasks } });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+// ============= STATISTICS & ANALYTICS =============
+app.get('/api/v2/projects/:projectId/stats', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const projectId = req.params.projectId;
+    const totalTasks = await models.Task.count({ where: { project_id: projectId } });
+    const completedTasks = await models.Task.count({ where: { project_id: projectId, status: 'done' } });
+    const inProgressTasks = await models.Task.count({ where: { project_id: projectId, status: 'in_progress' } });
+    const totalHours = await models.Task.sum('estimate_hours', { where: { project_id: projectId } });
+
+    res.json({
+      success: true,
+      data: {
+        total_tasks: totalTasks,
+        completed_tasks: completedTasks,
+        in_progress_tasks: inProgressTasks,
+        completion_rate: totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0,
+        total_estimated_hours: totalHours || 0,
+      },
+    });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+// ============= ACTIVITY LOG =============
+app.get('/api/v2/activity-log', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 20;
+    const { count, rows } = await models.ActivityLog.findAndCountAll({
+      limit,
+      offset: (page - 1) * limit,
+      order: [['created_at', 'DESC']],
+      include: [{ model: models.User }, { model: models.Project }],
+    });
+    res.json({
+      success: true,
+      data: {
+        data: rows,
+        pagination: { total: count, page, limit, pages: Math.ceil(count / limit) },
+      },
+    });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+app.post('/api/v2/activity-log', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const log = await models.ActivityLog.create({
+      ...req.body,
+      user_id: req.user?.id,
+    });
+    res.status(201).json({ success: true, data: log });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
   }
 });
 
