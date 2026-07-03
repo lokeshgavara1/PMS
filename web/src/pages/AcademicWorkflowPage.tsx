@@ -192,9 +192,9 @@ export default function AcademicWorkflowPage() {
                       </div>
                       <div className="text-right">
                         <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
-                          sub.status === 'approved' ? 'bg-green-100 text-green-800' :
-                          sub.status === 'under_review' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-blue-100 text-blue-800'
+                          sub.status === 'approved' ? 'bg-green-100 text-green-700' :
+                          sub.status === 'under_review' ? 'bg-yellow-100 text-yellow-700' :
+                          'bg-blue-100 text-blue-700'
                         }`}>
                           {sub.status === 'under_review' ? 'Under Review' : sub.status.charAt(0).toUpperCase() + sub.status.slice(1)}
                         </span>
@@ -323,7 +323,7 @@ export default function AcademicWorkflowPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow p-6 border border-blue-200">
                 <p className="text-blue-700 text-sm font-medium">Active Projects</p>
-                <p className="text-4xl font-bold text-blue-900 mt-2">{projects.length}</p>
+                <p className="text-4xl font-bold text-blue-700 mt-2">{projects.length}</p>
                 <p className="text-blue-600 text-xs mt-2">Projects in progress</p>
               </div>
               <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow p-6 border border-green-200">

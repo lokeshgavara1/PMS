@@ -29,39 +29,39 @@ export default function DashboardPage() {
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl shadow-xl p-8 text-white overflow-hidden relative group hover:shadow-2xl transition duration-300">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300"></div>
+        <div className="bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl shadow p-8 text-gray-900 overflow-hidden relative group hover:shadow-lg transition duration-300 border border-blue-200">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-200/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-4">
-              <p className="text-blue-100 text-sm font-semibold">Total Projects</p>
+              <p className="text-blue-700 text-sm font-semibold">Total Projects</p>
               <span className="text-3xl">📊</span>
             </div>
-            <p className="text-5xl font-bold text-white">{projectsData?.pagination.total || 0}</p>
-            <p className="text-blue-100 text-sm mt-3">Active projects in system</p>
+            <p className="text-5xl font-bold text-blue-700">{projectsData?.pagination.total || 0}</p>
+            <p className="text-blue-600 text-sm mt-3">Active projects in system</p>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-purple-600 to-purple-700 rounded-2xl shadow-xl p-8 text-white overflow-hidden relative group hover:shadow-2xl transition duration-300">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300"></div>
+        <div className="bg-gradient-to-br from-indigo-100 to-indigo-50 rounded-2xl shadow p-8 text-gray-900 overflow-hidden relative group hover:shadow-lg transition duration-300 border border-indigo-200">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-200/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-4">
-              <p className="text-purple-100 text-sm font-semibold">My Projects</p>
+              <p className="text-indigo-700 text-sm font-semibold">My Projects</p>
               <span className="text-3xl">📁</span>
             </div>
-            <p className="text-5xl font-bold text-white">{projects.length}</p>
-            <p className="text-purple-100 text-sm mt-3">You're involved in</p>
+            <p className="text-5xl font-bold text-indigo-700">{projects.length}</p>
+            <p className="text-indigo-600 text-sm mt-3">You're involved in</p>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-2xl shadow-xl p-8 text-white overflow-hidden relative group hover:shadow-2xl transition duration-300">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300"></div>
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow p-8 text-gray-900 overflow-hidden relative group hover:shadow-lg transition duration-300 border border-blue-200">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-200/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-4">
-              <p className="text-indigo-100 text-sm font-semibold">Active Tasks</p>
+              <p className="text-blue-700 text-sm font-semibold">Active Tasks</p>
               <span className="text-3xl">✓</span>
             </div>
-            <p className="text-5xl font-bold text-white">8</p>
-            <p className="text-indigo-100 text-sm mt-3">Assigned to you</p>
+            <p className="text-5xl font-bold text-blue-900">8</p>
+            <p className="text-blue-600 text-sm mt-3">Assigned to you</p>
           </div>
         </div>
       </div>
@@ -97,7 +97,7 @@ export default function DashboardPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded">
+                      <span className="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded">
                         {project.category}
                       </span>
                     </td>

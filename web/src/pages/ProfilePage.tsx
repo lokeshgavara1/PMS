@@ -24,13 +24,13 @@ export default function ProfilePage() {
 
   const getRoleColor = (role: string) => {
     const colors: Record<string, string> = {
-      admin: 'bg-red-100 text-red-800',
-      hod: 'bg-purple-100 text-purple-800',
-      faculty: 'bg-blue-100 text-blue-800',
-      pm: 'bg-green-100 text-green-800',
-      student: 'bg-yellow-100 text-yellow-800',
+      admin: 'bg-red-100 text-red-700',
+      hod: 'bg-purple-100 text-purple-700',
+      faculty: 'bg-blue-100 text-blue-700',
+      pm: 'bg-green-100 text-green-700',
+      student: 'bg-yellow-100 text-yellow-700',
     };
-    return colors[role?.toLowerCase()] || 'bg-gray-100 text-gray-800';
+    return colors[role?.toLowerCase()] || 'bg-gray-100 text-gray-700';
   };
 
   return (
@@ -50,19 +50,19 @@ export default function ProfilePage() {
       </div>
 
       {/* Profile Card */}
-      <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 rounded-lg p-8 text-white">
+      <div className="bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-lg p-8 border border-blue-200">
         <div className="flex items-center gap-6">
-          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center">
+          <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
             <span className="text-4xl">👤</span>
           </div>
           <div className="flex-1">
-            <h2 className="text-2xl font-bold mb-2">{user?.name || 'User Name'}</h2>
-            <p className="text-blue-200">{user?.email || 'user@cutm.ac.in'}</p>
+            <h2 className="text-2xl font-bold mb-2 text-gray-900">{user?.name || 'User Name'}</h2>
+            <p className="text-blue-600">{user?.email || 'user@cutm.ac.in'}</p>
             <div className="flex gap-2 mt-3">
               <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getRoleColor(user?.role || '')}`}>
                 {user?.role?.toUpperCase() || 'ROLE'}
               </span>
-              <span className="px-3 py-1 bg-blue-500 rounded-full text-sm font-medium">
+              <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
                 Active
               </span>
             </div>

@@ -228,10 +228,10 @@ export default function AdminPanel() {
                         </td>
                         <td className="px-6 py-4 text-sm flex gap-2">
                           {permissions.canEditUser && (
-                            <button className="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
+                            <button className="text-blue-600 hover:text-blue-700 font-medium">Edit</button>
                           )}
                           {permissions.canDeleteUser && (
-                            <button className="text-red-600 hover:text-red-900 font-medium">Disable</button>
+                            <button className="text-red-600 hover:text-red-700 font-medium">Disable</button>
                           )}
                           {!permissions.canEditUser && !permissions.canDeleteUser && (
                             <span className="text-gray-400 text-xs">No permissions</span>

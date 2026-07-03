@@ -134,6 +134,54 @@ export const handlers = [
     return HttpResponse.json(response);
   }),
 
+  // Google OAuth endpoint
+  http.post(`${API_BASE}/auth/google`, async (info) => {
+    const body = (await info.request.json()) as { token: string };
+
+    if (!body.token) {
+      return sendError(400, 'MISSING_TOKEN', 'Google token is required');
+    }
+
+    try {
+      // Mock: in production, verify token with Google's API
+      // For testing: accept tokens that contain cutm.ac.in or cutmap.ac.in email
+      let user: User | undefined;
+
+      // Mock demo users with institution emails
+      const institutionUsers: User[] = fixtures.users.filter(
+        (u) => u.email.includes('@cutm.ac.in') || u.email.includes('@cutmap.ac.in')
+      );
+
+      if (institutionUsers.length > 0) {
+        user = institutionUsers[0]; // Default to first institution user
+      } else {
+        return sendError(403, 'INVALID_DOMAIN', 'Only @cutm.ac.in and @cutmap.ac.in email addresses are allowed');
+      }
+
+      // Generate mock tokens
+      const tokens: AuthTokens = {
+        accessToken: `mock-jwt-${user.id}-${Date.now()}`,
+        refreshToken: `mock-refresh-${user.id}-${Date.now()}`,
+        expiresIn: 3600,
+      };
+
+      currentSession = {
+        userId: user.id,
+        isAuthenticated: true,
+        tokens,
+      };
+
+      const response: LoginResponse = {
+        success: true,
+        data: { user, tokens },
+      };
+
+      return HttpResponse.json(response);
+    } catch (error) {
+      return sendError(401, 'GOOGLE_AUTH_FAILED', 'Google authentication failed');
+    }
+  }),
+
   http.post(`${API_BASE}/auth/logout`, (info) => {
     if (!validateAuth(info.request)) {
       return sendError(401, 'UNAUTHORIZED', 'Not authenticated');

@@ -93,7 +93,7 @@ export default function ProjectsPage() {
                   <h3 className="text-lg font-semibold text-gray-900 hover:text-blue-600">{project.name}</h3>
                   <p className="text-sm text-gray-600 mt-1">{project.description?.slice(0, 100)}</p>
                 </div>
-                <span className="ml-2 px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded">
+                <span className="ml-2 px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded">
                   {project.category}
                 </span>
               </div>

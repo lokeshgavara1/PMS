@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useUnreadNotificationCount, useNotifications, useLogout } from '../api';
 import { useCurrentUser } from '../api';
 import { useNavigate } from 'react-router-dom';
+import centurionLogo from '../assets/cutm-logo.png';
 
 export default function Topbar() {
   const { data: user } = useCurrentUser();
@@ -23,23 +24,15 @@ export default function Topbar() {
   const unread = unreadCount?.unreadCount || 0;
 
   return (
-    <header className="bg-gradient-to-r from-white via-blue-50 to-indigo-50 border-b border-blue-200/60 px-8 py-5 flex items-center justify-between shadow-lg">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
-          <span className="text-lg font-bold text-white">P</span>
-        </div>
-        <div>
-          <h2 className="text-xl font-bold bg-gradient-to-r from-blue-900 to-indigo-900 bg-clip-text text-transparent tracking-tight">CUTM PMS</h2>
-          <p className="text-xs text-blue-600 font-medium">Project Management System</p>
-        </div>
-      </div>
+    <header className="bg-gradient-to-r from-white via-blue-50 to-indigo-50 border-b border-gray-200 px-8 py-6 flex items-center gap-8 shadow-sm">
+      <h1 className="text-lg font-semibold text-gray-900 tracking-tight flex-1 text-center">Centurion University of Technology and Management</h1>
 
       <div className="flex items-center gap-6">
         {/* Notifications */}
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
-            className="relative p-2.5 text-blue-600 hover:bg-blue-100 rounded-xl transition duration-200"
+            className="relative p-2.5 text-gray-700 hover:bg-blue-100 rounded-xl transition duration-200"
             title="Notifications"
           >
             <span className="text-xl">🔔</span>
@@ -52,7 +45,7 @@ export default function Topbar() {
 
           {/* Notifications Dropdown */}
           {showNotifications && (
-            <div className="absolute right-0 mt-3 w-96 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden">
+            <div className="absolute -left-44 mt-3 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden">
               <div className="p-5 border-b border-gray-100 bg-gradient-to-r from-indigo-50 to-blue-50">
                 <h3 className="font-bold text-gray-900 text-lg">Notifications</h3>
                 <p className="text-xs text-gray-600 mt-1">{unread} unread</p>
@@ -103,57 +96,66 @@ export default function Topbar() {
               </div>
               <div className="hidden sm:block text-sm">
                 <p className="font-semibold text-gray-900">{user.name}</p>
-                <p className="text-blue-600 capitalize text-xs font-medium">{user.system_role}</p>
+                <p className="text-gray-600 capitalize text-xs font-medium">{user.system_role}</p>
               </div>
             </button>
 
             {/* Profile Dropdown Menu */}
             {showProfileMenu && (
-              <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-xl border border-blue-100 z-50 overflow-hidden">
-                <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center font-bold mb-3 shadow-lg">
-                    {user.name.charAt(0).toUpperCase()}
+              <div className="absolute -left-48 mt-3 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 z-50 overflow-hidden">
+                {/* Header with close button */}
+                <div className="relative p-6 bg-white border-b border-gray-100">
+                  <button
+                    onClick={() => setShowProfileMenu(false)}
+                    className="absolute top-4 right-4 p-1 text-gray-500 hover:text-gray-700 rounded-full hover:bg-gray-100 transition"
+                  >
+                    ✕
+                  </button>
+
+                  {/* Profile Info */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center font-bold text-2xl shadow-lg flex-shrink-0">
+                      {user.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-bold text-gray-900 text-base">{user.name.toUpperCase()}</p>
+                      <p className="text-xs text-gray-600 mt-1">{user.email}</p>
+                      <p className="text-sm text-blue-600 font-medium mt-2 capitalize">{user.system_role}</p>
+                    </div>
                   </div>
-                  <p className="font-bold text-gray-900 text-sm">{user.name}</p>
-                  <p className="text-xs text-gray-600 mt-1">{user.email}</p>
-                  <span className="inline-block mt-3 px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-lg capitalize">
-                    {user.system_role}
-                  </span>
                 </div>
-                <div className="p-3 space-y-2">
+
+                {/* Menu Items */}
+                <div className="p-4 space-y-1">
                   <button
                     onClick={() => {
                       navigate('/profile');
                       setShowProfileMenu(false);
                     }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-xl transition duration-150 text-left font-medium text-sm"
+                    className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition duration-150 text-left text-sm"
                   >
-                    <span className="text-lg">👤</span>
-                    <span>View Profile</span>
-                    <span className="ml-auto text-gray-400">→</span>
+                    <span>My Profile</span>
+                    <span className="text-gray-400">→</span>
                   </button>
                   <button
                     onClick={() => {
-                      navigate('/profile');
+                      navigate('/settings');
                       setShowProfileMenu(false);
                     }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-xl transition duration-150 text-left font-medium text-sm"
+                    className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition duration-150 text-left text-sm"
                   >
-                    <span className="text-lg">⚙️</span>
-                    <span>Settings</span>
-                    <span className="ml-auto text-gray-400">→</span>
+                    <span>Account Settings</span>
+                    <span className="text-gray-400">→</span>
                   </button>
-                  <div className="h-px bg-gray-200 my-2"></div>
                   <button
                     onClick={() => {
                       handleLogout();
                       setShowProfileMenu(false);
                     }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-xl transition duration-150 text-left font-medium text-sm"
+                    className="w-full flex items-center justify-between px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition duration-150 text-left text-sm font-medium"
                   >
-                    <span className="text-lg">🚪</span>
-                    <span>Logout</span>
-                    <span className="ml-auto text-red-400">→</span>
+                    <span>⇒ Sign Out</span>
+                    <span></span>
                   </button>
                 </div>
               </div>
@@ -161,6 +163,7 @@ export default function Topbar() {
           </div>
         )}
       </div>
+
     </header>
   );
 }

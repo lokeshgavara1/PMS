@@ -57,10 +57,10 @@ export default function ProjectDetailPage() {
           <h1 className="text-3xl font-bold text-gray-900">{project.name}</h1>
           <p className="text-gray-600 mt-1">{project.description}</p>
           <div className="flex gap-4 mt-3">
-            <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">
+            <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-700 rounded-full">
               {project.category}
             </span>
-            <span className="px-3 py-1 text-sm font-medium bg-green-100 text-green-800 rounded-full">
+            <span className="px-3 py-1 text-sm font-medium bg-green-100 text-green-700 rounded-full">
               {project.status}
             </span>
           </div>

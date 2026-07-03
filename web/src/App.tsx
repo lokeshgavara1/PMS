@@ -17,6 +17,7 @@ import AcademicWorkflowPage from './pages/AcademicWorkflowPage';
 import AdminPanel from './pages/AdminPanel';
 import MyTasksPage from './pages/MyTasksPage';
 import ProfilePage from './pages/ProfilePage';
+import SettingsPage from './pages/SettingsPage';
 
 // Layouts
 import DashboardLayout from './layouts/DashboardLayout';
@@ -147,6 +148,14 @@ function AppRoutes() {
             <DashboardLayout>
               <ProfilePage />
             </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          <ProtectedRoute>
+            <SettingsPage />
           </ProtectedRoute>
         }
       />

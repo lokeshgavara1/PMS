@@ -10,6 +10,7 @@ import redisClient from './config/redis';
 import { initializeModels } from './models';
 import { MockLdapProvider } from './providers/MockLdapProvider';
 import dotenv from 'dotenv';
+import axios from 'axios';
 
 const jwtSign = (jwt as any).sign;
 
@@ -46,6 +47,29 @@ const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => 
     next();
   } catch (err) {
     res.status(401).json({ success: false, error: { code: 'INVALID_TOKEN', message: 'Invalid token' } });
+  }
+};
+
+// ============= GOOGLE OAUTH HELPERS =============
+
+// Validate email domain (CUTM or CUTMAP only)
+const isValidInstitutionEmail = (email: string): boolean => {
+  const allowedDomains = ['cutm.ac.in', 'cutmap.ac.in'];
+  const domain = email.toLowerCase().split('@')[1];
+  return allowedDomains.includes(domain);
+};
+
+// Verify Google token and get user info
+const verifyGoogleToken = async (token: string) => {
+  try {
+    const response = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${token}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (err: any) {
+    throw new Error('Invalid Google token');
   }
 };
 
@@ -98,6 +122,89 @@ app.post('/api/v2/auth/login', async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+// Google OAuth Sign-In
+app.post('/api/v2/auth/google', async (req: Request, res: Response) => {
+  try {
+    const { token } = req.body;
+
+    if (!token) {
+      return res.status(400).json({
+        success: false,
+        error: { code: 'MISSING_TOKEN', message: 'Google token is required' },
+      });
+    }
+
+    // Verify Google token
+    const googleUser = await verifyGoogleToken(token);
+
+    if (!googleUser.email) {
+      return res.status(400).json({
+        success: false,
+        error: { code: 'INVALID_EMAIL', message: 'Email not found in Google account' },
+      });
+    }
+
+    // Validate email domain (CUTM or CUTMAP only)
+    if (!isValidInstitutionEmail(googleUser.email)) {
+      return res.status(403).json({
+        success: false,
+        error: {
+          code: 'INVALID_DOMAIN',
+          message: 'Only @cutm.ac.in and @cutmap.ac.in email addresses are allowed',
+        },
+      });
+    }
+
+    // Find or create user
+    let user = await models.User.findOne({ where: { email: googleUser.email } });
+
+    if (!user) {
+      // Auto-create user with Google account (default role: student)
+      user = await models.User.create({
+        email: googleUser.email,
+        name: googleUser.name || googleUser.email.split('@')[0],
+        password_hash: await bcrypt.hash(uuidv4(), 10), // Random password for OAuth users
+        system_role: 'student', // Default role for new OAuth users
+        is_active: true,
+      });
+    }
+
+    // Check if user is active
+    if (!user.is_active) {
+      return res.status(403).json({
+        success: false,
+        error: { code: 'USER_INACTIVE', message: 'Your account is inactive. Contact administrator.' },
+      });
+    }
+
+    // Generate tokens
+    const accessToken = jwtSign(
+      { id: user.id, email: user.email, name: user.name, system_role: user.system_role },
+      process.env.JWT_SECRET || 'secret',
+      { expiresIn: process.env.JWT_EXPIRE || '1h' }
+    );
+
+    const refreshToken = jwtSign(
+      { id: user.id },
+      process.env.JWT_SECRET || 'secret',
+      { expiresIn: process.env.REFRESH_TOKEN_EXPIRE || '7d' }
+    );
+
+    res.json({
+      success: true,
+      data: {
+        user: { id: user.id, email: user.email, name: user.name, system_role: user.system_role },
+        tokens: { accessToken, refreshToken, expiresIn: 3600 },
+      },
+    });
+  } catch (err: any) {
+    res.status(401).json({
+      success: false,
+      error: { code: 'GOOGLE_AUTH_FAILED', message: err.message || 'Google authentication failed' },
+    });
   }
 });
 

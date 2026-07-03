@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
-import { useLogin, useCurrentUser } from '../api';
+import { useLogin, useGoogleLogin, useCurrentUser } from '../api';
 import { useAppStore } from '../stores/app';
 import centurionLogo from '../assets/cutm-logo.png';
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const { mutate: login, isLoading, error } = useLogin();
+  const { mutate: googleLogin, isLoading: isGoogleLoading, error: googleError } = useGoogleLogin();
   const { data: user } = useCurrentUser();
   const setCurrentUser = useAppStore((state) => state.setCurrentUser);
 
@@ -65,21 +66,18 @@ export default function LoginPage() {
       return;
     }
 
-    login(
-      { googleToken: idToken },
-      {
-        onSuccess: (data) => {
-          setCurrentUser(data.user);
-          navigate('/dashboard');
-        },
-        onError: (err: any) => {
-          setLocalError(
-            err.response?.data?.error?.message ||
-            'Google sign-in failed. Make sure you use a cutm.ac.in or cutmap.ac.in email.'
-          );
-        },
+    googleLogin(idToken, {
+      onSuccess: (data) => {
+        setCurrentUser(data.user);
+        navigate('/dashboard');
       },
-    );
+      onError: (err: any) => {
+        setLocalError(
+          err.response?.data?.error?.message ||
+          'Google sign-in failed. Make sure you use a cutm.ac.in or cutmap.ac.in email.'
+        );
+      },
+    });
   };
 
   const handleGoogleSignInError = () => {
@@ -96,32 +94,32 @@ export default function LoginPage() {
   ];
 
   return (
-    <div className="min-h-screen flex">
-      {/* Left Section - Dark Blue Marketing */}
-      <div className="w-1/2 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white p-12 flex flex-col justify-between">
+    <div className="min-h-screen flex bg-gradient-to-br from-white via-blue-50 to-indigo-50">
+      {/* Left Section - Light Blue Marketing */}
+      <div className="w-1/2 bg-gradient-to-br from-blue-50 via-white to-indigo-50 border-r border-blue-200 p-12 flex flex-col justify-between">
         <div>
           {/* Logo */}
           <div className="mb-12">
             <img src={centurionLogo} alt="Centurion University" className="h-16 w-auto mb-3 rounded-full" />
-            <h1 className="text-2xl font-bold">CUTM-PMS</h1>
-            <p className="text-blue-300 text-sm mt-1">Project Management System</p>
+            <h1 className="text-2xl font-bold text-gray-900">CUTM-PMS</h1>
+            <p className="text-blue-600 text-sm mt-1">Project Management System</p>
           </div>
 
           {/* AI Badge */}
-          <div className="inline-block px-4 py-2 border border-blue-400 rounded-full text-sm text-blue-300 mb-12">
+          <div className="inline-block px-4 py-2 border border-blue-300 rounded-full text-sm text-blue-700 mb-12 bg-blue-50">
             ⚡ Smart Project Management
           </div>
 
           {/* Main Heading */}
           <div className="mb-8">
-            <h2 className="text-5xl font-bold leading-tight mb-4">
+            <h2 className="text-5xl font-bold leading-tight mb-4 text-gray-900">
               Manage Projects
               <br />
-              <span className="text-blue-400">Smarter &</span>
+              <span className="text-blue-600">Smarter &</span>
               <br />
               Faster.
             </h2>
-            <p className="text-blue-200 text-lg leading-relaxed">
+            <p className="text-gray-700 text-lg leading-relaxed">
               CUTM-PMS gives your team intelligent task tracking, automated workflows,
               real-time analytics, and seamless collaboration — all in one place.
             </p>
@@ -131,39 +129,39 @@ export default function LoginPage() {
         {/* Features */}
         <div>
           <div className="flex gap-3 mb-12 flex-wrap">
-            <button className="px-6 py-2 border border-blue-400 text-blue-300 rounded-lg hover:bg-blue-900/50 transition">
+            <button className="px-6 py-2 border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-100 transition bg-white">
               📊 Task Management
             </button>
-            <button className="px-6 py-2 border border-blue-400 text-blue-300 rounded-lg hover:bg-blue-900/50 transition">
+            <button className="px-6 py-2 border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-100 transition bg-white">
               📈 Real Analytics
             </button>
-            <button className="px-6 py-2 border border-blue-400 text-blue-300 rounded-lg hover:bg-blue-900/50 transition">
+            <button className="px-6 py-2 border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-100 transition bg-white">
               🔄 Auto Workflows
             </button>
-            <button className="px-6 py-2 border border-blue-400 text-blue-300 rounded-lg hover:bg-blue-900/50 transition">
+            <button className="px-6 py-2 border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-100 transition bg-white">
               🔒 Secure & Compliant
             </button>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 pb-12 border-b border-blue-800">
-            <div className="border border-blue-700 rounded-lg p-6 text-center">
-              <p className="text-3xl font-bold mb-2">500+</p>
-              <p className="text-blue-300 text-sm">Projects Managed</p>
+          <div className="grid grid-cols-3 gap-6 pb-12 border-b border-blue-200">
+            <div className="border border-blue-200 rounded-lg p-6 text-center bg-white">
+              <p className="text-3xl font-bold mb-2 text-blue-600">500+</p>
+              <p className="text-gray-700 text-sm">Projects Managed</p>
             </div>
-            <div className="border border-blue-700 rounded-lg p-6 text-center">
-              <p className="text-3xl font-bold mb-2">99%</p>
-              <p className="text-blue-300 text-sm">Uptime</p>
+            <div className="border border-blue-200 rounded-lg p-6 text-center bg-white">
+              <p className="text-3xl font-bold mb-2 text-blue-600">99%</p>
+              <p className="text-gray-700 text-sm">Uptime</p>
             </div>
-            <div className="border border-blue-700 rounded-lg p-6 text-center">
-              <p className="text-3xl font-bold mb-2">4.9★</p>
-              <p className="text-blue-300 text-sm">User Rating</p>
+            <div className="border border-blue-200 rounded-lg p-6 text-center bg-white">
+              <p className="text-3xl font-bold mb-2 text-blue-600">4.9★</p>
+              <p className="text-gray-700 text-sm">User Rating</p>
             </div>
           </div>
 
           {/* Security Notice */}
-          <div className="mt-12 p-4 bg-blue-900/30 border border-blue-700 rounded-lg">
-            <p className="text-blue-300 text-sm">
+          <div className="mt-12 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <p className="text-gray-700 text-sm">
               🔐 <span className="font-semibold">Restricted Access</span>
               <br />
               Login is limited to official cutm.ac.in / cutmap.ac.in accounts.
@@ -179,10 +177,10 @@ export default function LoginPage() {
           <p className="text-gray-600 mb-8">Sign in to your project dashboard</p>
 
           {/* Error Message */}
-          {(localError || error) && (
+          {(localError || error || googleError) && (
             <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
               <p className="text-red-700 text-sm">
-                {localError || (error as any)?.response?.data?.error?.message || 'An error occurred'}
+                {localError || (error as any)?.response?.data?.error?.message || (googleError as any)?.response?.data?.error?.message || 'An error occurred'}
               </p>
             </div>
           )}
@@ -190,12 +188,15 @@ export default function LoginPage() {
           {/* Google Sign In Button */}
           <div className="w-full mb-6">
             {import.meta.env.VITE_GOOGLE_CLIENT_ID ? (
-              <GoogleLogin
-                onSuccess={handleGoogleSignInSuccess}
-                onError={handleGoogleSignInError}
-                text="signin_with"
-                width="100%"
-              />
+              <div className={isGoogleLoading ? 'opacity-50 pointer-events-none' : ''}>
+                <GoogleLogin
+                  onSuccess={handleGoogleSignInSuccess}
+                  onError={handleGoogleSignInError}
+                  text="signin_with"
+                  width="100%"
+                  disabled={isGoogleLoading}
+                />
+              </div>
             ) : (
               <button
                 type="button"

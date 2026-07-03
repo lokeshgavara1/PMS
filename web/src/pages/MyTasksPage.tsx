@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useCurrentUser, useUpdateTaskStatus } from '../api';
 import { useNavigate } from 'react-router-dom';
+import { useRole } from '../hooks';
 
 export default function MyTasksPage() {
   const { data: user } = useCurrentUser();
   const { mutate: updateStatus } = useUpdateTaskStatus(0);
   const navigate = useNavigate();
+  const { permissions } = useRole();
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [filterPriority, setFilterPriority] = useState<string>('all');
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
@@ -137,12 +139,18 @@ export default function MyTasksPage() {
           <h1 className="text-3xl font-bold text-gray-900">My Tasks</h1>
           <p className="text-gray-600 mt-1">Manage and track your assigned tasks</p>
         </div>
-        <button
-          onClick={handleCreateTask}
-          className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 font-medium shadow-lg transition duration-200"
-        >
-          + Create Task
-        </button>
+        {permissions.canCreateTask ? (
+          <button
+            onClick={handleCreateTask}
+            className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 font-medium shadow-lg transition duration-200"
+          >
+            + Create Task
+          </button>
+        ) : (
+          <div className="px-6 py-2.5 bg-gray-100 text-gray-600 rounded-lg text-sm font-medium">
+            Tasks are created by Faculty or Project Managers
+          </div>
+        )}
       </div>
 
       {/* Stats */}

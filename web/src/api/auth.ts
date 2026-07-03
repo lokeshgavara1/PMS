@@ -4,11 +4,29 @@ import type { User, AuthTokens, LoginRequest, LoginResponse } from '../types/ind
 
 /**
  * POST /api/v2/auth/login
- * Authenticate user with LDAP credentials or Google token
+ * Authenticate user with LDAP credentials
  */
 export const useLogin = () => {
-  return useMutation(async (credentials: LoginRequest | { googleToken: string }) => {
+  return useMutation(async (credentials: LoginRequest) => {
     const response = await apiClient.post<LoginResponse>('/auth/login', credentials);
+    const { user, tokens } = response.data.data;
+
+    // Store tokens in localStorage
+    localStorage.setItem('accessToken', tokens.accessToken);
+    localStorage.setItem('refreshToken', tokens.refreshToken);
+
+    return { user, tokens };
+  });
+};
+
+/**
+ * POST /api/v2/auth/google
+ * Authenticate user with Google OAuth token
+ * Email must be from @cutm.ac.in or @cutmap.ac.in domain
+ */
+export const useGoogleLogin = () => {
+  return useMutation(async (token: string) => {
+    const response = await apiClient.post<LoginResponse>('/auth/google', { token });
     const { user, tokens } = response.data.data;
 
     // Store tokens in localStorage

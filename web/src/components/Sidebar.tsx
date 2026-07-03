@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAppStore } from '../stores/app';
 import { useCurrentUser, useLogout } from '../api';
 import { useRole } from '../hooks';
+import centurionLogo from '../assets/cutm-logo.png';
 
 export default function Sidebar() {
   const sidebarOpen = useAppStore((state) => state.sidebarOpen);
@@ -42,21 +43,19 @@ export default function Sidebar() {
     <aside
       className={`${
         sidebarOpen ? 'w-64' : 'w-20'
-      } bg-gradient-to-b from-white via-blue-50 to-indigo-50 border-r border-blue-200/60 transition-all duration-300 flex flex-col overflow-y-auto shadow-lg`}
+      } bg-gradient-to-b from-blue-50 via-indigo-50 to-blue-50 border-r border-blue-200 transition-all duration-300 flex flex-col overflow-y-auto shadow-sm`}
     >
       {/* Logo */}
-      <div className="flex items-center justify-between h-20 px-4 border-b border-blue-200/60">
+      <div className="px-4 border-b border-gray-200 flex items-center justify-between gap-2" style={{height: '80px'}}>
         {sidebarOpen && (
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">P</span>
-            </div>
-            <h1 className="text-lg font-bold bg-gradient-to-r from-blue-900 to-indigo-900 bg-clip-text text-transparent">CUTM-PMS</h1>
+          <div className="flex items-center gap-3 flex-1">
+            <img src={centurionLogo} alt="Centurion University" className="h-10 w-auto flex-shrink-0" />
+            <h2 className="text-sm font-bold text-gray-900">CUTM PMS</h2>
           </div>
         )}
         <button
           onClick={toggleSidebar}
-          className="p-2 hover:bg-blue-100 text-blue-600 rounded-lg transition duration-200"
+          className="p-2 hover:bg-blue-100 text-blue-600 rounded-lg transition duration-200 flex-shrink-0"
           title="Toggle sidebar"
         >
           {sidebarOpen ? '◀' : '▶'}
@@ -71,7 +70,7 @@ export default function Sidebar() {
             to={item.path}
             className={`flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 ${
               isActive(item.path)
-                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-lg'
+                ? 'bg-blue-500 text-white font-semibold'
                 : 'text-gray-700 hover:text-gray-900 hover:bg-blue-100'
             }`}
             title={item.label}
@@ -86,9 +85,9 @@ export default function Sidebar() {
       </nav>
 
       {/* User Menu - Logout only */}
-      <div className="border-t border-blue-200/60 p-4 space-y-3 bg-blue-50/50">
+      <div className="border-t border-gray-200 p-4 space-y-3 bg-gray-50">
         {sidebarOpen && user && (
-          <div className="px-2 py-3 bg-white rounded-xl border border-blue-100">
+          <div className="px-2 py-3 bg-blue-50 rounded-xl border border-blue-200">
             <p className="font-semibold text-gray-900 truncate text-sm">{user.name}</p>
             <p className="text-gray-600 text-xs truncate mt-1">{user.email}</p>
             <span className="inline-block mt-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-md capitalize">
@@ -96,6 +95,16 @@ export default function Sidebar() {
             </span>
           </div>
         )}
+        <Link
+          to="/settings"
+          className={`w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-blue-100 rounded-xl transition duration-200 font-medium text-sm ${
+            !sidebarOpen && 'justify-center'
+          }`}
+          title="Settings"
+        >
+          <span>⚙️</span>
+          {sidebarOpen && <span>Settings</span>}
+        </Link>
         <button
           onClick={handleLogout}
           className={`w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-xl transition duration-200 font-medium text-sm ${
