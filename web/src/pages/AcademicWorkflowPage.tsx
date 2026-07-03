@@ -21,6 +21,7 @@ export default function AcademicWorkflowPage() {
   const isStudent = currentUser?.system_role === 'student';
   const isFaculty = currentUser?.system_role === 'faculty';
   const isHOD = currentUser?.system_role === 'hod';
+  const isPM = currentUser?.system_role === 'pm' || currentUser?.system_role === 'admin';
 
   // Mock submissions for students
   const submissions = [
@@ -69,6 +70,7 @@ export default function AcademicWorkflowPage() {
             {isStudent && 'Submit and track your project deliverables'}
             {isFaculty && 'Review student submissions and provide feedback'}
             {isHOD && 'Department-wide submission and approval analytics'}
+            {isPM && 'Manage project workflows and team deliverables'}
           </p>
         </div>
 
@@ -269,6 +271,109 @@ export default function AcademicWorkflowPage() {
             <div className="bg-white rounded-lg shadow p-6">
               <p className="text-sm text-gray-600">Approval Rate</p>
               <p className="text-4xl font-bold text-orange-600 mt-2">{departmentStats.approvalRate}%</p>
+            </div>
+          </div>
+        )}
+
+        {/* PM/Admin: Project Workflows */}
+        {isPM && (
+          <div className="space-y-6">
+            {/* Active Projects */}
+            <div className="bg-white rounded-lg shadow overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                <h2 className="text-lg font-bold text-gray-900">Active Project Workflows</h2>
+                <p className="text-sm text-gray-600 mt-1">Manage and monitor team deliverables</p>
+              </div>
+              <div className="divide-y divide-gray-200">
+                {projects.slice(0, 4).map((project) => (
+                  <div key={project.id} className="p-6 hover:bg-gray-50">
+                    <div className="flex justify-between items-start mb-3">
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-gray-900">{project.name}</h3>
+                        <p className="text-sm text-gray-600 mt-1">{project.description}</p>
+                      </div>
+                      <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
+                        project.status === 'active' ? 'bg-green-100 text-green-800' :
+                        project.status === 'planning' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-gray-100 text-gray-800'
+                      }`}>
+                        {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                      <div className="text-sm">
+                        <p className="text-gray-600">Category</p>
+                        <p className="font-medium text-gray-900 capitalize">{project.category}</p>
+                      </div>
+                      <div className="text-sm">
+                        <p className="text-gray-600">Start Date</p>
+                        <p className="font-medium text-gray-900">{new Date(project.start_date).toLocaleDateString()}</p>
+                      </div>
+                      <div className="text-sm">
+                        <p className="text-gray-600">End Date</p>
+                        <p className="font-medium text-gray-900">{new Date(project.end_date).toLocaleDateString()}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Workflow Statistics */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow p-6 border border-blue-200">
+                <p className="text-blue-700 text-sm font-medium">Active Projects</p>
+                <p className="text-4xl font-bold text-blue-900 mt-2">{projects.length}</p>
+                <p className="text-blue-600 text-xs mt-2">Projects in progress</p>
+              </div>
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow p-6 border border-green-200">
+                <p className="text-green-700 text-sm font-medium">Team Members</p>
+                <p className="text-4xl font-bold text-green-900 mt-2">24</p>
+                <p className="text-green-600 text-xs mt-2">Across all projects</p>
+              </div>
+              <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg shadow p-6 border border-orange-200">
+                <p className="text-orange-700 text-sm font-medium">Total Tasks</p>
+                <p className="text-4xl font-bold text-orange-900 mt-2">{tasks.length}</p>
+                <p className="text-orange-600 text-xs mt-2">In all workflows</p>
+              </div>
+            </div>
+
+            {/* Team Performance */}
+            <div className="bg-white rounded-lg shadow overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                <h2 className="text-lg font-bold text-gray-900">Team Performance</h2>
+              </div>
+              <div className="p-6">
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm font-medium text-gray-700">Task Completion Rate</span>
+                      <span className="text-sm font-medium text-gray-900">78%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-blue-600 h-2 rounded-full" style={{width: '78%'}}></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm font-medium text-gray-700">On-Time Delivery</span>
+                      <span className="text-sm font-medium text-gray-900">85%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-green-600 h-2 rounded-full" style={{width: '85%'}}></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm font-medium text-gray-700">Quality Score</span>
+                      <span className="text-sm font-medium text-gray-900">92%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-purple-600 h-2 rounded-full" style={{width: '92%'}}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
