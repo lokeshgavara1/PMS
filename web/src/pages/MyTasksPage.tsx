@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { useCurrentUser, useUpdateTaskStatus } from '../api';
+import { useNavigate } from 'react-router-dom';
 
 export default function MyTasksPage() {
   const { data: user } = useCurrentUser();
   const { mutate: updateStatus } = useUpdateTaskStatus(0);
+  const navigate = useNavigate();
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [filterPriority, setFilterPriority] = useState<string>('all');
+  const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
+  const [editingTitle, setEditingTitle] = useState<string>('');
 
   // Mock tasks data - in production this would come from API
   const myTasks = [
@@ -88,6 +92,36 @@ export default function MyTasksPage() {
     updateStatus(newStatus as any);
   };
 
+  const handleCreateTask = () => {
+    navigate('/projects');
+  };
+
+  const handleEditTask = (task: any) => {
+    setEditingTaskId(task.id);
+    setEditingTitle(task.title);
+  };
+
+  const handleSaveEdit = (taskId: number) => {
+    console.log(`Task ${taskId} updated with title: ${editingTitle}`);
+    setEditingTaskId(null);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingTaskId(null);
+    setEditingTitle('');
+  };
+
+  const handleDeleteTask = (taskId: number) => {
+    const confirmed = confirm('Are you sure you want to delete this task?');
+    if (confirmed) {
+      console.log(`Task ${taskId} deleted`);
+    }
+  };
+
+  const handleViewDetails = (taskId: number) => {
+    console.log(`Viewing details for task ${taskId}`);
+  };
+
   const stats = {
     total: myTasks.length,
     inProgress: myTasks.filter((t: any) => t.status === 'in_progress').length,
@@ -103,6 +137,12 @@ export default function MyTasksPage() {
           <h1 className="text-3xl font-bold text-gray-900">My Tasks</h1>
           <p className="text-gray-600 mt-1">Manage and track your assigned tasks</p>
         </div>
+        <button
+          onClick={handleCreateTask}
+          className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 font-medium shadow-lg transition duration-200"
+        >
+          + Create Task
+        </button>
       </div>
 
       {/* Stats */}
@@ -169,7 +209,30 @@ export default function MyTasksPage() {
               >
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900">{task.title}</h3>
+                    {editingTaskId === task.id ? (
+                      <div className="flex gap-2 mb-3">
+                        <input
+                          type="text"
+                          value={editingTitle}
+                          onChange={(e) => setEditingTitle(e.target.value)}
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        <button
+                          onClick={() => handleSaveEdit(task.id)}
+                          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium transition"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={handleCancelEdit}
+                          className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 font-medium transition"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    ) : (
+                      <h3 className="text-lg font-semibold text-gray-900">{task.title}</h3>
+                    )}
                     <p className="text-gray-600 mt-1 text-sm">{task.description}</p>
 
                     <div className="flex gap-3 mt-3">
@@ -189,11 +252,11 @@ export default function MyTasksPage() {
                     </div>
                   </div>
 
-                  <div className="text-right ml-4">
+                  <div className="ml-4 space-y-3">
                     <select
                       value={task.status}
                       onChange={(e) => handleStatusChange(task.id, e.target.value)}
-                      className={`px-4 py-2 rounded-lg font-medium border-none focus:outline-none focus:ring-2 focus:ring-blue-500 ${getStatusColor(
+                      className={`w-32 px-4 py-2 rounded-lg font-medium border-none focus:outline-none focus:ring-2 focus:ring-blue-500 ${getStatusColor(
                         task.status
                       )}`}
                     >
@@ -203,6 +266,30 @@ export default function MyTasksPage() {
                       <option value="review">Review</option>
                       <option value="done">Done</option>
                     </select>
+
+                    <div className="flex gap-2 text-sm">
+                      <button
+                        onClick={() => handleViewDetails(task.id)}
+                        className="flex-1 px-3 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 font-medium transition"
+                        title="View task details"
+                      >
+                        👁️ View
+                      </button>
+                      <button
+                        onClick={() => handleEditTask(task)}
+                        className="flex-1 px-3 py-2 bg-yellow-50 text-yellow-600 rounded-lg hover:bg-yellow-100 font-medium transition"
+                        title="Edit this task"
+                      >
+                        ✏️ Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteTask(task.id)}
+                        className="flex-1 px-3 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 font-medium transition"
+                        title="Delete this task"
+                      >
+                        🗑️ Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAppStore } from '../stores/app';
 import { useCurrentUser, useLogout } from '../api';
+import { useRole } from '../hooks';
 
 export default function Sidebar() {
   const sidebarOpen = useAppStore((state) => state.sidebarOpen);
@@ -11,6 +12,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const toggleSidebar = useAppStore((state) => state.toggleSidebar);
+  const { hasRole } = useRole();
 
   const handleLogout = () => {
     logout(undefined, {
@@ -31,8 +33,8 @@ export default function Sidebar() {
     { label: 'Workflow', path: '/workflow', icon: '📋' },
   ];
 
-  // Add Admin menu only for admins
-  if (user?.system_role === 'admin' || user?.system_role === 'hod') {
+  // Add Admin menu only for admins and HODs
+  if (hasRole(['admin', 'hod'])) {
     navItems.push({ label: 'Admin', path: '/admin', icon: '⚙️' });
   }
 

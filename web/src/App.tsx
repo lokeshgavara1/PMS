@@ -1,6 +1,7 @@
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useCurrentUser, isAuthenticated } from './api';
 import { useAppStore } from './stores/app';
 
@@ -19,6 +20,7 @@ import ProfilePage from './pages/ProfilePage';
 
 // Layouts
 import DashboardLayout from './layouts/DashboardLayout';
+import RoleBasedRoute from './components/RoleBasedRoute';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -132,7 +134,9 @@ function AppRoutes() {
         path="/admin"
         element={
           <ProtectedRoute>
-            <AdminPanel />
+            <RoleBasedRoute requiredRoles={['admin', 'hod']}>
+              <AdminPanel />
+            </RoleBasedRoute>
           </ProtectedRoute>
         }
       />
@@ -157,12 +161,16 @@ function AppRoutes() {
 }
 
 function App() {
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <AppRoutes />
-      </Router>
-    </QueryClientProvider>
+    <GoogleOAuthProvider clientId={googleClientId}>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <AppRoutes />
+        </Router>
+      </QueryClientProvider>
+    </GoogleOAuthProvider>
   );
 }
 

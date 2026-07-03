@@ -6,6 +6,13 @@ import teamIllustration from '../assets/landing_page_img.jpg';
 export default function LandingPage() {
   const navigate = useNavigate();
 
+  const handleLearnMore = () => {
+    const featuresSection = document.getElementById('features');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const features = [
     { icon: '📊', title: 'Smart Task Management', description: 'Organize projects with intelligent task tracking and dependencies' },
     { icon: '📈', title: 'Real-Time Analytics', description: 'Get instant insights into project progress and team performance' },
@@ -53,7 +60,10 @@ export default function LandingPage() {
                 >
                   Get Started →
                 </button>
-                <button className="px-8 py-3 border-2 border-gray-300 text-gray-900 rounded-lg hover:bg-gray-50 transition font-semibold text-lg">
+                <button
+                  onClick={handleLearnMore}
+                  className="px-8 py-3 border-2 border-gray-300 text-gray-900 rounded-lg hover:bg-gray-50 transition font-semibold text-lg"
+                >
                   Learn More
                 </button>
               </div>
@@ -86,7 +96,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gray-50">
+      <section id="features" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Powerful Features</h2>

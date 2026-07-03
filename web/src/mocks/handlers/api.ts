@@ -76,12 +76,41 @@ export const handlers = [
   // AUTH ENDPOINTS
   // ============================================================================
   http.post(`${API_BASE}/auth/login`, async (info) => {
-    const body = (await info.request.json()) as { email: string; password: string };
+    const body = (await info.request.json()) as
+      | { email: string; password: string }
+      | { googleToken: string };
 
-    // Find user by email (mock validation)
-    const user = fixtures.users.find((u) => u.email === body.email);
-    if (!user) {
-      return sendError(401, 'AUTH_FAILED', 'Invalid email or password');
+    let user: User | undefined;
+
+    // Handle Google token authentication
+    if ('googleToken' in body) {
+      // In mock mode, extract email from Google token (base64 encoded payload)
+      // In production, verify the token with Google's API
+      try {
+        // Mock: assume token format contains email info (in production, verify with Google)
+        // For now, map to a demo user with a cutm.ac.in email
+        const demoGoogleUsers: { [key: string]: User } = {
+          'student@gmail.com': fixtures.users.find((u) => u.email === 'student1@cutm.ac.in')!,
+          'admin@gmail.com': fixtures.users.find((u) => u.email === 'admin@cutm.ac.in')!,
+        };
+
+        // Mock: in production, decode JWT and verify with Google
+        user = Object.values(demoGoogleUsers)[0]; // Default to first user for demo
+
+        if (!user) {
+          return sendError(401, 'AUTH_FAILED', 'Google account not linked to CUTM account');
+        }
+      } catch (error) {
+        return sendError(401, 'AUTH_FAILED', 'Invalid Google token');
+      }
+    }
+    // Handle email/password authentication
+    else {
+      // Find user by email (mock validation)
+      user = fixtures.users.find((u) => u.email === body.email);
+      if (!user) {
+        return sendError(401, 'AUTH_FAILED', 'Invalid email or password');
+      }
     }
 
     // Generate mock tokens
@@ -535,6 +564,9 @@ export const handlers = [
       ...body,
     };
 
+    // Add the new user to the fixtures
+    fixtures.users.push(newUser);
+
     return sendSuccess(newUser, 201);
   }),
 
@@ -552,6 +584,7 @@ export const handlers = [
     }
 
     const updated = { ...user, ...body, updated_at: new Date().toISOString() };
+    Object.assign(user, updated);
     return sendSuccess(updated);
   }),
 

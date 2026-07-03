@@ -4,10 +4,10 @@ import type { User, AuthTokens, LoginRequest, LoginResponse } from '../types/ind
 
 /**
  * POST /api/v2/auth/login
- * Authenticate user with LDAP credentials
+ * Authenticate user with LDAP credentials or Google token
  */
 export const useLogin = () => {
-  return useMutation(async (credentials: LoginRequest) => {
+  return useMutation(async (credentials: LoginRequest | { googleToken: string }) => {
     const response = await apiClient.post<LoginResponse>('/auth/login', credentials);
     const { user, tokens } = response.data.data;
 

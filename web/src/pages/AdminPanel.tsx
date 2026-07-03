@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useUsers, useCreateUser, useUpdateUser } from '../api';
 import DashboardLayout from '../layouts/DashboardLayout';
+import { useRole } from '../hooks';
 
 export default function AdminPanel() {
   const { data: usersData } = useUsers();
   const { mutate: createUser } = useCreateUser();
   const { mutate: updateUser } = useUpdateUser(0);
+  const { permissions } = useRole();
 
   const [activeTab, setActiveTab] = useState<'users' | 'workflow' | 'departments'>('users');
   const [showUserForm, setShowUserForm] = useState(false);
@@ -178,13 +180,19 @@ export default function AdminPanel() {
               </div>
             )}
 
-            {!showUserForm && (
+            {!showUserForm && permissions.canCreateUser && (
               <button
                 onClick={() => setShowUserForm(true)}
                 className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
               >
                 + Create New User
               </button>
+            )}
+
+            {!showUserForm && !permissions.canCreateUser && (
+              <div className="px-6 py-3 bg-gray-100 text-gray-600 rounded-lg text-sm">
+                Only admins can create users
+              </div>
             )}
 
             {/* Users Table */}
@@ -219,8 +227,15 @@ export default function AdminPanel() {
                           </span>
                         </td>
                         <td className="px-6 py-4 text-sm flex gap-2">
-                          <button className="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
-                          <button className="text-red-600 hover:text-red-900 font-medium">Disable</button>
+                          {permissions.canEditUser && (
+                            <button className="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
+                          )}
+                          {permissions.canDeleteUser && (
+                            <button className="text-red-600 hover:text-red-900 font-medium">Disable</button>
+                          )}
+                          {!permissions.canEditUser && !permissions.canDeleteUser && (
+                            <span className="text-gray-400 text-xs">No permissions</span>
+                          )}
                         </td>
                       </tr>
                     ))}

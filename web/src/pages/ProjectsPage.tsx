@@ -3,11 +3,13 @@ import { useProjects, useCreateProject } from '../api';
 import { useAppStore } from '../stores/app';
 import { Link } from 'react-router-dom';
 import { ProjectCategory, ProjectVisibility } from '../types/index';
+import { useRole } from '../hooks';
 
 export default function ProjectsPage() {
   const { data: projectsData, isLoading } = useProjects(1, 20);
   const { mutate: createProject, isLoading: isCreating } = useCreateProject();
   const { modals, openModal, closeModal, addToast } = useAppStore();
+  const { permissions } = useRole();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -55,12 +57,20 @@ export default function ProjectsPage() {
           <h1 className="text-3xl font-bold text-gray-900">Projects</h1>
           <p className="text-gray-600 mt-1">Manage and collaborate on your projects</p>
         </div>
-        <button
-          onClick={() => openModal('createProject')}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
-        >
-          + New Project
-        </button>
+        {permissions.canCreateProject && (
+          <button
+            onClick={() => openModal('createProject')}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+          >
+            + New Project
+          </button>
+        )}
+
+        {!permissions.canCreateProject && (
+          <div className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm">
+            You don't have permission to create projects
+          </div>
+        )}
       </div>
 
       {/* Projects List */}
