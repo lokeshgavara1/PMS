@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useProject, useProjectTasks, useProjectSprints } from '../api';
 import DashboardLayout from '../layouts/DashboardLayout';
 import KanbanBoard from '../components/KanbanBoard';
 import BacklogView from '../components/BacklogView';
 import GanttChart from '../components/GanttChart';
 
-type Tab = 'board' | 'backlog' | 'sprints' | 'gantt' | 'activity' | 'settings';
+type Tab = 'board' | 'backlog' | 'sprints' | 'gantt' | 'activity' | 'settings' | 'workflow';
 
 export default function ProjectDetailPage() {
   const { projectId } = useParams<{ projectId: string }>();
+  const navigate = useNavigate();
   const id = projectId ? parseInt(projectId) : null;
 
   const { data: project, isLoading: projectLoading } = useProject(id);
@@ -45,6 +46,7 @@ export default function ProjectDetailPage() {
     { id: 'backlog', label: 'Backlog', icon: '📋' },
     { id: 'sprints', label: 'Sprints', icon: '⚡' },
     { id: 'gantt', label: 'Gantt', icon: '📅' },
+    { id: 'workflow', label: 'Workflow', icon: '⚙️' },
     { id: 'activity', label: 'Activity', icon: '📝' },
     { id: 'settings', label: 'Settings', icon: '⚙️' },
   ];
@@ -117,6 +119,20 @@ export default function ProjectDetailPage() {
               ) : (
                 <p className="text-gray-500">No sprints yet</p>
               )}
+            </div>
+          )}
+          {activeTab === 'workflow' && (
+            <div className="bg-white rounded-lg shadow p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold">Project Workflow</h2>
+                <button
+                  onClick={() => navigate(`/projects/${projectId}/workflow`)}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
+                >
+                  Open Full Workflow
+                </button>
+              </div>
+              <p className="text-gray-600">Manage project members, task approvals, and timesheets. Click the button above to access the full workflow panel.</p>
             </div>
           )}
           {activeTab === 'activity' && (

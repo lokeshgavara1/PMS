@@ -34,8 +34,9 @@ export default function Sidebar() {
     { label: 'Workflow', path: '/workflow', icon: '📋' },
   ];
 
-  // Add Admin menu only for admins and HODs
+  // Add Admin and HOD-specific menus
   if (hasRole(['admin', 'hod'])) {
+    navItems.push({ label: 'HOD Dashboard', path: '/hod/dashboard', icon: '📊' });
     navItems.push({ label: 'Admin', path: '/admin', icon: '⚙️' });
   }
 
