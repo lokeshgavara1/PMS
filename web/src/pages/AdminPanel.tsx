@@ -75,6 +75,19 @@ export default function AdminPanel() {
     setEditingUserId(null);
   };
 
+  const handleDisableUser = (userId: number) => {
+    if (confirm('Are you sure you want to disable this user?')) {
+      updateUser(
+        { id: userId, is_active: false } as any,
+        {
+          onSuccess: () => {
+            alert('User disabled successfully');
+          },
+        }
+      );
+    }
+  };
+
   const handleToggleWorkflow = (id: number) => {
     setWorkflowRules(workflowRules.map(r =>
       r.id === id ? { ...r, status: r.status === 'enabled' ? 'disabled' : 'enabled' } : r
@@ -268,7 +281,12 @@ export default function AdminPanel() {
                             </button>
                           )}
                           {permissions.canDeleteUser && (
-                            <button className="text-red-600 hover:text-red-700 font-medium">Disable</button>
+                            <button
+                              onClick={() => handleDisableUser(user.id)}
+                              className="text-red-600 hover:text-red-700 font-medium"
+                            >
+                              Disable
+                            </button>
                           )}
                           {!permissions.canEditUser && !permissions.canDeleteUser && (
                             <span className="text-gray-400 text-xs">No permissions</span>
