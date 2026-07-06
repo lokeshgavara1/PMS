@@ -646,6 +646,192 @@ export const handlers = [
 
     return sendSuccess({ data: store.timeLogs });
   }),
+
+  // ============================================================================
+  // PROJECT MEMBERS
+  // ============================================================================
+  http.get(`${API_BASE}/projects/:projectId/members`, (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    const projectId = parseInt(info.params.projectId as string);
+    // Mock: return users assigned to this project
+    const projectMembers = fixtures.users.slice(0, 3).map((u) => ({
+      id: u.id,
+      name: u.name,
+      email: u.email,
+      system_role: u.system_role,
+    }));
+
+    return sendSuccess({ data: projectMembers });
+  }),
+
+  http.post(`${API_BASE}/projects/:projectId/members`, async (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    return sendSuccess({ message: 'Member added successfully' }, 201);
+  }),
+
+  // ============================================================================
+  // TASK APPROVALS
+  // ============================================================================
+  http.patch(`${API_BASE}/tasks/:taskId/approval`, async (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    const taskId = parseInt(info.params.taskId as string);
+    const task = store.tasks.find((t) => t.id === taskId);
+
+    if (!task) {
+      return sendError(404, 'TASK_NOT_FOUND', `Task with ID ${taskId} not found`);
+    }
+
+    const body = await info.request.json();
+    const updated = {
+      ...task,
+      approval_status: body.approval_status || 'pending',
+      approval_notes: body.approval_notes,
+      approval_by: currentSession.userId,
+      approval_date: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+    Object.assign(task, updated);
+
+    return sendSuccess(task);
+  }),
+
+  http.get(`${API_BASE}/tasks/:taskId/approval-status`, (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    const taskId = parseInt(info.params.taskId as string);
+    const task = store.tasks.find((t) => t.id === taskId);
+
+    if (!task) {
+      return sendError(404, 'TASK_NOT_FOUND', `Task with ID ${taskId} not found`);
+    }
+
+    return sendSuccess({
+      approval_status: task.approval_status || 'pending',
+      approval_notes: task.approval_notes,
+      approval_by: task.approval_by,
+      approval_date: task.approval_date,
+    });
+  }),
+
+  // ============================================================================
+  // TIMESHEET SYNC
+  // ============================================================================
+  http.post(`${API_BASE}/timesheets/sync`, async (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    const body = await info.request.json();
+    const projectId = body.projectId || 1;
+
+    // Mock: calculate total hours from time logs for this project
+    const projectTimeLogs = store.timeLogs.filter((log) => {
+      const task = store.tasks.find((t) => t.id === log.task_id);
+      return task && task.project_id === projectId;
+    });
+
+    const totalHours = projectTimeLogs.reduce((sum, log) => sum + (log.hours || 0), 0);
+
+    const timesheet = {
+      id: Math.random(),
+      user_id: currentSession.userId,
+      project_id: projectId,
+      week_start: new Date(new Date().setDate(new Date().getDate() - new Date().getDay())).toISOString(),
+      total_hours: totalHours,
+    };
+
+    return sendSuccess({ timesheet });
+  }),
+
+  // ============================================================================
+  // PROJECT COMPLETION
+  // ============================================================================
+  http.patch(`${API_BASE}/projects/:projectId/complete`, async (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    const projectId = parseInt(info.params.projectId as string);
+    const project = store.projects.find((p) => p.id === projectId);
+
+    if (!project) {
+      return sendError(404, 'PROJECT_NOT_FOUND', `Project with ID ${projectId} not found`);
+    }
+
+    const updated = {
+      ...project,
+      status: 'completed',
+      completed_date: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+    Object.assign(project, updated);
+
+    return sendSuccess(project);
+  }),
+
+  // ============================================================================
+  // TASK FILES
+  // ============================================================================
+  http.post(`${API_BASE}/tasks/:taskId/files`, async (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    return sendSuccess({ message: 'File uploaded successfully' }, 201);
+  }),
+
+  http.get(`${API_BASE}/tasks/:taskId/files`, (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    const taskId = parseInt(info.params.taskId as string);
+    // Mock: return empty files array
+    return sendSuccess({ files: [] });
+  }),
+
+  // ============================================================================
+  // HOD DASHBOARD
+  // ============================================================================
+  http.get(`${API_BASE}/hod/dashboard`, (info) => {
+    if (!validateAuth(info.request)) {
+      return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
+    }
+
+    // Mock: return project statistics
+    const projects = store.projects
+      .filter((p) => !p.is_archived)
+      .map((project) => {
+        const projectTasks = store.tasks.filter((t) => t.project_id === project.id && !t.is_archived);
+        const completedTasks = projectTasks.filter((t) => t.status === TaskStatus.DONE).length;
+
+        return {
+          id: project.id,
+          name: project.name,
+          status: project.status,
+          owner_id: project.owner_id,
+          start_date: project.start_date,
+          end_date: project.end_date,
+          total_tasks: projectTasks.length,
+          completed_tasks: completedTasks,
+          completion_rate: projectTasks.length > 0 ? Math.round((completedTasks / projectTasks.length) * 100) : 0,
+          total_estimated_hours: projectTasks.reduce((sum, t) => sum + (t.estimate_hours || 0), 0),
+        };
+      });
+
+    return sendSuccess({ projects });
+  }),
 ];
 
 // Helper function to validate status transitions
