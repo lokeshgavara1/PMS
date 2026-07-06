@@ -25,9 +25,15 @@ interface SessionData {
 }
 
 // Session storage (in real app this would be Redis)
+// Initialize with default admin user for development
 let currentSession: SessionData = {
-  userId: 0,
-  isAuthenticated: false,
+  userId: fixtures.users.find((u) => u.system_role === 'admin')?.id || 1,
+  isAuthenticated: true,
+  tokens: {
+    accessToken: 'mock-jwt-admin-token',
+    refreshToken: 'mock-refresh-admin-token',
+    expiresIn: 3600,
+  },
 };
 
 // Store for mutations
