@@ -25,7 +25,8 @@ export default function HODDashboardPage() {
   const loadDashboard = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5173/api/v2/hod/dashboard');
+      const baseUrl = import.meta.env.VITE_API_BASE_URL || '/api/v2';
+      const response = await fetch(`${baseUrl}/hod/dashboard`);
       const data = await response.json();
       if (data.success) {
         setProjects(data.data.projects || []);

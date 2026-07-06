@@ -33,6 +33,8 @@ export default function WorkflowCompletePage() {
   const [approvalStatus, setApprovalStatus] = useState<'pending' | 'approved' | 'rejected'>('pending');
   const [approvalNotes, setApprovalNotes] = useState('');
 
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || '/api/v2';
+
   useEffect(() => {
     loadProjectMembers();
     loadProjectTasks();
@@ -41,7 +43,7 @@ export default function WorkflowCompletePage() {
 
   const loadProjectMembers = async () => {
     try {
-      const response = await fetch(`http://localhost:5173/api/v2/projects/${projectId}/members`);
+      const response = await fetch(`${baseUrl}/projects/${projectId}/members`);
       const data = await response.json();
       if (data.success) {
         setMembers(data.data.data || []);
@@ -53,7 +55,7 @@ export default function WorkflowCompletePage() {
 
   const loadProjectTasks = async () => {
     try {
-      const response = await fetch(`http://localhost:5173/api/v2/projects/${projectId}/tasks`);
+      const response = await fetch(`${baseUrl}/projects/${projectId}/tasks`);
       const data = await response.json();
       if (data.success) {
         setTasks(data.data.data || []);
@@ -65,7 +67,7 @@ export default function WorkflowCompletePage() {
 
   const loadTimesheets = async () => {
     try {
-      const response = await fetch(`http://localhost:5173/api/v2/timesheets/sync`, {
+      const response = await fetch(`${baseUrl}/timesheets/sync`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ projectId })
@@ -81,7 +83,7 @@ export default function WorkflowCompletePage() {
 
   const handleTaskApproval = async (taskId: number) => {
     try {
-      const response = await fetch(`http://localhost:5173/api/v2/tasks/${taskId}/approval`, {
+      const response = await fetch(`${baseUrl}/tasks/${taskId}/approval`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -102,7 +104,7 @@ export default function WorkflowCompletePage() {
 
   const handleAddMember = async (userId: number) => {
     try {
-      const response = await fetch(`http://localhost:5173/api/v2/projects/${projectId}/members`, {
+      const response = await fetch(`${baseUrl}/projects/${projectId}/members`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId })
@@ -118,7 +120,7 @@ export default function WorkflowCompletePage() {
 
   const handleFileUpload = async (taskId: number, filename: string) => {
     try {
-      const response = await fetch(`http://localhost:5173/api/v2/tasks/${taskId}/files`, {
+      const response = await fetch(`${baseUrl}/tasks/${taskId}/files`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
