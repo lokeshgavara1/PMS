@@ -88,15 +88,24 @@ export default function Topbar() {
           <div className="relative">
             <button
               onClick={() => setShowProfileMenu(!showProfileMenu)}
-              className="flex items-center gap-3 px-2 py-1.5 hover:bg-blue-100 rounded-xl transition duration-200 group"
+              className="flex items-center gap-3 px-3 py-2 hover:bg-blue-100 rounded-xl transition duration-200 group"
               title="Profile menu"
             >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center font-bold cursor-pointer shadow-lg group-hover:shadow-xl transition">
                 {user.name.charAt(0).toUpperCase()}
               </div>
-              <div className="hidden sm:block text-sm">
-                <p className="font-semibold text-gray-900">{user.name}</p>
-                <p className="text-gray-600 capitalize text-xs font-medium">{user.system_role}</p>
+              <div className="hidden sm:flex flex-col items-start gap-1">
+                <p className="font-semibold text-gray-900 text-sm">{user.name}</p>
+                <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold capitalize shadow-sm ${
+                  user.system_role === 'admin' ? 'bg-red-100 text-red-700' :
+                  user.system_role === 'hod' ? 'bg-purple-100 text-purple-700' :
+                  user.system_role === 'faculty' ? 'bg-blue-100 text-blue-700' :
+                  user.system_role === 'student' ? 'bg-green-100 text-green-700' :
+                  user.system_role === 'pm' ? 'bg-orange-100 text-orange-700' :
+                  'bg-gray-100 text-gray-700'
+                }`}>
+                  {user.system_role}
+                </span>
               </div>
             </button>
 
