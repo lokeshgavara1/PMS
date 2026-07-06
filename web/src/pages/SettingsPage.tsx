@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { useCurrentUser } from '../api';
+import { ShieldIcon, NotificationIcon, EyeIcon, ChartIcon, LightningIcon, EditIcon } from '../components/SidebarIcons';
 
 // Tab components
 import AccountSecurityTab from '../components/settings/AccountSecurityTab';
@@ -16,13 +17,25 @@ export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState<SettingsTab>('security');
   const { data: user } = useCurrentUser();
 
-  const tabs: { id: SettingsTab; label: string; icon: string; description: string }[] = [
-    { id: 'security', label: 'Account Security', icon: '🔒', description: 'Password, 2FA, sessions' },
-    { id: 'notifications', label: 'Notifications', icon: '🔔', description: 'Email, in-app alerts' },
-    { id: 'privacy', label: 'Privacy & Sharing', icon: '👁️', description: 'Visibility, data sharing' },
-    { id: 'display', label: 'Display & Preferences', icon: '🎨', description: 'Theme, language, timezone' },
-    { id: 'integrations', label: 'Integrations', icon: '🔗', description: 'Connected accounts' },
-    { id: 'accessibility', label: 'Accessibility', icon: '♿', description: 'Fonts, contrast, shortcuts' },
+  const getTabIcon = (tabId: SettingsTab) => {
+    const icons: Record<SettingsTab, React.ReactNode> = {
+      security: <ShieldIcon size={20} />,
+      notifications: <NotificationIcon size={20} />,
+      privacy: <EyeIcon size={20} />,
+      display: <ChartIcon size={20} />,
+      integrations: <LightningIcon size={20} />,
+      accessibility: <EditIcon size={20} />,
+    };
+    return icons[tabId];
+  };
+
+  const tabs: { id: SettingsTab; label: string; description: string }[] = [
+    { id: 'security', label: 'Account Security', description: 'Password, 2FA, sessions' },
+    { id: 'notifications', label: 'Notifications', description: 'Email, in-app alerts' },
+    { id: 'privacy', label: 'Privacy & Sharing', description: 'Visibility, data sharing' },
+    { id: 'display', label: 'Display & Preferences', description: 'Theme, language, timezone' },
+    { id: 'integrations', label: 'Integrations', description: 'Connected accounts' },
+    { id: 'accessibility', label: 'Accessibility', description: 'Fonts, contrast, shortcuts' },
   ];
 
   return (
@@ -52,7 +65,9 @@ export default function SettingsPage() {
                     title={tab.description}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-lg">{tab.icon}</span>
+                      <div className={activeTab === tab.id ? 'text-teal-500' : 'text-gray-500'}>
+                        {getTabIcon(tab.id)}
+                      </div>
                       <div className="flex-1">
                         <div className="text-sm font-medium">{tab.label}</div>
                         <div className="text-xs text-gray-500 hidden sm:block">{tab.description}</div>

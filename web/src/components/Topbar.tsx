@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useUnreadNotificationCount, useNotifications, useLogout } from '../api';
 import { useCurrentUser } from '../api';
 import { useNavigate } from 'react-router-dom';
+import { NotificationIcon } from './SidebarIcons';
 import centurionLogo from '../assets/cutm-logo.png';
 
 export default function Topbar() {
@@ -35,7 +36,7 @@ export default function Topbar() {
             className="relative p-2.5 text-navy-500 hover:bg-beige-100 rounded-lg transition duration-200"
             title="Notifications"
           >
-            <span className="text-xl">🔔</span>
+            <NotificationIcon size={20} className="text-navy-500" />
             {unread > 0 && (
               <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-red-500 to-red-600 text-white text-xs rounded-full flex items-center justify-center font-bold shadow-lg">
                 {unread > 9 ? '9+' : unread}

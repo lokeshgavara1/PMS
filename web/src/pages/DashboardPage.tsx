@@ -1,6 +1,7 @@
 import React from 'react';
 import { useProjects } from '../api';
 import { Link } from 'react-router-dom';
+import { BarChartIcon, FolderIcon, CheckIcon } from '../components/SidebarIcons';
 
 export default function DashboardPage() {
   const { data: projectsData, isLoading } = useProjects(1, 6);
@@ -34,7 +35,7 @@ export default function DashboardPage() {
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-4">
               <p className="text-sky-blue-500 text-sm font-semibold">Total Projects</p>
-              <span className="text-3xl">📊</span>
+              <BarChartIcon size={32} className="text-sky-blue-500" />
             </div>
             <p className="text-5xl font-bold text-navy-500">{projectsData?.pagination.total || 0}</p>
             <p className="text-teal-500 text-sm mt-3">Active projects in system</p>
@@ -46,7 +47,7 @@ export default function DashboardPage() {
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-4">
               <p className="text-teal-500 text-sm font-semibold">My Projects</p>
-              <span className="text-3xl">📁</span>
+              <FolderIcon size={32} className="text-teal-500" />
             </div>
             <p className="text-5xl font-bold text-teal-500">{projects.length}</p>
             <p className="text-teal-700 text-sm mt-3">You're involved in</p>
@@ -58,7 +59,7 @@ export default function DashboardPage() {
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-4">
               <p className="text-beige-500 text-sm font-semibold">Active Tasks</p>
-              <span className="text-3xl">✓</span>
+              <CheckIcon size={32} className="text-beige-500" />
             </div>
             <p className="text-5xl font-bold text-navy-500">8</p>
             <p className="text-teal-500 text-sm mt-3">Assigned to you</p>

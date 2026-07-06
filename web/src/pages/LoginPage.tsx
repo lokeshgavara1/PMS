@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { useLogin, useGoogleLogin, useCurrentUser } from '../api';
 import { useAppStore } from '../stores/app';
+import { LightningIcon, BarChartIcon, ChartIcon, ShieldIcon } from '../components/SidebarIcons';
 import centurionLogo from '../assets/cutm-logo.png';
 
 export default function LoginPage() {
@@ -106,8 +107,9 @@ export default function LoginPage() {
           </div>
 
           {/* AI Badge */}
-          <div className="inline-block px-4 py-2 border border-teal-300 rounded-full text-sm text-teal-700 mb-12 bg-teal-50">
-            ⚡ Smart Project Management
+          <div className="inline-block px-4 py-2 border border-teal-300 rounded-full text-sm text-teal-700 mb-12 bg-teal-50 flex items-center gap-2">
+            <LightningIcon size={16} className="text-teal-700" />
+            Smart Project Management
           </div>
 
           {/* Main Heading */}
@@ -129,17 +131,21 @@ export default function LoginPage() {
         {/* Features */}
         <div>
           <div className="flex gap-3 mb-12 flex-wrap">
-            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white">
-              📊 Task Management
+            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white flex items-center gap-2">
+              <BarChartIcon size={16} className="text-teal-700" />
+              Task Management
             </button>
-            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white">
-              📈 Real Analytics
+            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white flex items-center gap-2">
+              <ChartIcon size={16} className="text-teal-700" />
+              Real Analytics
             </button>
-            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white">
-              🔄 Auto Workflows
+            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white flex items-center gap-2">
+              <LightningIcon size={16} className="text-teal-700" />
+              Auto Workflows
             </button>
-            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white">
-              🔒 Secure & Compliant
+            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white flex items-center gap-2">
+              <ShieldIcon size={16} className="text-teal-700" />
+              Secure & Compliant
             </button>
           </div>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BarChartIcon, ChartIcon, LightningIcon, UsersIcon, ClockIcon, ShieldIcon } from '../components/SidebarIcons';
 import centurionLogo from '../assets/cutm-logo.png';
 import teamIllustration from '../assets/landing_page_img.jpg';
 
@@ -14,12 +15,12 @@ export default function LandingPage() {
   };
 
   const features = [
-    { icon: '📊', title: 'Smart Task Management', description: 'Organize projects with intelligent task tracking and dependencies' },
-    { icon: '📈', title: 'Real-Time Analytics', description: 'Get instant insights into project progress and team performance' },
-    { icon: '🔄', title: 'Automated Workflows', description: 'Streamline repetitive tasks with intelligent automation' },
-    { icon: '👥', title: 'Team Collaboration', description: 'Keep your team aligned with real-time updates and comments' },
-    { icon: '⏱️', title: 'Time Tracking', description: 'Log hours and monitor resource allocation efficiently' },
-    { icon: '🔒', title: 'Secure & Compliant', description: 'Enterprise-grade security with role-based access control' },
+    { icon: BarChartIcon, title: 'Smart Task Management', description: 'Organize projects with intelligent task tracking and dependencies' },
+    { icon: ChartIcon, title: 'Real-Time Analytics', description: 'Get instant insights into project progress and team performance' },
+    { icon: LightningIcon, title: 'Automated Workflows', description: 'Streamline repetitive tasks with intelligent automation' },
+    { icon: UsersIcon, title: 'Team Collaboration', description: 'Keep your team aligned with real-time updates and comments' },
+    { icon: ClockIcon, title: 'Time Tracking', description: 'Log hours and monitor resource allocation efficiently' },
+    { icon: ShieldIcon, title: 'Secure & Compliant', description: 'Enterprise-grade security with role-based access control' },
   ];
 
   return (
@@ -106,16 +107,21 @@ export default function LandingPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-xl p-8 border border-gray-200 hover:shadow-lg transition"
-              >
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
+            {features.map((feature, idx) => {
+              const Icon = feature.icon;
+              return (
+                <div
+                  key={idx}
+                  className="bg-white rounded-xl p-8 border border-gray-200 hover:shadow-lg transition"
+                >
+                  <div className="mb-4 text-teal-500">
+                    <Icon size={32} />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

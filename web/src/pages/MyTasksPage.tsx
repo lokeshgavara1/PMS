@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCurrentUser, useUpdateTaskStatus } from '../api';
 import { useNavigate } from 'react-router-dom';
 import { useRole } from '../hooks';
+import { ViewIcon, EditIcon, DeleteIcon, ClockIcon } from '../components/SidebarIcons';
 
 export default function MyTasksPage() {
   const { data: user } = useCurrentUser();
@@ -278,32 +279,36 @@ export default function MyTasksPage() {
                     <div className="flex gap-2 text-sm">
                       <button
                         onClick={() => handleViewDetails(task.id)}
-                        className="flex-1 px-3 py-2 bg-teal-50 text-teal-500 rounded-lg hover:bg-sky-blue-100 font-medium transition"
+                        className="flex-1 px-3 py-2 bg-teal-50 text-teal-500 rounded-lg hover:bg-sky-blue-100 font-medium transition flex items-center justify-center gap-2"
                         title="View task details"
                       >
-                        👁️ View
+                        <ViewIcon size={16} className="text-teal-500" />
+                        View
                       </button>
                       <button
                         onClick={() => handleEditTask(task)}
-                        className="flex-1 px-3 py-2 bg-yellow-50 text-yellow-600 rounded-lg hover:bg-yellow-100 font-medium transition"
+                        className="flex-1 px-3 py-2 bg-yellow-50 text-yellow-600 rounded-lg hover:bg-yellow-100 font-medium transition flex items-center justify-center gap-2"
                         title="Edit this task"
                       >
-                        ✏️ Edit
+                        <EditIcon size={16} className="text-yellow-600" />
+                        Edit
                       </button>
                       <button
                         onClick={() => handleDeleteTask(task.id)}
-                        className="flex-1 px-3 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 font-medium transition"
+                        className="flex-1 px-3 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 font-medium transition flex items-center justify-center gap-2"
                         title="Delete this task"
                       >
-                        🗑️ Delete
+                        <DeleteIcon size={16} className="text-red-600" />
+                        Delete
                       </button>
                     </div>
                   </div>
                 </div>
 
                 {task.estimate_hours && (
-                  <div className="mt-3 text-xs text-gray-500">
-                    ⏱️ Estimate: {task.estimate_hours} hours
+                  <div className="mt-3 text-xs text-gray-500 flex items-center gap-1.5">
+                    <ClockIcon size={14} className="text-gray-500" />
+                    Estimate: {task.estimate_hours} hours
                   </div>
                 )}
               </div>
@@ -313,8 +318,8 @@ export default function MyTasksPage() {
           <div className="p-12 text-center">
             <p className="text-gray-600 text-lg">
               {myTasks.length === 0
-                ? '📭 No tasks assigned to you yet'
-                : '🎯 No tasks match your filters'}
+                ? 'No tasks assigned to you yet'
+                : 'No tasks match your filters'}
             </p>
           </div>
         )}

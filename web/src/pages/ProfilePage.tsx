@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useCurrentUser } from '../api';
+import { ShieldIcon } from '../components/SidebarIcons';
 
 export default function ProfilePage() {
   const { data: user } = useCurrentUser();
@@ -200,7 +201,8 @@ export default function ProfilePage() {
       {/* Security Section */}
       <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
         <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-          <span className="text-2xl">🔒</span> Security & Password
+          <ShieldIcon size={24} className="text-gray-900" />
+          Security & Password
         </h3>
         <div className="space-y-4">
           <p className="text-gray-700 mb-4">Secure your account with a strong password</p>

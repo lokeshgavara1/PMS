@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useUsers, useCreateUser, useUpdateUser } from '../api';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { useRole } from '../hooks';
+import { UsersIcon, SettingsIcon, FolderIcon, CheckIcon, EditIcon as EditIconSVG } from '../components/SidebarIcons';
 
 export default function AdminPanel() {
   const { data: usersData } = useUsers();
@@ -118,33 +119,36 @@ export default function AdminPanel() {
           <div className="flex border-b border-gray-200">
             <button
               onClick={() => setActiveTab('users')}
-              className={`flex-1 px-6 py-4 text-center font-medium ${
+              className={`flex-1 px-6 py-4 text-center font-medium flex items-center justify-center gap-2 ${
                 activeTab === 'users'
                   ? 'text-teal-500 border-b-2 border-teal-500'
                   : 'text-gray-700 hover:text-gray-900'
               }`}
             >
-              👥 User Management
+              <UsersIcon size={18} className={activeTab === 'users' ? 'text-teal-500' : 'text-gray-700'} />
+              User Management
             </button>
             <button
               onClick={() => setActiveTab('workflow')}
-              className={`flex-1 px-6 py-4 text-center font-medium ${
+              className={`flex-1 px-6 py-4 text-center font-medium flex items-center justify-center gap-2 ${
                 activeTab === 'workflow'
                   ? 'text-teal-500 border-b-2 border-teal-500'
                   : 'text-gray-700 hover:text-gray-900'
               }`}
             >
-              ⚙️ Workflow Config
+              <SettingsIcon size={18} className={activeTab === 'workflow' ? 'text-teal-500' : 'text-gray-700'} />
+              Workflow Config
             </button>
             <button
               onClick={() => setActiveTab('departments')}
-              className={`flex-1 px-6 py-4 text-center font-medium ${
+              className={`flex-1 px-6 py-4 text-center font-medium flex items-center justify-center gap-2 ${
                 activeTab === 'departments'
                   ? 'text-teal-500 border-b-2 border-teal-500'
                   : 'text-gray-700 hover:text-gray-900'
               }`}
             >
-              🏢 Departments
+              <FolderIcon size={18} className={activeTab === 'departments' ? 'text-teal-500' : 'text-gray-700'} />
+              Departments
             </button>
           </div>
         </div>

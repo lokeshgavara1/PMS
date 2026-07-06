@@ -5,6 +5,7 @@ import DashboardLayout from '../layouts/DashboardLayout';
 import KanbanBoard from '../components/KanbanBoard';
 import BacklogView from '../components/BacklogView';
 import GanttChart from '../components/GanttChart';
+import { BarChartIcon, DocumentIcon, LightningIcon, SettingsIcon } from '../components/SidebarIcons';
 
 type Tab = 'board' | 'backlog' | 'sprints' | 'gantt' | 'activity' | 'settings' | 'workflow';
 
@@ -41,14 +42,28 @@ export default function ProjectDetailPage() {
   }
 
   const tasks = tasksData?.data || [];
-  const tabs: { id: Tab; label: string; icon: string }[] = [
-    { id: 'board', label: 'Board', icon: '📊' },
-    { id: 'backlog', label: 'Backlog', icon: '📋' },
-    { id: 'sprints', label: 'Sprints', icon: '⚡' },
-    { id: 'gantt', label: 'Gantt', icon: '📅' },
-    { id: 'workflow', label: 'Workflow', icon: '⚙️' },
-    { id: 'activity', label: 'Activity', icon: '📝' },
-    { id: 'settings', label: 'Settings', icon: '⚙️' },
+
+  const getTabIcon = (tabId: Tab) => {
+    const icons: Record<Tab, React.ReactNode> = {
+      board: <BarChartIcon size={18} />,
+      backlog: <DocumentIcon size={18} />,
+      sprints: <LightningIcon size={18} />,
+      gantt: <DocumentIcon size={18} />,
+      workflow: <SettingsIcon size={18} />,
+      activity: <DocumentIcon size={18} />,
+      settings: <SettingsIcon size={18} />,
+    };
+    return icons[tabId];
+  };
+
+  const tabs: { id: Tab; label: string }[] = [
+    { id: 'board', label: 'Board' },
+    { id: 'backlog', label: 'Backlog' },
+    { id: 'sprints', label: 'Sprints' },
+    { id: 'gantt', label: 'Gantt' },
+    { id: 'workflow', label: 'Workflow' },
+    { id: 'activity', label: 'Activity' },
+    { id: 'settings', label: 'Settings' },
   ];
 
   return (
@@ -75,13 +90,16 @@ export default function ProjectDetailPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-3 font-medium border-b-2 transition ${
+                className={`px-4 py-3 font-medium border-b-2 transition flex items-center gap-2 ${
                   activeTab === tab.id
                     ? 'border-blue-500 text-teal-500'
                     : 'border-transparent text-gray-600 hover:text-gray-900'
                 }`}
               >
-                {tab.icon} {tab.label}
+                <span className={activeTab === tab.id ? 'text-teal-500' : 'text-gray-600'}>
+                  {getTabIcon(tab.id)}
+                </span>
+                {tab.label}
               </button>
             ))}
           </div>

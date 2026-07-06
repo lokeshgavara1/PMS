@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useProjects, useProjectTasks } from '../api';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { useAppStore } from '../stores/app';
+import { CheckIcon } from '../components/SidebarIcons';
 
 export default function AcademicWorkflowPage() {
   const { data: projectsData } = useProjects(1, 100);
@@ -230,13 +231,14 @@ export default function AcademicWorkflowPage() {
                       <div className="flex gap-2">
                         <button
                           onClick={() => handleReview(item.id, true)}
-                          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2"
                         >
-                          ✓ Approve
+                          <CheckIcon size={16} className="text-white" />
+                          Approve
                         </button>
                         <button
                           onClick={() => handleReview(item.id, false)}
-                          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center gap-2"
                         >
                           ✕ Reject
                         </button>
