@@ -153,6 +153,10 @@ export function initializeModels(sequelize: Sequelize) {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      completed_date: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
     },
     {
       sequelize,
@@ -250,6 +254,22 @@ export function initializeModels(sequelize: Sequelize) {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      approval_status: {
+        type: DataTypes.ENUM('pending', 'approved', 'rejected'),
+        defaultValue: 'pending',
+      },
+      approval_notes: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      approval_by: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      approval_date: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
     },
     {
       sequelize,
@@ -261,6 +281,7 @@ export function initializeModels(sequelize: Sequelize) {
         { fields: ['sprint_id'] },
         { fields: ['assignee_id'] },
         { fields: ['due_date'] },
+        { fields: ['approval_status'] },
         { type: 'FULLTEXT', fields: ['title', 'description'] },
       ],
     }
@@ -424,6 +445,51 @@ export function initializeModels(sequelize: Sequelize) {
     }
   );
 
+  // Timesheet Model
+  class Timesheet extends Model {
+    declare id: number;
+    declare user_id: number;
+    declare project_id: number;
+    declare week_start: Date;
+    declare total_hours: number;
+  }
+
+  Timesheet.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      project_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      week_start: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      total_hours: {
+        type: DataTypes.DECIMAL(10, 2),
+        defaultValue: 0,
+      },
+    },
+    {
+      sequelize,
+      tableName: 'timesheets',
+      timestamps: true,
+      underscored: true,
+      indexes: [
+        { fields: ['user_id', 'project_id', 'week_start'] },
+        { fields: ['user_id', 'week_start'] },
+      ],
+    }
+  );
+
   // Notification Model
   class Notification extends Model {
     declare id: number;
@@ -569,6 +635,7 @@ export function initializeModels(sequelize: Sequelize) {
     Sprint,
     Comment,
     TimeLog,
+    Timesheet,
     Notification,
     ActivityLog,
   };

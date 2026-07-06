@@ -874,6 +874,192 @@ app.post('/api/v2/activity-log', authMiddleware, async (req: AuthRequest, res: R
   }
 });
 
+// ============= PROJECT MEMBERS / STUDENTS JOINING =============
+app.post('/api/v2/projects/:projectId/members', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const { user_id } = req.body;
+
+    // Create a timesheet entry for the user when they join
+    const timesheetEntry = await models.Timesheet.findOrCreate({
+      where: { user_id, project_id: parseInt(projectId) },
+      defaults: { user_id, project_id: parseInt(projectId), week_start: new Date(), total_hours: 0 },
+    });
+
+    res.status(201).json({ success: true, data: { message: 'User added to project', timesheet: timesheetEntry[0] } });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+app.get('/api/v2/projects/:projectId/members', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    // Get all users assigned to tasks in this project
+    const members = await models.Task.findAll({
+      where: { project_id: projectId },
+      attributes: ['assignee_id'],
+      raw: true,
+      group: ['assignee_id'],
+    });
+
+    const userIds = [...new Set(members.map((m: any) => m.assignee_id).filter(Boolean))];
+    const users = await models.User.findAll({ where: { id: userIds } });
+
+    res.json({ success: true, data: { data: users } });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+// ============= TASK APPROVAL WORKFLOW =============
+app.patch('/api/v2/tasks/:taskId/approval', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const { taskId } = req.params;
+    const { approval_status, approval_notes } = req.body; // 'pending', 'approved', 'rejected'
+
+    const task = await models.Task.update(
+      {
+        approval_status,
+        approval_notes,
+        approval_by: req.user?.id,
+        approval_date: new Date()
+      },
+      { where: { id: taskId } }
+    );
+
+    res.json({ success: true, data: { message: 'Task approval status updated' } });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+app.get('/api/v2/tasks/:taskId/approval-status', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const { taskId } = req.params;
+    const task = await models.Task.findByPk(taskId, {
+      attributes: ['id', 'title', 'approval_status', 'approval_notes', 'approval_date', 'approval_by'],
+    });
+
+    res.json({ success: true, data: task });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+// ============= TIMESHEET SYNC FROM TIME LOGS =============
+app.post('/api/v2/timesheets/sync', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const { projectId, userId } = req.body;
+
+    // Get all time logs for the user in this project
+    const timeLogs = await models.TimeLog.findAll({
+      include: [{
+        model: models.Task,
+        where: { project_id: projectId },
+        attributes: ['id']
+      }],
+      where: { user_id: userId }
+    });
+
+    // Sum up hours from time logs
+    const totalHours = timeLogs.reduce((sum, log: any) => sum + (log.hours_logged || 0), 0);
+
+    // Update or create timesheet entry
+    const timesheet = await models.Timesheet.findOrCreate({
+      where: { user_id: userId, project_id: projectId },
+      defaults: { user_id, project_id, week_start: new Date(), total_hours: totalHours }
+    });
+
+    if (!timesheet[1]) {
+      await timesheet[0].update({ total_hours: totalHours });
+    }
+
+    res.json({ success: true, data: { message: 'Timesheet synced from time logs', timesheet: timesheet[0] } });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+// ============= HOD DASHBOARD =============
+app.get('/api/v2/hod/dashboard', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    // Get all projects stats for HOD view
+    const projects = await models.Project.findAll({
+      attributes: ['id', 'name', 'status', 'owner_id', 'start_date', 'end_date'],
+    });
+
+    const stats = await Promise.all(
+      projects.map(async (project: any) => {
+        const totalTasks = await models.Task.count({ where: { project_id: project.id } });
+        const completedTasks = await models.Task.count({ where: { project_id: project.id, status: 'done' } });
+        const totalHours = await models.Task.sum('estimate_hours', { where: { project_id: project.id } });
+
+        return {
+          ...project.toJSON(),
+          total_tasks: totalTasks,
+          completed_tasks: completedTasks,
+          completion_rate: totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0,
+          total_estimated_hours: totalHours || 0,
+        };
+      })
+    );
+
+    res.json({ success: true, data: { projects: stats } });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
+// ============= PROJECT COMPLETION =============
+app.patch('/api/v2/projects/:projectId/complete', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const { projectId } = req.params;
+
+    // Update project status to completed
+    await models.Project.update(
+      { status: 'completed', completed_date: new Date() },
+      { where: { id: projectId } }
+    );
+
+    res.json({ success: true, data: { message: 'Project marked as completed' } });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+// ============= FILE UPLOAD (Placeholder for file management) =============
+app.post('/api/v2/tasks/:taskId/files', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const { taskId } = req.params;
+    const { filename, file_url, file_size, uploaded_by } = req.body;
+
+    // Store file metadata (in a real app, you'd handle actual file upload to cloud storage)
+    const fileRecord = {
+      task_id: taskId,
+      filename,
+      file_url,
+      file_size,
+      uploaded_by: req.user?.id,
+      created_at: new Date()
+    };
+
+    res.status(201).json({ success: true, data: { message: 'File uploaded', file: fileRecord } });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: { code: 'VALIDATION_ERROR', message: err.message } });
+  }
+});
+
+app.get('/api/v2/tasks/:taskId/files', authMiddleware, async (req: AuthRequest, res: Response) => {
+  try {
+    const { taskId } = req.params;
+    // In a real app, fetch files from database or cloud storage
+    res.json({ success: true, data: { files: [] } });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: { code: 'SERVER_ERROR', message: err.message } });
+  }
+});
+
 // Initialize database and start server
 async function start() {
   try {
