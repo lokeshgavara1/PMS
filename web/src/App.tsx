@@ -18,6 +18,8 @@ import AdminPanel from './pages/AdminPanel';
 import MyTasksPage from './pages/MyTasksPage';
 import ProfilePage from './pages/ProfilePage';
 import SettingsPage from './pages/SettingsPage';
+import WorkflowCompletePage from './pages/WorkflowCompletePage';
+import HODDashboardPage from './pages/HODDashboardPage';
 
 // Layouts
 import DashboardLayout from './layouts/DashboardLayout';
@@ -156,6 +158,28 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <SettingsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/projects/:projectId/workflow"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <WorkflowCompletePage />
+            </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/hod/dashboard"
+        element={
+          <ProtectedRoute>
+            <RoleBasedRoute requiredRoles={['hod', 'admin']}>
+              <DashboardLayout>
+                <HODDashboardPage />
+              </DashboardLayout>
+            </RoleBasedRoute>
           </ProtectedRoute>
         }
       />
