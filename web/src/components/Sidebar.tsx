@@ -44,19 +44,19 @@ export default function Sidebar() {
     <aside
       className={`${
         sidebarOpen ? 'w-64' : 'w-20'
-      } bg-gradient-to-b from-sky-blue-50 via-beige-50 to-sky-blue-50 border-r border-sky-blue-200 transition-all duration-300 flex flex-col overflow-y-auto shadow-sm`}
+      } bg-gradient-to-b from-navy via-navy-dark to-navy border-r border-navy-dark transition-all duration-300 flex flex-col overflow-y-auto shadow-lg`}
     >
       {/* Logo */}
-      <div className="px-4 border-b border-gray-200 flex items-center justify-between gap-2" style={{height: '80px'}}>
+      <div className="px-4 border-b border-navy-dark flex items-center justify-between gap-2" style={{height: '80px'}}>
         {sidebarOpen && (
           <div className="flex items-center gap-3 flex-1">
             <img src={centurionLogo} alt="Centurion University" className="h-10 w-auto flex-shrink-0" />
-            <h2 className="text-sm font-bold text-gray-900">CUTM PMS</h2>
+            <h2 className="text-sm font-bold text-white">CUTM PMS</h2>
           </div>
         )}
         <button
           onClick={toggleSidebar}
-          className="p-2 hover:bg-blue-100 text-blue-600 rounded-lg transition duration-200 flex-shrink-0"
+          className="p-2 hover:bg-teal hover:text-white text-sky-blue rounded-lg transition duration-200 flex-shrink-0"
           title="Toggle sidebar"
         >
           {sidebarOpen ? '◀' : '▶'}
@@ -69,10 +69,10 @@ export default function Sidebar() {
           <Link
             key={item.path}
             to={item.path}
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 ${
+            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition duration-200 ${
               isActive(item.path)
-                ? 'bg-navy-500 text-white font-semibold'
-                : 'text-gray-700 hover:text-gray-900 hover:bg-teal-50'
+                ? 'bg-teal text-white font-semibold shadow-md'
+                : 'text-white hover:text-white hover:bg-teal hover:shadow-md'
             }`}
             title={item.label}
           >
@@ -86,19 +86,19 @@ export default function Sidebar() {
       </nav>
 
       {/* User Menu - Logout only */}
-      <div className="border-t border-gray-200 p-4 space-y-3 bg-gray-50">
+      <div className="border-t border-navy-dark p-4 space-y-3 bg-navy-dark">
         {sidebarOpen && user && (
-          <div className="px-2 py-3 bg-blue-50 rounded-xl border border-blue-200">
-            <p className="font-semibold text-gray-900 truncate text-sm">{user.name}</p>
-            <p className="text-gray-600 text-xs truncate mt-1">{user.email}</p>
-            <span className="inline-block mt-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-md capitalize">
+          <div className="px-2 py-3 bg-teal bg-opacity-20 rounded-lg border border-teal border-opacity-30">
+            <p className="font-semibold text-white truncate text-sm">{user.name}</p>
+            <p className="text-sky-blue text-xs truncate mt-1">{user.email}</p>
+            <span className="inline-block mt-2 px-2 py-1 bg-teal bg-opacity-30 text-sky-blue text-xs font-medium rounded-md capitalize">
               {user.system_role}
             </span>
           </div>
         )}
         <Link
           to="/settings"
-          className={`w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-blue-100 rounded-xl transition duration-200 font-medium text-sm ${
+          className={`w-full flex items-center gap-3 px-4 py-3 text-white hover:text-white hover:bg-teal hover:shadow-md rounded-lg transition duration-200 font-medium text-sm ${
             !sidebarOpen && 'justify-center'
           }`}
           title="Settings"
@@ -108,7 +108,7 @@ export default function Sidebar() {
         </Link>
         <button
           onClick={handleLogout}
-          className={`w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-xl transition duration-200 font-medium text-sm ${
+          className={`w-full flex items-center gap-3 px-4 py-3 text-red-300 hover:text-white hover:bg-red-600 rounded-lg transition duration-200 font-medium text-sm ${
             !sidebarOpen && 'justify-center'
           }`}
           title="Logout"
