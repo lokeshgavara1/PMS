@@ -24,7 +24,7 @@ export default function Topbar() {
   const unread = unreadCount?.unreadCount || 0;
 
   return (
-    <header className="bg-gradient-to-r from-white via-blue-50 to-indigo-50 border-b border-gray-200 px-8 py-6 flex items-center gap-8 shadow-sm">
+    <header className="bg-gradient-to-r from-white via-beige-50 to-sky-blue-50 border-b border-sky-blue-100 px-8 py-6 flex items-center gap-8 shadow-sm">
       <h1 className="text-lg font-semibold text-gray-900 tracking-tight flex-1 text-center">Centurion University of Technology and Management</h1>
 
       <div className="flex items-center gap-6">
@@ -32,7 +32,7 @@ export default function Topbar() {
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
-            className="relative p-2.5 text-gray-700 hover:bg-blue-100 rounded-xl transition duration-200"
+            className="relative p-2.5 text-gray-700 hover:bg-sky-blue-100 rounded-xl transition duration-200"
             title="Notifications"
           >
             <span className="text-xl">🔔</span>
@@ -88,10 +88,10 @@ export default function Topbar() {
           <div className="relative">
             <button
               onClick={() => setShowProfileMenu(!showProfileMenu)}
-              className="flex items-center gap-3 px-3 py-2 hover:bg-blue-100 rounded-xl transition duration-200 group"
+              className="flex items-center gap-3 px-3 py-2 hover:bg-sky-blue-100 rounded-xl transition duration-200 group"
               title="Profile menu"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center font-bold cursor-pointer shadow-lg group-hover:shadow-xl transition">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-navy-500 to-teal-500 text-white flex items-center justify-center font-bold cursor-pointer shadow-lg group-hover:shadow-xl transition">
                 {user.name.charAt(0).toUpperCase()}
               </div>
               <div className="hidden sm:flex flex-col items-start gap-1">
@@ -123,7 +123,7 @@ export default function Topbar() {
 
                   {/* Profile Info */}
                   <div className="flex items-start gap-4">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center font-bold text-2xl shadow-lg flex-shrink-0">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-navy-500 to-teal-500 text-white flex items-center justify-center font-bold text-2xl shadow-lg flex-shrink-0">
                       {user.name.charAt(0).toUpperCase()}
                     </div>
                     <div className="flex-1">

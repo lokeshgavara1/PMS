@@ -44,7 +44,7 @@ export default function Sidebar() {
     <aside
       className={`${
         sidebarOpen ? 'w-64' : 'w-20'
-      } bg-gradient-to-b from-blue-50 via-indigo-50 to-blue-50 border-r border-blue-200 transition-all duration-300 flex flex-col overflow-y-auto shadow-sm`}
+      } bg-gradient-to-b from-sky-blue-50 via-beige-50 to-sky-blue-50 border-r border-sky-blue-200 transition-all duration-300 flex flex-col overflow-y-auto shadow-sm`}
     >
       {/* Logo */}
       <div className="px-4 border-b border-gray-200 flex items-center justify-between gap-2" style={{height: '80px'}}>
@@ -71,8 +71,8 @@ export default function Sidebar() {
             to={item.path}
             className={`flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 ${
               isActive(item.path)
-                ? 'bg-blue-500 text-white font-semibold'
-                : 'text-gray-700 hover:text-gray-900 hover:bg-blue-100'
+                ? 'bg-navy-500 text-white font-semibold'
+                : 'text-gray-700 hover:text-gray-900 hover:bg-teal-50'
             }`}
             title={item.label}
           >
