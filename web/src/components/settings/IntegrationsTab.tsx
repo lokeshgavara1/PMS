@@ -139,7 +139,7 @@ export default function IntegrationsTab() {
                     >
                       Disconnect
                     </button>
-                    <button className="flex-1 px-3 py-2 text-blue-600 hover:bg-blue-50 border border-blue-300 rounded transition text-sm font-medium">
+                    <button className="flex-1 px-3 py-2 text-teal-500 hover:bg-teal-50 border border-teal-300 rounded transition text-sm font-medium">
                       Settings
                     </button>
                   </div>
@@ -164,7 +164,7 @@ export default function IntegrationsTab() {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Calendar Synchronization</h3>
         <p className="text-sm text-gray-600 mb-4">Sync your CUTM-PMS calendar with external calendars</p>
 
-        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 space-y-4">
+        <div className="bg-teal-50 p-4 rounded-lg border border-teal-100 space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium text-gray-900">Sync with Google Calendar</p>
@@ -190,7 +190,7 @@ export default function IntegrationsTab() {
           </div>
         </div>
 
-        <div className="mt-4 bg-blue-50 p-4 rounded-lg border border-blue-200 space-y-4">
+        <div className="mt-4 bg-teal-50 p-4 rounded-lg border border-teal-100 space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium text-gray-900">Sync with Outlook Calendar</p>
@@ -210,12 +210,12 @@ export default function IntegrationsTab() {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Email Notifications</h3>
         <p className="text-sm text-gray-600 mb-4">Forward notifications to an external email</p>
 
-        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 space-y-4">
+        <div className="bg-teal-50 p-4 rounded-lg border border-teal-100 space-y-4">
           <label className="flex items-center gap-3">
             <input
               type="checkbox"
               defaultChecked={false}
-              className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+              className="w-4 h-4 text-teal-500 rounded focus:ring-teal-500"
             />
             <span className="font-medium text-gray-900">Forward to external email</span>
           </label>
@@ -225,7 +225,7 @@ export default function IntegrationsTab() {
             <input
               type="email"
               placeholder="your-email@example.com"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
             <p className="text-xs text-gray-500 mt-1">A verification email will be sent</p>
           </div>

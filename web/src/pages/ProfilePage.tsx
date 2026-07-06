@@ -26,7 +26,7 @@ export default function ProfilePage() {
     const colors: Record<string, string> = {
       admin: 'bg-red-100 text-red-700',
       hod: 'bg-purple-100 text-purple-700',
-      faculty: 'bg-blue-100 text-blue-700',
+      faculty: 'bg-sky-blue-100 text-teal-600',
       pm: 'bg-green-100 text-green-700',
       student: 'bg-yellow-100 text-yellow-700',
     };
@@ -50,19 +50,19 @@ export default function ProfilePage() {
       </div>
 
       {/* Profile Card */}
-      <div className="bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-lg p-8 border border-blue-200">
+      <div className="bg-gradient-to-br from-sky-blue-50 via-white to-beige-50 rounded-lg p-8 border border-teal-100">
         <div className="flex items-center gap-6">
-          <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
+          <div className="w-24 h-24 bg-gradient-to-br from-sky-blue-500 to-navy-500 rounded-full flex items-center justify-center">
             <span className="text-4xl">👤</span>
           </div>
           <div className="flex-1">
             <h2 className="text-2xl font-bold mb-2 text-gray-900">{user?.name || 'User Name'}</h2>
-            <p className="text-blue-600">{user?.email || 'user@cutm.ac.in'}</p>
+            <p className="text-teal-500">{user?.email || 'user@cutm.ac.in'}</p>
             <div className="flex gap-2 mt-3">
               <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getRoleColor(user?.role || '')}`}>
                 {user?.role?.toUpperCase() || 'ROLE'}
               </span>
-              <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+              <span className="px-3 py-1 bg-sky-blue-100 text-teal-600 rounded-full text-sm font-medium">
                 Active
               </span>
             </div>
@@ -85,7 +85,7 @@ export default function ProfilePage() {
                   type="text"
                   value={formData.name}
                   onChange={(e) => handleInputChange('name', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               ) : (
                 <p className="text-gray-900 font-medium">{formData.name || user?.name}</p>
@@ -99,7 +99,7 @@ export default function ProfilePage() {
                   type="email"
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               ) : (
                 <p className="text-gray-900 font-medium">{formData.email || user?.email}</p>
@@ -113,7 +113,7 @@ export default function ProfilePage() {
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => handleInputChange('phone', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               ) : (
                 <p className="text-gray-900 font-medium">{formData.phone}</p>
@@ -142,7 +142,7 @@ export default function ProfilePage() {
                   type="text"
                   value={formData.department}
                   onChange={(e) => handleInputChange('department', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               ) : (
                 <p className="text-gray-900 font-medium">{formData.department}</p>
@@ -170,7 +170,7 @@ export default function ProfilePage() {
             value={formData.bio}
             onChange={(e) => handleInputChange('bio', e.target.value)}
             rows={4}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
         ) : (
           <p className="text-gray-700">{formData.bio}</p>
@@ -179,9 +179,9 @@ export default function ProfilePage() {
 
       {/* Stats Grid */}
       <div className="grid md:grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
+        <div className="bg-gradient-to-br from-sky-blue-50 to-beige-50 rounded-lg p-6 border border-teal-100">
           <p className="text-gray-600 text-sm font-medium">Total Projects</p>
-          <p className="text-3xl font-bold text-blue-600 mt-2">8</p>
+          <p className="text-3xl font-bold text-teal-500 mt-2">8</p>
         </div>
         <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-6 border border-purple-200">
           <p className="text-gray-600 text-sm font-medium">Active Tasks</p>
@@ -204,7 +204,7 @@ export default function ProfilePage() {
         </h3>
         <div className="space-y-4">
           <p className="text-gray-700 mb-4">Secure your account with a strong password</p>
-          <button className="px-6 py-2 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition font-medium">
+          <button className="px-6 py-2 border-2 border-blue-600 text-teal-500 rounded-lg hover:bg-teal-50 transition font-medium">
             Change Password
           </button>
         </div>

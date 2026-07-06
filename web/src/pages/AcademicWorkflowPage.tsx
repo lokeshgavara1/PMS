@@ -84,7 +84,7 @@ export default function AcademicWorkflowPage() {
                     onClick={() => setActiveTab('submissions')}
                     className={`flex-1 px-6 py-4 text-center font-medium ${
                       activeTab === 'submissions'
-                        ? 'text-blue-600 border-b-2 border-blue-600'
+                        ? 'text-teal-500 border-b-2 border-blue-600'
                         : 'text-gray-700 hover:text-gray-900'
                     }`}
                   >
@@ -98,7 +98,7 @@ export default function AcademicWorkflowPage() {
                     onClick={() => setActiveTab('review')}
                     className={`flex-1 px-6 py-4 text-center font-medium ${
                       activeTab === 'review'
-                        ? 'text-blue-600 border-b-2 border-blue-600'
+                        ? 'text-teal-500 border-b-2 border-blue-600'
                         : 'text-gray-700 hover:text-gray-900'
                     }`}
                   >
@@ -112,7 +112,7 @@ export default function AcademicWorkflowPage() {
                     onClick={() => setActiveTab('dashboard')}
                     className={`flex-1 px-6 py-4 text-center font-medium ${
                       activeTab === 'dashboard'
-                        ? 'text-blue-600 border-b-2 border-blue-600'
+                        ? 'text-teal-500 border-b-2 border-blue-600'
                         : 'text-gray-700 hover:text-gray-900'
                     }`}
                   >
@@ -140,7 +140,7 @@ export default function AcademicWorkflowPage() {
                     value={submissionForm.title}
                     onChange={(e) => setSubmissionForm({ ...submissionForm, title: e.target.value })}
                     placeholder="e.g., Project Proposal, Phase 1 Deliverable"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     required
                   />
                 </div>
@@ -152,7 +152,7 @@ export default function AcademicWorkflowPage() {
                     value={submissionForm.description}
                     onChange={(e) => setSubmissionForm({ ...submissionForm, description: e.target.value })}
                     placeholder="Describe your submission..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     rows={4}
                   />
                 </div>
@@ -163,7 +163,7 @@ export default function AcademicWorkflowPage() {
                   <input
                     type="file"
                     onChange={(e) => setSubmissionForm({ ...submissionForm, file: e.target.files?.[0] || null })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
                 <button
@@ -194,7 +194,7 @@ export default function AcademicWorkflowPage() {
                         <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
                           sub.status === 'approved' ? 'bg-green-100 text-green-700' :
                           sub.status === 'under_review' ? 'bg-yellow-100 text-yellow-700' :
-                          'bg-blue-100 text-blue-700'
+                          'bg-sky-blue-100 text-teal-600'
                         }`}>
                           {sub.status === 'under_review' ? 'Under Review' : sub.status.charAt(0).toUpperCase() + sub.status.slice(1)}
                         </span>
@@ -258,7 +258,7 @@ export default function AcademicWorkflowPage() {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <div className="bg-white rounded-lg shadow p-6">
               <p className="text-sm text-gray-600">Total Students</p>
-              <p className="text-4xl font-bold text-blue-600 mt-2">{departmentStats.totalStudents}</p>
+              <p className="text-4xl font-bold text-teal-500 mt-2">{departmentStats.totalStudents}</p>
             </div>
             <div className="bg-white rounded-lg shadow p-6">
               <p className="text-sm text-gray-600">Average GPA</p>
@@ -321,10 +321,10 @@ export default function AcademicWorkflowPage() {
 
             {/* Workflow Statistics */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow p-6 border border-blue-200">
-                <p className="text-blue-700 text-sm font-medium">Active Projects</p>
-                <p className="text-4xl font-bold text-blue-700 mt-2">{projects.length}</p>
-                <p className="text-blue-600 text-xs mt-2">Projects in progress</p>
+              <div className="bg-gradient-to-br from-sky-blue-50 to-blue-100 rounded-lg shadow p-6 border border-teal-100">
+                <p className="text-teal-600 text-sm font-medium">Active Projects</p>
+                <p className="text-4xl font-bold text-teal-600 mt-2">{projects.length}</p>
+                <p className="text-teal-500 text-xs mt-2">Projects in progress</p>
               </div>
               <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow p-6 border border-green-200">
                 <p className="text-green-700 text-sm font-medium">Team Members</p>

@@ -46,7 +46,7 @@ export default function SettingsPage() {
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full text-left px-4 py-3 border-l-4 transition ${
                       activeTab === tab.id
-                        ? 'bg-blue-50 border-l-blue-600 text-blue-600 font-semibold'
+                        ? 'bg-teal-50 border-l-teal-500 text-teal-600 font-semibold'
                         : 'border-l-transparent text-gray-700 hover:bg-gray-50 hover:border-l-gray-300'
                     }`}
                     title={tab.description}
@@ -68,7 +68,7 @@ export default function SettingsPage() {
           <div className="lg:col-span-3">
             <div className="bg-white rounded-lg shadow">
               {/* Tab Header */}
-              <div className="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-white via-blue-50 to-indigo-50">
+              <div className="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-white via-sky-blue-50 to-beige-50">
                 <h2 className="text-xl font-bold text-gray-900">
                   {tabs.find((t) => t.id === activeTab)?.label}
                 </h2>
@@ -89,15 +89,15 @@ export default function SettingsPage() {
             </div>
 
             {/* Need Help Section */}
-            <div className="mt-6 bg-blue-50 rounded-lg p-4 border border-blue-200">
-              <h3 className="font-semibold text-blue-700">Need Help?</h3>
-              <p className="text-sm text-blue-600 mt-1">
+            <div className="mt-6 bg-teal-50 rounded-lg p-4 border border-teal-100">
+              <h3 className="font-semibold text-teal-600">Need Help?</h3>
+              <p className="text-sm text-teal-500 mt-1">
                 For account-related issues, please contact{' '}
-                <a href="mailto:support@cutm.ac.in" className="font-semibold text-blue-600 hover:text-blue-700">
+                <a href="mailto:support@cutm.ac.in" className="font-semibold text-teal-500 hover:text-teal-600">
                   support@cutm.ac.in
                 </a>
                 {' '}or visit our{' '}
-                <a href="#" className="font-semibold text-blue-600 hover:text-blue-700">
+                <a href="#" className="font-semibold text-teal-500 hover:text-teal-600">
                   knowledge base
                 </a>
                 .

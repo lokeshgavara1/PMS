@@ -151,7 +151,7 @@ export default function WorkflowCompletePage() {
             onClick={() => setActiveTab('members')}
             className={`py-3 px-1 border-b-2 font-medium text-sm ${
               activeTab === 'members'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-blue-500 text-teal-500'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -161,7 +161,7 @@ export default function WorkflowCompletePage() {
             onClick={() => setActiveTab('tasks')}
             className={`py-3 px-1 border-b-2 font-medium text-sm ${
               activeTab === 'tasks'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-blue-500 text-teal-500'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -171,7 +171,7 @@ export default function WorkflowCompletePage() {
             onClick={() => setActiveTab('timesheets')}
             className={`py-3 px-1 border-b-2 font-medium text-sm ${
               activeTab === 'timesheets'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-blue-500 text-teal-500'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -192,7 +192,7 @@ export default function WorkflowCompletePage() {
                     <div>
                       <p className="font-medium text-gray-900">{member.name}</p>
                       <p className="text-sm text-gray-600">{member.email}</p>
-                      <span className="inline-block mt-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">
+                      <span className="inline-block mt-2 px-2 py-1 bg-sky-blue-100 text-teal-600 text-xs font-medium rounded">
                         {member.system_role}
                       </span>
                     </div>
@@ -243,7 +243,7 @@ export default function WorkflowCompletePage() {
                         <select
                           value={approvalStatus}
                           onChange={(e) => setApprovalStatus(e.target.value as any)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                         >
                           <option value="pending">Pending</option>
                           <option value="approved">Approved</option>
@@ -256,7 +256,7 @@ export default function WorkflowCompletePage() {
                           value={approvalNotes}
                           onChange={(e) => setApprovalNotes(e.target.value)}
                           rows={3}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                           placeholder="Add approval notes..."
                         />
                       </div>
@@ -292,11 +292,11 @@ export default function WorkflowCompletePage() {
           {timesheets.length > 0 ? (
             <div className="grid gap-4">
               {timesheets.map((timesheet) => (
-                <div key={timesheet.id} className="p-4 border border-gray-200 rounded-lg bg-gradient-to-br from-blue-50 to-indigo-50">
+                <div key={timesheet.id} className="p-4 border border-gray-200 rounded-lg bg-gradient-to-br from-sky-blue-50 to-beige-50">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="font-medium text-gray-900">Week of {new Date(timesheet.week_start).toLocaleDateString()}</p>
-                      <p className="text-2xl font-bold text-blue-600 mt-2">{timesheet.total_hours} hours</p>
+                      <p className="text-2xl font-bold text-teal-500 mt-2">{timesheet.total_hours} hours</p>
                       <p className="text-sm text-gray-600 mt-1">Total hours logged and synced</p>
                     </div>
                     <button

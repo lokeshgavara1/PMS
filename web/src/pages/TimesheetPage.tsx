@@ -94,7 +94,7 @@ export default function TimesheetPage() {
                       value={timeEntries[dayKey as keyof typeof timeEntries]}
                       onChange={(e) => handleLogDay(dayKey, e.target.value)}
                       placeholder="Hours"
-                      className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-center"
+                      className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-center"
                     />
                   </div>
                 );
@@ -102,9 +102,9 @@ export default function TimesheetPage() {
             </div>
 
             {/* Total */}
-            <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg mb-6">
+            <div className="flex items-center justify-between p-4 bg-teal-50 rounded-lg mb-6">
               <span className="font-semibold text-gray-900">Weekly Total</span>
-              <span className="text-2xl font-bold text-blue-600">{weeklyTotal.toFixed(1)} hours</span>
+              <span className="text-2xl font-bold text-teal-500">{weeklyTotal.toFixed(1)} hours</span>
             </div>
 
             {/* Status Indicators */}
@@ -117,9 +117,9 @@ export default function TimesheetPage() {
                 <p className="text-sm text-gray-600">Approval</p>
                 <p className="text-lg font-bold text-yellow-600">Pending</p>
               </div>
-              <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <div className="p-4 bg-teal-50 rounded-lg border border-teal-100">
                 <p className="text-sm text-gray-600">Sync Status</p>
-                <p className="text-lg font-bold text-blue-600">✓ Synced</p>
+                <p className="text-lg font-bold text-teal-500">✓ Synced</p>
               </div>
             </div>
 

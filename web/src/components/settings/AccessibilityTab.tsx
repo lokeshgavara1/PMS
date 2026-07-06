@@ -45,7 +45,7 @@ export default function AccessibilityTab() {
           ].map((option) => (
             <label
               key={option.value}
-              className="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50"
+              className="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-teal-50"
             >
               <input
                 type="radio"
@@ -53,7 +53,7 @@ export default function AccessibilityTab() {
                 value={option.value}
                 checked={settings.fontSize === option.value}
                 onChange={() => handleChange('fontSize', option.value)}
-                className="w-4 h-4 text-blue-600"
+                className="w-4 h-4 text-teal-500"
               />
               <div className="ml-3 flex-1">
                 <p className="font-medium text-gray-900">{option.label}</p>
@@ -87,7 +87,7 @@ export default function AccessibilityTab() {
 
         <div className="space-y-4">
           {/* High Contrast */}
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+          <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium text-gray-900">High Contrast Mode</p>
@@ -109,7 +109,7 @@ export default function AccessibilityTab() {
           </div>
 
           {/* Focus Indicator */}
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+          <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium text-gray-900">Enhanced Focus Indicator</p>
@@ -131,7 +131,7 @@ export default function AccessibilityTab() {
           </div>
 
           {/* Dyslexia Font */}
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+          <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium text-gray-900">Dyslexia-Friendly Font</p>
@@ -161,7 +161,7 @@ export default function AccessibilityTab() {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Motion & Animation</h3>
         <p className="text-sm text-gray-600 mb-4">Control motion effects to prevent dizziness</p>
 
-        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+        <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium text-gray-900">Reduce Motion</p>
@@ -191,7 +191,7 @@ export default function AccessibilityTab() {
         <p className="text-sm text-gray-600 mb-4">Optimize experience for screen readers</p>
 
         <div className="space-y-4">
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+          <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium text-gray-900">Screen Reader Mode</p>
@@ -247,7 +247,7 @@ export default function AccessibilityTab() {
         <p className="text-sm text-gray-600 mb-4">Keyboard shortcuts and navigation options</p>
 
         <div className="space-y-4">
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+          <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
             <div className="flex items-center justify-between mb-3">
               <div>
                 <p className="font-medium text-gray-900">Keyboard Shortcuts</p>
@@ -268,7 +268,7 @@ export default function AccessibilityTab() {
             </div>
 
             {settings.keyboardShortcuts && (
-              <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+              <button className="text-sm text-teal-500 hover:text-teal-600 font-medium">
                 View Keyboard Shortcut Help →
               </button>
             )}

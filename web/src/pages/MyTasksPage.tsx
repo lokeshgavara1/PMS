@@ -278,7 +278,7 @@ export default function MyTasksPage() {
                     <div className="flex gap-2 text-sm">
                       <button
                         onClick={() => handleViewDetails(task.id)}
-                        className="flex-1 px-3 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 font-medium transition"
+                        className="flex-1 px-3 py-2 bg-teal-50 text-teal-500 rounded-lg hover:bg-sky-blue-100 font-medium transition"
                         title="View task details"
                       >
                         👁️ View

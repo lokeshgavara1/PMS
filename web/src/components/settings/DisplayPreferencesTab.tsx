@@ -49,7 +49,7 @@ export default function DisplayPreferencesTab() {
               onClick={() => handleChange('theme', option.value)}
               className={`p-4 rounded-lg border-2 transition text-center ${
                 settings.theme === option.value
-                  ? 'border-blue-600 bg-blue-50'
+                  ? 'border-blue-600 bg-teal-50'
                   : 'border-gray-200 hover:border-gray-300'
               }`}
             >
@@ -70,7 +70,7 @@ export default function DisplayPreferencesTab() {
         <select
           value={settings.language}
           onChange={(e) => handleChange('language', e.target.value)}
-          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
         >
           <option value="en-US">🇺🇸 English (US)</option>
           <option value="en-GB">🇬🇧 English (UK)</option>
@@ -93,7 +93,7 @@ export default function DisplayPreferencesTab() {
         <select
           value={settings.timezone}
           onChange={(e) => handleChange('timezone', e.target.value)}
-          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
         >
           <option value="Asia/Kolkata">🇮🇳 Asia/Kolkata (IST, UTC+5:30)</option>
           <option value="Asia/Kolkata">🇮🇳 Asia/Kolkata (IST, UTC+5:30)</option>
@@ -121,7 +121,7 @@ export default function DisplayPreferencesTab() {
             <select
               value={settings.dateFormat}
               onChange={(e) => handleChange('dateFormat', e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
             >
               <option value="DD/MM/YYYY">DD/MM/YYYY (15/07/2026)</option>
               <option value="MM/DD/YYYY">MM/DD/YYYY (07/15/2026)</option>
@@ -140,7 +140,7 @@ export default function DisplayPreferencesTab() {
                   value="24"
                   checked={settings.timeFormat === '24'}
                   onChange={() => handleChange('timeFormat', '24')}
-                  className="w-4 h-4 text-blue-600"
+                  className="w-4 h-4 text-teal-500"
                 />
                 <span className="text-sm text-gray-700">24-hour (14:30)</span>
               </label>
@@ -151,7 +151,7 @@ export default function DisplayPreferencesTab() {
                   value="12"
                   checked={settings.timeFormat === '12'}
                   onChange={() => handleChange('timeFormat', '12')}
-                  className="w-4 h-4 text-blue-600"
+                  className="w-4 h-4 text-teal-500"
                 />
                 <span className="text-sm text-gray-700">12-hour (2:30 PM)</span>
               </label>
@@ -173,7 +173,7 @@ export default function DisplayPreferencesTab() {
             <select
               value={settings.itemsPerPage}
               onChange={(e) => handleChange('itemsPerPage', parseInt(e.target.value))}
-              className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
             >
               <option value={10}>10 items</option>
               <option value={20}>20 items</option>
@@ -182,7 +182,7 @@ export default function DisplayPreferencesTab() {
             </select>
           </div>
 
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+          <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium text-gray-900">Compact View</p>
@@ -212,7 +212,7 @@ export default function DisplayPreferencesTab() {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Navigation</h3>
         <p className="text-sm text-gray-600 mb-4">Configure sidebar and navigation behavior</p>
 
-        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+        <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium text-gray-900">Collapse Sidebar by Default</p>

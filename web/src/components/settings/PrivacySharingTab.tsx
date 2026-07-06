@@ -56,7 +56,7 @@ export default function PrivacySharingTab() {
           {visibilityOptions.map((option) => (
             <label
               key={option.value}
-              className="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50"
+              className="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-teal-50"
             >
               <input
                 type="radio"
@@ -64,7 +64,7 @@ export default function PrivacySharingTab() {
                 value={option.value}
                 checked={settings.profileVisibility === option.value}
                 onChange={() => handleVisibilityChange('profileVisibility', option.value)}
-                className="w-4 h-4 text-blue-600"
+                className="w-4 h-4 text-teal-500"
               />
               <div className="ml-3 flex-1">
                 <p className="font-medium text-gray-900">{option.label}</p>
@@ -92,7 +92,7 @@ export default function PrivacySharingTab() {
           {visibilityOptions.map((option) => (
             <label
               key={option.value}
-              className="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50"
+              className="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-teal-50"
             >
               <input
                 type="radio"
@@ -100,7 +100,7 @@ export default function PrivacySharingTab() {
                 value={option.value}
                 checked={settings.emailVisibility === option.value}
                 onChange={() => handleVisibilityChange('emailVisibility', option.value)}
-                className="w-4 h-4 text-blue-600"
+                className="w-4 h-4 text-teal-500"
               />
               <div className="ml-3 flex-1">
                 <p className="font-medium text-gray-900">{option.label}</p>
@@ -128,7 +128,7 @@ export default function PrivacySharingTab() {
           {visibilityOptions.map((option) => (
             <label
               key={option.value}
-              className="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50"
+              className="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-teal-50"
             >
               <input
                 type="radio"
@@ -136,7 +136,7 @@ export default function PrivacySharingTab() {
                 value={option.value}
                 checked={settings.workVisibility === option.value}
                 onChange={() => handleVisibilityChange('workVisibility', option.value)}
-                className="w-4 h-4 text-blue-600"
+                className="w-4 h-4 text-teal-500"
               />
               <div className="ml-3 flex-1">
                 <p className="font-medium text-gray-900">{option.label}</p>
@@ -160,7 +160,7 @@ export default function PrivacySharingTab() {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Data & Analytics</h3>
         <p className="text-sm text-gray-600 mb-4">Help improve CUTM-PMS by sharing anonymous usage data</p>
 
-        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 space-y-4">
+        <div className="bg-teal-50 p-4 rounded-lg border border-teal-100 space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium text-gray-900">Anonymous Analytics</p>
@@ -191,7 +191,7 @@ export default function PrivacySharingTab() {
                 <li>Device and browser type</li>
               </ul>
               <p className="text-xs text-gray-500 mt-3">
-                Your personal data (name, email, submissions) is never shared. <a href="#" className="text-blue-600 hover:text-blue-700">Learn more</a>
+                Your personal data (name, email, submissions) is never shared. <a href="#" className="text-teal-500 hover:text-teal-600">Learn more</a>
               </p>
             </div>
           )}
@@ -205,7 +205,7 @@ export default function PrivacySharingTab() {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Search Engine Indexing</h3>
         <p className="text-sm text-gray-600 mb-4">Allow search engines to index your public profile</p>
 
-        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+        <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium text-gray-900">Index my profile</p>

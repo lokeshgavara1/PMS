@@ -65,10 +65,10 @@ export default function HODDashboardPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl shadow p-6 text-gray-900 border border-blue-200">
-          <p className="text-blue-700 text-sm font-semibold">Total Projects</p>
-          <p className="text-4xl font-bold text-blue-700 mt-2">{totalProjects}</p>
-          <p className="text-blue-600 text-sm mt-2">Across all departments</p>
+        <div className="bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl shadow p-6 text-gray-900 border border-teal-100">
+          <p className="text-teal-600 text-sm font-semibold">Total Projects</p>
+          <p className="text-4xl font-bold text-teal-600 mt-2">{totalProjects}</p>
+          <p className="text-teal-500 text-sm mt-2">Across all departments</p>
         </div>
 
         <div className="bg-gradient-to-br from-green-100 to-green-50 rounded-2xl shadow p-6 text-gray-900 border border-green-200">
@@ -97,7 +97,7 @@ export default function HODDashboardPage() {
             onClick={() => setFilter('all')}
             className={`py-3 px-1 border-b-2 font-medium text-sm ${
               filter === 'all'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-blue-500 text-teal-500'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -107,7 +107,7 @@ export default function HODDashboardPage() {
             onClick={() => setFilter('active')}
             className={`py-3 px-1 border-b-2 font-medium text-sm ${
               filter === 'active'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-blue-500 text-teal-500'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -117,7 +117,7 @@ export default function HODDashboardPage() {
             onClick={() => setFilter('completed')}
             className={`py-3 px-1 border-b-2 font-medium text-sm ${
               filter === 'completed'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-blue-500 text-teal-500'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -144,7 +144,7 @@ export default function HODDashboardPage() {
                 </div>
                 <span className={`px-3 py-1 text-xs font-bold rounded-lg ${
                   project.status === 'active' ? 'bg-green-100 text-green-700' :
-                  project.status === 'completed' ? 'bg-blue-100 text-blue-700' :
+                  project.status === 'completed' ? 'bg-sky-blue-100 text-teal-600' :
                   project.status === 'planning' ? 'bg-yellow-100 text-yellow-700' :
                   'bg-gray-100 text-gray-700'
                 }`}>
@@ -160,7 +160,7 @@ export default function HODDashboardPage() {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
-                    className="bg-blue-500 h-2 rounded-full transition-all duration-300"
+                    className="bg-teal-500 h-2 rounded-full transition-all duration-300"
                     style={{ width: `${project.completion_rate}%` }}
                   ></div>
                 </div>
@@ -169,7 +169,7 @@ export default function HODDashboardPage() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
-                  <p className="text-2xl font-bold text-blue-600">{project.completed_tasks}/{project.total_tasks}</p>
+                  <p className="text-2xl font-bold text-teal-500">{project.completed_tasks}/{project.total_tasks}</p>
                   <p className="text-xs text-gray-600 mt-1">Tasks Completed</p>
                 </div>
                 <div>

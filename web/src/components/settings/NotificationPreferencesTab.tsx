@@ -131,14 +131,14 @@ export default function NotificationPreferencesTab() {
             { value: 'daily' as const, label: 'Daily Digest', description: 'One summary email per day' },
             { value: 'weekly' as const, label: 'Weekly Digest', description: 'One summary email per week' },
           ].map((option) => (
-            <label key={option.value} className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50">
+            <label key={option.value} className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-teal-50">
               <input
                 type="radio"
                 name="digestFrequency"
                 value={option.value}
                 checked={digestFrequency === option.value}
                 onChange={(e) => setDigestFrequency(e.target.value as any)}
-                className="w-4 h-4 text-blue-600"
+                className="w-4 h-4 text-teal-500"
               />
               <div className="ml-3 flex-1">
                 <p className="font-medium text-gray-900">{option.label}</p>
@@ -156,7 +156,7 @@ export default function NotificationPreferencesTab() {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Quiet Hours</h3>
         <p className="text-sm text-gray-600 mb-4">Don't send notifications during these hours</p>
 
-        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 space-y-4">
+        <div className="bg-teal-50 p-4 rounded-lg border border-teal-100 space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium text-gray-900">Enable Quiet Hours</p>
@@ -184,7 +184,7 @@ export default function NotificationPreferencesTab() {
                   type="time"
                   value={quietHours.startTime}
                   onChange={(e) => setQuietHours({ ...quietHours, startTime: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
               <div>
@@ -193,7 +193,7 @@ export default function NotificationPreferencesTab() {
                   type="time"
                   value={quietHours.endTime}
                   onChange={(e) => setQuietHours({ ...quietHours, endTime: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
             </div>
@@ -214,7 +214,7 @@ export default function NotificationPreferencesTab() {
             <div className="flex items-center justify-between">
               <p className="font-medium text-gray-900">All Notifications</p>
               <div className="flex gap-4">
-                <button className="px-3 py-1 text-sm text-blue-600 hover:text-blue-700 font-medium">
+                <button className="px-3 py-1 text-sm text-teal-500 hover:text-teal-600 font-medium">
                   Enable All
                 </button>
                 <button className="px-3 py-1 text-sm text-gray-600 hover:text-gray-700 font-medium">
@@ -244,7 +244,7 @@ export default function NotificationPreferencesTab() {
                     type="checkbox"
                     checked={notif.email}
                     onChange={() => handleToggleNotification(notif.id, 'email')}
-                    className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                    className="w-4 h-4 text-teal-500 rounded focus:ring-teal-500"
                   />
                   <span className="text-sm text-gray-700">📧 Email</span>
                 </label>
@@ -255,7 +255,7 @@ export default function NotificationPreferencesTab() {
                     type="checkbox"
                     checked={notif.inApp}
                     onChange={() => handleToggleNotification(notif.id, 'inApp')}
-                    className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                    className="w-4 h-4 text-teal-500 rounded focus:ring-teal-500"
                   />
                   <span className="text-sm text-gray-700">🔔 In-App</span>
                 </label>
@@ -273,11 +273,11 @@ export default function NotificationPreferencesTab() {
         <p className="text-sm text-gray-600 mb-4">Choose how you want to receive notifications</p>
 
         <div className="space-y-3">
-          <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50">
+          <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-teal-50">
             <input
               type="checkbox"
               defaultChecked
-              className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+              className="w-4 h-4 text-teal-500 rounded focus:ring-teal-500"
             />
             <div className="ml-3 flex-1">
               <p className="font-medium text-gray-900">📧 Email Notifications</p>
@@ -285,11 +285,11 @@ export default function NotificationPreferencesTab() {
             </div>
           </label>
 
-          <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50">
+          <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-teal-50">
             <input
               type="checkbox"
               defaultChecked
-              className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+              className="w-4 h-4 text-teal-500 rounded focus:ring-teal-500"
             />
             <div className="ml-3 flex-1">
               <p className="font-medium text-gray-900">🔔 In-App Notifications</p>
@@ -297,10 +297,10 @@ export default function NotificationPreferencesTab() {
             </div>
           </label>
 
-          <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50">
+          <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-teal-50">
             <input
               type="checkbox"
-              className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+              className="w-4 h-4 text-teal-500 rounded focus:ring-teal-500"
             />
             <div className="ml-3 flex-1">
               <p className="font-medium text-gray-900">📱 Push Notifications</p>
@@ -308,10 +308,10 @@ export default function NotificationPreferencesTab() {
             </div>
           </label>
 
-          <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50">
+          <label className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-teal-50">
             <input
               type="checkbox"
-              className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+              className="w-4 h-4 text-teal-500 rounded focus:ring-teal-500"
             />
             <div className="ml-3 flex-1">
               <p className="font-medium text-gray-900">💬 SMS Notifications</p>

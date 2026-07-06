@@ -115,7 +115,7 @@ export default function AccountSecurityTab() {
                 type="password"
                 value={password.current}
                 onChange={(e) => setPassword({ ...password, current: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 required
               />
             </div>
@@ -125,7 +125,7 @@ export default function AccountSecurityTab() {
                 type="password"
                 value={password.new}
                 onChange={(e) => setPassword({ ...password, new: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 required
               />
               <p className="text-xs text-gray-500 mt-1">At least 12 characters, with uppercase, lowercase, numbers</p>
@@ -136,7 +136,7 @@ export default function AccountSecurityTab() {
                 type="password"
                 value={password.confirm}
                 onChange={(e) => setPassword({ ...password, confirm: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 required
               />
             </div>
@@ -164,7 +164,7 @@ export default function AccountSecurityTab() {
       {/* Two-Factor Authentication */}
       <div>
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Two-Factor Authentication</h3>
-        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+        <div className="bg-teal-50 p-4 rounded-lg border border-teal-100">
           <div className="flex items-start justify-between">
             <div>
               <p className="text-sm text-gray-700 font-medium">Status: {twoFAEnabled ? '✓ Enabled' : '✗ Disabled'}</p>
@@ -198,7 +198,7 @@ export default function AccountSecurityTab() {
                   type="text"
                   placeholder="Enter 6-digit code"
                   maxLength={6}
-                  className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
                 <button
                   onClick={handleConfirm2FA}
@@ -232,7 +232,7 @@ export default function AccountSecurityTab() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <p className="font-medium text-gray-900">{session.device}</p>
-                    {session.current && <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">Current</span>}
+                    {session.current && <span className="text-xs bg-sky-blue-100 text-teal-600 px-2 py-1 rounded">Current</span>}
                   </div>
                   <p className="text-sm text-gray-600 mt-1">📍 {session.location}</p>
                   <p className="text-sm text-gray-500 mt-1">Last active: {session.lastActive}</p>

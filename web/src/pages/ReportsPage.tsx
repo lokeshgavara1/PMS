@@ -77,7 +77,7 @@ export default function ReportsPage() {
           <select
             value={selectedProjectId || ''}
             onChange={(e) => setSelectedProjectId(e.target.value ? parseInt(e.target.value) : null)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             <option value="">All Projects</option>
             {projects.map((p) => (
@@ -116,9 +116,9 @@ export default function ReportsPage() {
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-lg font-bold text-gray-900 mb-4">Quick Stats</h2>
             <div className="space-y-4">
-              <div className="flex justify-between items-center p-3 bg-blue-50 rounded">
+              <div className="flex justify-between items-center p-3 bg-teal-50 rounded">
                 <span className="text-gray-700">Total Tasks</span>
-                <span className="text-2xl font-bold text-blue-600">{tasks.length}</span>
+                <span className="text-2xl font-bold text-teal-500">{tasks.length}</span>
               </div>
               <div className="flex justify-between items-center p-3 bg-green-50 rounded">
                 <span className="text-gray-700">Completed</span>

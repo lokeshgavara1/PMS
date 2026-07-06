@@ -59,7 +59,7 @@ export default function ProjectDetailPage() {
           <h1 className="text-3xl font-bold text-gray-900">{project.name}</h1>
           <p className="text-gray-600 mt-1">{project.description}</p>
           <div className="flex gap-4 mt-3">
-            <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-700 rounded-full">
+            <span className="px-3 py-1 text-sm font-medium bg-sky-blue-100 text-teal-600 rounded-full">
               {project.category}
             </span>
             <span className="px-3 py-1 text-sm font-medium bg-green-100 text-green-700 rounded-full">
@@ -77,7 +77,7 @@ export default function ProjectDetailPage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-4 py-3 font-medium border-b-2 transition ${
                   activeTab === tab.id
-                    ? 'border-blue-500 text-blue-600'
+                    ? 'border-blue-500 text-teal-500'
                     : 'border-transparent text-gray-600 hover:text-gray-900'
                 }`}
               >
