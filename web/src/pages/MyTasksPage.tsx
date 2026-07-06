@@ -72,7 +72,7 @@ export default function MyTasksPage() {
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
       backlog: 'bg-gray-100 text-gray-700',
-      todo: 'bg-blue-100 text-blue-700',
+      todo: 'bg-sky-blue-100 text-sky-blue-500',
       in_progress: 'bg-yellow-100 text-yellow-700',
       review: 'bg-purple-100 text-purple-700',
       done: 'bg-green-100 text-green-700',
@@ -142,7 +142,7 @@ export default function MyTasksPage() {
         {permissions.canCreateTask ? (
           <button
             onClick={handleCreateTask}
-            className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 font-medium shadow-lg transition duration-200"
+            className="px-6 py-2.5 bg-gradient-to-r from-teal-500 to-navy-500 text-white rounded-lg hover:from-teal-600 hover:to-navy-700 font-medium shadow-lg transition duration-200"
           >
             + Create Task
           </button>
@@ -165,7 +165,7 @@ export default function MyTasksPage() {
         </div>
         <div className="bg-white rounded-lg p-6 border border-gray-200">
           <p className="text-gray-600 text-sm font-medium">Pending</p>
-          <p className="text-3xl font-bold text-blue-600 mt-2">{stats.pending}</p>
+          <p className="text-3xl font-bold text-teal-500 mt-2">{stats.pending}</p>
         </div>
         <div className="bg-white rounded-lg p-6 border border-gray-200">
           <p className="text-gray-600 text-sm font-medium">Completed</p>
@@ -180,7 +180,7 @@ export default function MyTasksPage() {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             <option value="all">All Statuses</option>
             <option value="backlog">Backlog</option>
@@ -195,7 +195,7 @@ export default function MyTasksPage() {
           <select
             value={filterPriority}
             onChange={(e) => setFilterPriority(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             <option value="all">All Priorities</option>
             <option value="critical">Critical</option>
@@ -213,7 +213,7 @@ export default function MyTasksPage() {
             {filteredTasks.map((task: any) => (
               <div
                 key={task.id}
-                className="p-6 hover:bg-gray-50 transition border-l-4 border-blue-500"
+                className="p-6 hover:bg-gray-50 transition border-l-4 border-teal-500"
               >
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
@@ -223,7 +223,7 @@ export default function MyTasksPage() {
                           type="text"
                           value={editingTitle}
                           onChange={(e) => setEditingTitle(e.target.value)}
-                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                         />
                         <button
                           onClick={() => handleSaveEdit(task.id)}
@@ -253,7 +253,7 @@ export default function MyTasksPage() {
                         {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
                       </span>
                       {task.due_date && (
-                        <span className="text-xs px-3 py-1 bg-blue-50 text-blue-700 rounded-full">
+                        <span className="text-xs px-3 py-1 bg-sky-blue-50 text-sky-blue-500 rounded-full">
                           Due: {new Date(task.due_date).toLocaleDateString()}
                         </span>
                       )}
@@ -264,7 +264,7 @@ export default function MyTasksPage() {
                     <select
                       value={task.status}
                       onChange={(e) => handleStatusChange(task.id, e.target.value)}
-                      className={`w-32 px-4 py-2 rounded-lg font-medium border-none focus:outline-none focus:ring-2 focus:ring-blue-500 ${getStatusColor(
+                      className={`w-32 px-4 py-2 rounded-lg font-medium border-none focus:outline-none focus:ring-2 focus:ring-teal-500 ${getStatusColor(
                         task.status
                       )}`}
                     >

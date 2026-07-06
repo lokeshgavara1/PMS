@@ -60,7 +60,7 @@ export default function ProjectsPage() {
         {permissions.canCreateProject && (
           <button
             onClick={() => openModal('createProject')}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+            className="px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition font-medium"
           >
             + New Project
           </button>
@@ -86,14 +86,14 @@ export default function ProjectsPage() {
             <Link
               key={project.id}
               to={`/projects/${project.id}`}
-              className="bg-white rounded-lg shadow hover:shadow-lg transition p-6 border-l-4 border-blue-500 cursor-pointer"
+              className="bg-white rounded-lg shadow hover:shadow-lg transition p-6 border-l-4 border-teal-500 cursor-pointer"
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 hover:text-blue-600">{project.name}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 hover:text-teal-500">{project.name}</h3>
                   <p className="text-sm text-gray-600 mt-1">{project.description?.slice(0, 100)}</p>
                 </div>
-                <span className="ml-2 px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded">
+                <span className="ml-2 px-2 py-1 text-xs font-medium bg-sky-blue-100 text-sky-blue-500 rounded">
                   {project.category}
                 </span>
               </div>
@@ -138,7 +138,7 @@ export default function ProjectsPage() {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                   placeholder="e.g., Mobile App Development"
                 />
               </div>
@@ -149,7 +149,7 @@ export default function ProjectsPage() {
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                   rows={3}
                   placeholder="Brief description of the project"
                 />
@@ -161,7 +161,7 @@ export default function ProjectsPage() {
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value as ProjectCategory })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
                   <option value={ProjectCategory.ACADEMIC}>Academic</option>
                   <option value={ProjectCategory.RESEARCH}>Research</option>
@@ -176,7 +176,7 @@ export default function ProjectsPage() {
                 <select
                   value={formData.visibility}
                   onChange={(e) => setFormData({ ...formData, visibility: e.target.value as ProjectVisibility })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
                   <option value={ProjectVisibility.PRIVATE}>Private</option>
                   <option value={ProjectVisibility.DEPARTMENT}>Department</option>
@@ -192,7 +192,7 @@ export default function ProjectsPage() {
                     type="date"
                     value={formData.start_date}
                     onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
                 <div>
@@ -201,7 +201,7 @@ export default function ProjectsPage() {
                     type="date"
                     value={formData.end_date}
                     onChange={(e) => setFormData({ ...formData, end_date: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
               </div>
@@ -261,7 +261,7 @@ function ToastContainer() {
                 ? 'bg-red-500'
                 : toast.type === 'warning'
                   ? 'bg-yellow-500'
-                  : 'bg-blue-500'
+                  : 'bg-sky-blue-500'
           }`}
         >
           {toast.message}

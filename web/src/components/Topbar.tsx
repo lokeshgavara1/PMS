@@ -32,7 +32,7 @@ export default function Topbar() {
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
-            className="relative p-2.5 text-navy hover:bg-beige-light rounded-lg transition duration-200"
+            className="relative p-2.5 text-navy-500 hover:bg-beige-100 rounded-lg transition duration-200"
             title="Notifications"
           >
             <span className="text-xl">🔔</span>
@@ -88,7 +88,7 @@ export default function Topbar() {
           <div className="relative">
             <button
               onClick={() => setShowProfileMenu(!showProfileMenu)}
-              className="flex items-center gap-3 px-3 py-2 hover:bg-beige-light rounded-lg transition duration-200 group"
+              className="flex items-center gap-3 px-3 py-2 hover:bg-beige-100 rounded-lg transition duration-200 group"
               title="Profile menu"
             >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-navy-500 to-teal-500 text-white flex items-center justify-center font-bold cursor-pointer shadow-lg group-hover:shadow-xl transition">

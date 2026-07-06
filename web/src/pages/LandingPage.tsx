@@ -33,7 +33,7 @@ export default function LandingPage() {
           </div>
           <button
             onClick={() => navigate('/login')}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+            className="px-6 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition font-medium"
           >
             Sign In
           </button>
@@ -41,13 +41,13 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+      <section className="pt-32 pb-20 bg-gradient-to-br from-sky-blue-50 via-white to-beige-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-6">
                 Manage Projects
-                <span className="text-blue-600"> Smarter</span>
+                <span className="text-teal-500"> Smarter</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                 CUTM-PMS empowers teams to plan, execute, and deliver projects with confidence.
@@ -56,7 +56,7 @@ export default function LandingPage() {
               <div className="flex gap-4">
                 <button
                   onClick={() => navigate('/login')}
-                  className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold text-lg"
+                  className="px-8 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition font-semibold text-lg"
                 >
                   Get Started →
                 </button>
@@ -80,15 +80,15 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-3 md:grid-cols-3 gap-8 text-center">
             <div>
-              <p className="text-4xl font-bold text-blue-600 mb-2">500+</p>
+              <p className="text-4xl font-bold text-teal-500 mb-2">500+</p>
               <p className="text-gray-600">Projects Managed</p>
             </div>
             <div>
-              <p className="text-4xl font-bold text-blue-600 mb-2">99%</p>
+              <p className="text-4xl font-bold text-teal-500 mb-2">99%</p>
               <p className="text-gray-600">Uptime</p>
             </div>
             <div>
-              <p className="text-4xl font-bold text-blue-600 mb-2">4.9★</p>
+              <p className="text-4xl font-bold text-teal-500 mb-2">4.9★</p>
               <p className="text-gray-600">User Rating</p>
             </div>
           </div>
@@ -123,12 +123,12 @@ export default function LandingPage() {
       {/* Security Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-12 text-white text-center">
+          <div className="bg-gradient-to-r from-teal-500 to-navy-500 rounded-2xl p-12 text-white text-center">
             <h2 className="text-3xl font-bold mb-4">Enterprise Security</h2>
-            <p className="text-lg text-blue-100 mb-6">
+            <p className="text-lg text-sky-blue-100 mb-6">
               🔐 Your data is protected with enterprise-grade security and compliance standards
             </p>
-            <p className="text-blue-200 text-sm">
+            <p className="text-sky-blue-100 text-sm">
               Restricted Access: Login is limited to official cutm.ac.in / cutmap.ac.in accounts
             </p>
           </div>
@@ -144,7 +144,7 @@ export default function LandingPage() {
           </p>
           <button
             onClick={() => navigate('/login')}
-            className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold text-lg"
+            className="px-8 py-4 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition font-semibold text-lg"
           >
             Sign In Now →
           </button>

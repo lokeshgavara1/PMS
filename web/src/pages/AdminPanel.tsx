@@ -120,7 +120,7 @@ export default function AdminPanel() {
               onClick={() => setActiveTab('users')}
               className={`flex-1 px-6 py-4 text-center font-medium ${
                 activeTab === 'users'
-                  ? 'text-blue-600 border-b-2 border-blue-600'
+                  ? 'text-teal-500 border-b-2 border-teal-500'
                   : 'text-gray-700 hover:text-gray-900'
               }`}
             >
@@ -130,7 +130,7 @@ export default function AdminPanel() {
               onClick={() => setActiveTab('workflow')}
               className={`flex-1 px-6 py-4 text-center font-medium ${
                 activeTab === 'workflow'
-                  ? 'text-blue-600 border-b-2 border-blue-600'
+                  ? 'text-teal-500 border-b-2 border-teal-500'
                   : 'text-gray-700 hover:text-gray-900'
               }`}
             >
@@ -140,7 +140,7 @@ export default function AdminPanel() {
               onClick={() => setActiveTab('departments')}
               className={`flex-1 px-6 py-4 text-center font-medium ${
                 activeTab === 'departments'
-                  ? 'text-blue-600 border-b-2 border-blue-600'
+                  ? 'text-teal-500 border-b-2 border-teal-500'
                   : 'text-gray-700 hover:text-gray-900'
               }`}
             >
@@ -154,7 +154,7 @@ export default function AdminPanel() {
           <div className="space-y-6">
             {/* Create/Edit User Form */}
             {showUserForm && (
-              <div className="bg-white rounded-lg shadow p-6 border-2 border-blue-200">
+              <div className="bg-white rounded-lg shadow p-6 border-2 border-teal-100">
                 <h2 className="text-lg font-bold text-gray-900 mb-4">{editingUserId ? 'Edit User' : 'Create New User'}</h2>
                 <form onSubmit={handleSaveUser} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -165,7 +165,7 @@ export default function AdminPanel() {
                         value={userForm.name}
                         onChange={(e) => setUserForm({ ...userForm, name: e.target.value })}
                         placeholder="Full name"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                         required
                       />
                     </div>
@@ -176,7 +176,7 @@ export default function AdminPanel() {
                         value={userForm.email}
                         onChange={(e) => setUserForm({ ...userForm, email: e.target.value })}
                         placeholder="user@example.com"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                         required
                       />
                     </div>
@@ -187,7 +187,7 @@ export default function AdminPanel() {
                         value={userForm.password}
                         onChange={(e) => setUserForm({ ...userForm, password: e.target.value })}
                         placeholder="••••••••"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                         required
                       />
                     </div>
@@ -196,7 +196,7 @@ export default function AdminPanel() {
                       <select
                         value={userForm.system_role}
                         onChange={(e) => setUserForm({ ...userForm, system_role: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                       >
                         <option value="student">Student</option>
                         <option value="faculty">Faculty</option>
@@ -209,7 +209,7 @@ export default function AdminPanel() {
                   <div className="flex gap-2">
                     <button
                       type="submit"
-                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                      className="px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600"
                     >
                       {editingUserId ? 'Update User' : 'Create User'}
                     </button>
@@ -228,7 +228,7 @@ export default function AdminPanel() {
             {!showUserForm && permissions.canCreateUser && (
               <button
                 onClick={() => setShowUserForm(true)}
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
+                className="px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 font-medium"
               >
                 + Create New User
               </button>
@@ -275,7 +275,7 @@ export default function AdminPanel() {
                           {permissions.canEditUser && (
                             <button
                               onClick={() => handleEditUser(user)}
-                              className="text-blue-600 hover:text-blue-700 font-medium"
+                              className="text-teal-500 hover:text-teal-600 font-medium"
                             >
                               Edit
                             </button>
@@ -367,7 +367,7 @@ export default function AdminPanel() {
                       />
                     </div>
                     <div className="flex gap-2 pt-2">
-                      <button className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 text-sm font-medium">
+                      <button className="flex-1 px-3 py-2 bg-teal-100 text-teal-700 rounded-lg hover:bg-teal-200 text-sm font-medium">
                         Edit
                       </button>
                       <button className="flex-1 px-3 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 text-sm font-medium">

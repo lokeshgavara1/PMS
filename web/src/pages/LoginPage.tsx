@@ -94,19 +94,19 @@ export default function LoginPage() {
   ];
 
   return (
-    <div className="min-h-screen flex bg-gradient-to-br from-white via-blue-50 to-indigo-50">
+    <div className="min-h-screen flex bg-gradient-to-br from-white via-sky-blue-50 to-beige-50">
       {/* Left Section - Light Blue Marketing */}
-      <div className="w-1/2 bg-gradient-to-br from-blue-50 via-white to-indigo-50 border-r border-blue-200 p-12 flex flex-col justify-between">
+      <div className="w-1/2 bg-gradient-to-br from-sky-blue-50 via-white to-beige-50 border-r border-sky-blue-100 p-12 flex flex-col justify-between">
         <div>
           {/* Logo */}
           <div className="mb-12">
             <img src={centurionLogo} alt="Centurion University" className="h-16 w-auto mb-3 rounded-full" />
             <h1 className="text-2xl font-bold text-gray-900">CUTM-PMS</h1>
-            <p className="text-blue-600 text-sm mt-1">Project Management System</p>
+            <p className="text-teal-500 text-sm mt-1">Project Management System</p>
           </div>
 
           {/* AI Badge */}
-          <div className="inline-block px-4 py-2 border border-blue-300 rounded-full text-sm text-blue-700 mb-12 bg-blue-50">
+          <div className="inline-block px-4 py-2 border border-teal-300 rounded-full text-sm text-teal-700 mb-12 bg-teal-50">
             ⚡ Smart Project Management
           </div>
 
@@ -115,7 +115,7 @@ export default function LoginPage() {
             <h2 className="text-5xl font-bold leading-tight mb-4 text-gray-900">
               Manage Projects
               <br />
-              <span className="text-blue-600">Smarter &</span>
+              <span className="text-teal-500">Smarter &</span>
               <br />
               Faster.
             </h2>
@@ -129,38 +129,38 @@ export default function LoginPage() {
         {/* Features */}
         <div>
           <div className="flex gap-3 mb-12 flex-wrap">
-            <button className="px-6 py-2 border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-100 transition bg-white">
+            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white">
               📊 Task Management
             </button>
-            <button className="px-6 py-2 border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-100 transition bg-white">
+            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white">
               📈 Real Analytics
             </button>
-            <button className="px-6 py-2 border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-100 transition bg-white">
+            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white">
               🔄 Auto Workflows
             </button>
-            <button className="px-6 py-2 border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-100 transition bg-white">
+            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white">
               🔒 Secure & Compliant
             </button>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 pb-12 border-b border-blue-200">
-            <div className="border border-blue-200 rounded-lg p-6 text-center bg-white">
-              <p className="text-3xl font-bold mb-2 text-blue-600">500+</p>
+          <div className="grid grid-cols-3 gap-6 pb-12 border-b border-sky-blue-100">
+            <div className="border border-sky-blue-100 rounded-lg p-6 text-center bg-white">
+              <p className="text-3xl font-bold mb-2 text-teal-500">500+</p>
               <p className="text-gray-700 text-sm">Projects Managed</p>
             </div>
-            <div className="border border-blue-200 rounded-lg p-6 text-center bg-white">
-              <p className="text-3xl font-bold mb-2 text-blue-600">99%</p>
+            <div className="border border-sky-blue-100 rounded-lg p-6 text-center bg-white">
+              <p className="text-3xl font-bold mb-2 text-teal-500">99%</p>
               <p className="text-gray-700 text-sm">Uptime</p>
             </div>
-            <div className="border border-blue-200 rounded-lg p-6 text-center bg-white">
-              <p className="text-3xl font-bold mb-2 text-blue-600">4.9★</p>
+            <div className="border border-sky-blue-100 rounded-lg p-6 text-center bg-white">
+              <p className="text-3xl font-bold mb-2 text-teal-500">4.9★</p>
               <p className="text-gray-700 text-sm">User Rating</p>
             </div>
           </div>
 
           {/* Security Notice */}
-          <div className="mt-12 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <div className="mt-12 p-4 bg-teal-50 border border-teal-200 rounded-lg">
             <p className="text-gray-700 text-sm">
               🔐 <span className="font-semibold">Restricted Access</span>
               <br />
@@ -244,7 +244,7 @@ export default function LoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 placeholder="user@cutm.ac.in"
               />
             </div>
@@ -256,7 +256,7 @@ export default function LoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 placeholder="password123"
               />
             </div>
@@ -265,7 +265,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
+              className="w-full bg-teal-500 text-white py-2 rounded-lg font-semibold hover:bg-teal-600 disabled:opacity-50 disabled:cursor-not-allowed transition"
             >
               {isLoading ? 'Signing in...' : 'Sign In'}
             </button>
@@ -292,8 +292,8 @@ export default function LoginPage() {
           </div>
 
           {/* Info */}
-          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-xs text-blue-700">
+          <div className="mt-6 p-4 bg-sky-blue-50 border border-sky-blue-100 rounded-lg">
+            <p className="text-xs text-sky-blue-500">
               💡 This is a demo using Mock Service Worker (MSW). All API calls are intercepted and mocked. No real
               authentication occurs.
             </p>

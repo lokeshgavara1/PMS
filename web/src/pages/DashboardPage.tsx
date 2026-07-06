@@ -29,39 +29,39 @@ export default function DashboardPage() {
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl shadow p-8 text-gray-900 overflow-hidden relative group hover:shadow-lg transition duration-300 border border-blue-200">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-200/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300"></div>
+        <div className="bg-gradient-to-br from-sky-blue-light to-sky-blue-50 rounded-2xl shadow p-8 text-gray-900 overflow-hidden relative group hover:shadow-lg transition duration-300 border border-sky-blue-100">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-sky-blue-100 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300 opacity-50"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-4">
-              <p className="text-blue-700 text-sm font-semibold">Total Projects</p>
+              <p className="text-sky-blue-500 text-sm font-semibold">Total Projects</p>
               <span className="text-3xl">📊</span>
             </div>
-            <p className="text-5xl font-bold text-blue-700">{projectsData?.pagination.total || 0}</p>
-            <p className="text-blue-600 text-sm mt-3">Active projects in system</p>
+            <p className="text-5xl font-bold text-navy-500">{projectsData?.pagination.total || 0}</p>
+            <p className="text-teal-500 text-sm mt-3">Active projects in system</p>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-indigo-100 to-indigo-50 rounded-2xl shadow p-8 text-gray-900 overflow-hidden relative group hover:shadow-lg transition duration-300 border border-indigo-200">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-200/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300"></div>
+        <div className="bg-gradient-to-br from-teal-light to-teal-50 rounded-2xl shadow p-8 text-gray-900 overflow-hidden relative group hover:shadow-lg transition duration-300 border border-teal-100">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-teal-100 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300 opacity-50"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-4">
-              <p className="text-indigo-700 text-sm font-semibold">My Projects</p>
+              <p className="text-teal-500 text-sm font-semibold">My Projects</p>
               <span className="text-3xl">📁</span>
             </div>
-            <p className="text-5xl font-bold text-indigo-700">{projects.length}</p>
-            <p className="text-indigo-600 text-sm mt-3">You're involved in</p>
+            <p className="text-5xl font-bold text-teal-500">{projects.length}</p>
+            <p className="text-teal-700 text-sm mt-3">You're involved in</p>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow p-8 text-gray-900 overflow-hidden relative group hover:shadow-lg transition duration-300 border border-blue-200">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-200/20 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300"></div>
+        <div className="bg-gradient-to-br from-beige-light to-beige-50 rounded-2xl shadow p-8 text-gray-900 overflow-hidden relative group hover:shadow-lg transition duration-300 border border-beige-100">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-beige-100 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300 opacity-50"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-4">
-              <p className="text-blue-700 text-sm font-semibold">Active Tasks</p>
+              <p className="text-beige-500 text-sm font-semibold">Active Tasks</p>
               <span className="text-3xl">✓</span>
             </div>
-            <p className="text-5xl font-bold text-blue-900">8</p>
-            <p className="text-blue-600 text-sm mt-3">Assigned to you</p>
+            <p className="text-5xl font-bold text-navy-500">8</p>
+            <p className="text-teal-500 text-sm mt-3">Assigned to you</p>
           </div>
         </div>
       </div>
@@ -70,7 +70,7 @@ export default function DashboardPage() {
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
           <h2 className="text-xl font-bold text-gray-900">Recent Projects</h2>
-          <Link to="/projects" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+          <Link to="/projects" className="text-teal-500 hover:text-teal-600 text-sm font-medium">
             View All →
           </Link>
         </div>
@@ -97,7 +97,7 @@ export default function DashboardPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded">
+                      <span className="inline-block px-2 py-1 text-xs font-medium bg-sky-blue-100 text-sky-blue-500 rounded">
                         {project.category}
                       </span>
                     </td>
@@ -118,7 +118,7 @@ export default function DashboardPage() {
                     <td className="px-6 py-4 text-right">
                       <Link
                         to={`/projects/${project.id}`}
-                        className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                        className="text-teal-500 hover:text-teal-600 text-sm font-medium"
                       >
                         View
                       </Link>
@@ -133,7 +133,7 @@ export default function DashboardPage() {
             <p className="text-gray-500 text-sm">No projects yet. Create your first project to get started.</p>
             <Link
               to="/projects"
-              className="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-medium"
+              className="inline-block mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition text-sm font-medium"
             >
               Create Project
             </Link>
