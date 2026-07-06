@@ -11,6 +11,7 @@ export default function AdminPanel() {
 
   const [activeTab, setActiveTab] = useState<'users' | 'workflow' | 'departments'>('users');
   const [showUserForm, setShowUserForm] = useState(false);
+  const [editingUserId, setEditingUserId] = useState<number | null>(null);
   const [userForm, setUserForm] = useState({
     email: '',
     password: '',
@@ -33,14 +34,45 @@ export default function AdminPanel() {
 
   const users = usersData?.data || [];
 
-  const handleCreateUser = (e: React.FormEvent) => {
+  const handleSaveUser = (e: React.FormEvent) => {
     e.preventDefault();
-    createUser(userForm as any, {
-      onSuccess: () => {
-        setUserForm({ email: '', password: '', name: '', system_role: 'student', department_id: 1 });
-        setShowUserForm(false);
-      },
+    if (editingUserId) {
+      updateUser(
+        { id: editingUserId, ...userForm } as any,
+        {
+          onSuccess: () => {
+            setUserForm({ email: '', password: '', name: '', system_role: 'student', department_id: 1 });
+            setShowUserForm(false);
+            setEditingUserId(null);
+          },
+        }
+      );
+    } else {
+      createUser(userForm as any, {
+        onSuccess: () => {
+          setUserForm({ email: '', password: '', name: '', system_role: 'student', department_id: 1 });
+          setShowUserForm(false);
+        },
+      });
+    }
+  };
+
+  const handleEditUser = (user: any) => {
+    setUserForm({
+      email: user.email,
+      password: '',
+      name: user.name,
+      system_role: user.system_role,
+      department_id: user.department_id || 1,
     });
+    setEditingUserId(user.id);
+    setShowUserForm(true);
+  };
+
+  const handleCancelEdit = () => {
+    setUserForm({ email: '', password: '', name: '', system_role: 'student', department_id: 1 });
+    setShowUserForm(false);
+    setEditingUserId(null);
   };
 
   const handleToggleWorkflow = (id: number) => {
@@ -107,11 +139,11 @@ export default function AdminPanel() {
         {/* User Management */}
         {activeTab === 'users' && (
           <div className="space-y-6">
-            {/* Create User Form */}
+            {/* Create/Edit User Form */}
             {showUserForm && (
               <div className="bg-white rounded-lg shadow p-6 border-2 border-blue-200">
-                <h2 className="text-lg font-bold text-gray-900 mb-4">Create New User</h2>
-                <form onSubmit={handleCreateUser} className="space-y-4">
+                <h2 className="text-lg font-bold text-gray-900 mb-4">{editingUserId ? 'Edit User' : 'Create New User'}</h2>
+                <form onSubmit={handleSaveUser} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
@@ -166,11 +198,11 @@ export default function AdminPanel() {
                       type="submit"
                       className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                     >
-                      Create User
+                      {editingUserId ? 'Update User' : 'Create User'}
                     </button>
                     <button
                       type="button"
-                      onClick={() => setShowUserForm(false)}
+                      onClick={handleCancelEdit}
                       className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
                     >
                       Cancel
@@ -228,7 +260,12 @@ export default function AdminPanel() {
                         </td>
                         <td className="px-6 py-4 text-sm flex gap-2">
                           {permissions.canEditUser && (
-                            <button className="text-blue-600 hover:text-blue-700 font-medium">Edit</button>
+                            <button
+                              onClick={() => handleEditUser(user)}
+                              className="text-blue-600 hover:text-blue-700 font-medium"
+                            >
+                              Edit
+                            </button>
                           )}
                           {permissions.canDeleteUser && (
                             <button className="text-red-600 hover:text-red-700 font-medium">Disable</button>
