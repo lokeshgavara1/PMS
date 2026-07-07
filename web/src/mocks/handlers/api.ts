@@ -133,6 +133,8 @@ export const handlers = [
 
     const response: LoginResponse = {
       success: true,
+      user,
+      tokens,
       data: { user, tokens },
     };
 
@@ -178,6 +180,8 @@ export const handlers = [
 
       const response: LoginResponse = {
         success: true,
+        user,
+        tokens,
         data: { user, tokens },
       };
 

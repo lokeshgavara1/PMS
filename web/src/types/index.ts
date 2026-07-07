@@ -4,41 +4,95 @@
 // ============================================================================
 
 // Enums
-export const SystemRole = {  ADMIN: 'admin' as const,  HOD: 'hod' as const,  FACULTY: 'faculty' as const,  PM: 'pm' as const,  STUDENT: 'student' as const,  GUEST: 'guest' as const,
-}
+export const SystemRole = {
+  ADMIN: 'admin' as const,
+  HOD: 'hod' as const,
+  FACULTY: 'faculty' as const,
+  PM: 'pm' as const,
+  STUDENT: 'student' as const,
+  GUEST: 'guest' as const,
+} as const;
 
-export const ProjectRole = {  OWNER: 'owner' as const,  LEAD: 'lead' as const,  MEMBER: 'member' as const,  VIEWER: 'viewer' as const,
-}
+export const ProjectRole = {
+  OWNER: 'owner' as const,
+  LEAD: 'lead' as const,
+  MEMBER: 'member' as const,
+  VIEWER: 'viewer' as const,
+} as const;
 
-export const ProjectCategory = {  ACADEMIC: 'academic' as const,  RESEARCH: 'research' as const,  ADMIN: 'admin' as const,  INFRASTRUCTURE: 'infrastructure' as const,
-}
+export const ProjectCategory = {
+  ACADEMIC: 'academic' as const,
+  RESEARCH: 'research' as const,
+  ADMIN: 'admin' as const,
+  INFRASTRUCTURE: 'infrastructure' as const,
+} as const;
 
-export const ProjectVisibility = {  PRIVATE: 'private' as const,  DEPARTMENT: 'department' as const,  PUBLIC: 'public' as const,
-}
+export const ProjectVisibility = {
+  PRIVATE: 'private' as const,
+  DEPARTMENT: 'department' as const,
+  PUBLIC: 'public' as const,
+} as const;
 
-export const ProjectStatus = {  PLANNING: 'planning' as const,  ACTIVE: 'active' as const,  ON_HOLD: 'on_hold' as const,  COMPLETED: 'completed' as const,  ARCHIVED: 'archived' as const,
-}
+export const ProjectStatus = {
+  PLANNING: 'planning' as const,
+  ACTIVE: 'active' as const,
+  ON_HOLD: 'on_hold' as const,
+  COMPLETED: 'completed' as const,
+  ARCHIVED: 'archived' as const,
+} as const;
 
-export const TaskType = {  TASK: 'task' as const,  BUG: 'bug' as const,  FEATURE: 'feature' as const,  IMPROVEMENT: 'improvement' as const,  RESEARCH: 'research' as const,  SUBMISSION: 'submission' as const,
-}
+export const TaskType = {
+  TASK: 'task' as const,
+  BUG: 'bug' as const,
+  FEATURE: 'feature' as const,
+  IMPROVEMENT: 'improvement' as const,
+  RESEARCH: 'research' as const,
+  SUBMISSION: 'submission' as const,
+} as const;
 
-export const TaskPriority = {  CRITICAL: 'critical' as const,  HIGH: 'high' as const,  MEDIUM: 'medium' as const,  LOW: 'low' as const,
-}
+export const TaskPriority = {
+  CRITICAL: 'critical' as const,
+  HIGH: 'high' as const,
+  MEDIUM: 'medium' as const,
+  LOW: 'low' as const,
+} as const;
 
-export const TaskStatus = {  BACKLOG: 'backlog' as const,  TODO: 'todo' as const,  IN_PROGRESS: 'in_progress' as const,  REVIEW: 'review' as const,  DONE: 'done' as const,
-}
+export const TaskStatus = {
+  BACKLOG: 'backlog' as const,
+  TODO: 'todo' as const,
+  IN_PROGRESS: 'in_progress' as const,
+  REVIEW: 'review' as const,
+  DONE: 'done' as const,
+} as const;
 
-export const SubmissionStatus = {  SUBMITTED: 'submitted' as const,  APPROVED: 'approved' as const,  REVISION_REQUIRED: 'revision_required' as const,  REJECTED: 'rejected' as const,
-}
+export const SubmissionStatus = {
+  SUBMITTED: 'submitted' as const,
+  APPROVED: 'approved' as const,
+  REVISION_REQUIRED: 'revision_required' as const,
+  REJECTED: 'rejected' as const,
+} as const;
 
-export const DependencyType = {  BLOCKS: 'blocks' as const,  BLOCKED_BY: 'blocked_by' as const,  RELATES_TO: 'relates_to' as const,  DUPLICATES: 'duplicates' as const,
-}
+export const DependencyType = {
+  BLOCKS: 'blocks' as const,
+  BLOCKED_BY: 'blocked_by' as const,
+  RELATES_TO: 'relates_to' as const,
+  DUPLICATES: 'duplicates' as const,
+} as const;
 
-export const SyncStatus = {  PENDING: 'pending' as const,  SYNCED: 'synced' as const,  FAILED: 'failed' as const,
-}
+export const SyncStatus = {
+  PENDING: 'pending' as const,
+  SYNCED: 'synced' as const,
+  FAILED: 'failed' as const,
+} as const;
 
-export const NotificationType = {  TASK_ASSIGNED: 'task_assigned' as const,  TASK_MENTIONED: 'task_mentioned' as const,  MILESTONE_REMINDER: 'milestone_reminder' as const,  STATUS_CHANGED: 'status_changed' as const,  REVIEW_REQUESTED: 'review_requested' as const,  COMMENT: 'comment' as const,
-}
+export const NotificationType = {
+  TASK_ASSIGNED: 'task_assigned' as const,
+  TASK_MENTIONED: 'task_mentioned' as const,
+  MILESTONE_REMINDER: 'milestone_reminder' as const,
+  STATUS_CHANGED: 'status_changed' as const,
+  REVIEW_REQUESTED: 'review_requested' as const,
+  COMMENT: 'comment' as const,
+} as const;
 
 // ============================================================================
 // CORE ENTITIES
@@ -122,9 +176,9 @@ export interface Sprint {
   description?: string;
   start_date: string;
   end_date: string;
-  goal?: string;
-  status: 'planning' | 'active' | 'completed';
+  status: any;
   velocity?: number;
+  goal?: string;
   created_at: string;
   updated_at: string;
 }
@@ -153,8 +207,10 @@ export interface Task {
 
 export interface TaskDependency {
   id: number;
-  task_id: number;
-  depends_on_task_id: number;
+  from_task_id: number;
+  to_task_id: number;
+  task_id?: number;
+  depends_on_task_id?: number;
   dependency_type: any;
   created_at: string;
 }
@@ -167,18 +223,6 @@ export interface Comment {
   parent_comment_id?: number;
   created_at: string;
   updated_at: string;
-}
-
-export interface Attachment {
-  id: number;
-  comment_id?: number;
-  task_id?: number;
-  uploaded_by: number;
-  file_name: string;
-  file_size: number;
-  mime_type: string;
-  storage_path: string;
-  created_at: string;
 }
 
 export interface TimeLog {
@@ -196,54 +240,101 @@ export interface TimeLog {
   updated_at: string;
 }
 
-export interface WorkflowConfig {
-  id: number;
-  project_id: number;
-  status_name: string;
-  position: number;
-  color?: string;
-  created_at: string;
-  updated_at: string;
-}
-
 export interface Notification {
   id: number;
   user_id: number;
   type: any;
+  title?: string;
+  message: string;
+  related_entity_id?: number;
   related_task_id?: number;
   related_project_id?: number;
   related_user_id?: number;
-  message: string;
   is_read: boolean;
   read_at?: string;
   created_at: string;
+  updated_at?: string;
 }
 
-export interface ActivityLogEntry {
+export interface ActivityLog {
   id: number;
-  entity_type: 'task' | 'project' | 'milestone' | 'comment';
-  entity_id: number;
   user_id: number;
+  entity_type: string;
+  entity_id: number;
   action: string;
-  old_value?: string;
-  new_value?: string;
+  old_value?: any;
+  new_value?: any;
   created_at: string;
 }
 
-export interface AuditLogEntry {
+export interface AuditLog {
   id: number;
-  user_id?: number;
+  user_id: number;
+  entity_type: string;
+  entity_id: number;
   action: string;
-  resource_type: string;
-  resource_id?: number;
-  details?: string;
-  ip_address?: string;
+  changes: any;
+  ip_address: string;
+  user_agent: string;
   created_at: string;
 }
 
-// ============================================================================
-// API REQUEST/RESPONSE DTOs
-// ============================================================================
+export interface Submission {
+  id: number;
+  task_id: number;
+  student_id: number;
+  submitted_at: string;
+  status: any;
+  feedback?: string;
+  grade?: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Timesheet {
+  id: number;
+  user_id: number;
+  week_start: string;
+  total_hours: number;
+  synced_at?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+// API Response Types
+export interface ApiSuccessResponse<T> {
+  success: boolean;
+  data: T;
+  message?: string;
+}
+
+export interface ApiErrorResponse {
+  success: boolean;
+  error: {
+    code: string;
+    message: string;
+    field?: string;
+    statusCode?: number;
+    details?: Record<string, any>;
+  };
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+  };
+}
+
+export interface LoginResponse {
+  success: boolean;
+  user: User;
+  tokens: AuthTokens;
+  data?: any;
+}
 
 export interface AuthTokens {
   accessToken: string;
@@ -251,17 +342,21 @@ export interface AuthTokens {
   expiresIn: number;
 }
 
+export interface CreateTaskRequest {
+  title: string;
+  description?: string;
+  type: any;
+  priority: any;
+  status?: any;
+  assignee_id?: number;
+  sprint_id?: number;
+  milestone_id?: number;
+  estimate_hours?: number;
+}
+
 export interface LoginRequest {
   email: string;
   password: string;
-}
-
-export interface LoginResponse {
-  success: true;
-  data: {
-    user: User;
-    tokens: AuthTokens;
-  };
 }
 
 export interface CreateProjectRequest {
@@ -272,22 +367,6 @@ export interface CreateProjectRequest {
   department_id?: number;
   start_date: string;
   end_date: string;
-}
-
-export interface CreateTaskRequest {
-  title: string;
-  description?: string;
-  type: any;
-  priority: any;
-  sprint_id?: number;
-  assignee_id?: number;
-  due_date?: string;
-  estimate_hours?: number;
-  parent_id?: number;
-}
-
-export interface UpdateTaskStatusRequest {
-  status: any;
 }
 
 export interface CreateCommentRequest {
@@ -301,37 +380,17 @@ export interface LogTimeRequest {
   description?: string;
 }
 
-// ============================================================================
-// API ERROR RESPONSE
-// ============================================================================
-
-export interface ApiError {
-  code: string;
-  message: string;
-  field?: string;
-  statusCode: number;
+export interface WorkflowConfig {
+  id: number;
+  project_id?: number;
+  name: string;
+  status: string;
+  status_name?: string;
+  position?: number;
+  color?: string;
+  description: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
-export interface ApiErrorResponse {
-  success: false;
-  error: ApiError;
-}
-
-export interface ApiSuccessResponse<T = any> {
-  success: true;
-  data: T;
-}
-
-// ============================================================================
-// PAGINATED RESPONSE
-// ============================================================================
-
-export interface PaginatedResponse<T> {
-  data: T[];
-  pagination: {
-    total: number;
-    page: number;
-    limit: number;
-    pages: number;
-  };
-}
+export type ActivityLogEntry = ActivityLog;
