@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface DisplaySettings {
   theme: 'light' | 'dark' | 'auto';
@@ -28,7 +28,7 @@ export default function DisplayPreferencesTab() {
   };
 
   const handleToggle = (field: string) => {
-    setSettings({ ...settings, [field]: !settings[field] });
+    setSettings({ ...settings, [field]: !(settings as any)[field] } as DisplaySettings);
   };
 
   return (

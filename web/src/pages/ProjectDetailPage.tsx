@@ -19,7 +19,7 @@ export default function ProjectDetailPage() {
   const { data: sprints } = useProjectSprints(id);
 
   const [activeTab, setActiveTab] = useState<Tab>('board');
-  const [selectedSprintId, setSelectedSprintId] = useState<string | null>('backlog');
+  const [_selectedSprintId, _setSelectedSprintId] = useState<string | null>('backlog');
 
   if (projectLoading) {
     return (

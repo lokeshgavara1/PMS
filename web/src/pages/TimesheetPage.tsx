@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTimeLogs, useLogTime } from '../api';
 import DashboardLayout from '../layouts/DashboardLayout';
 

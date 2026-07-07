@@ -1,13 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useUpdateTaskStatus } from '../api';
-
-enum TaskStatus {
-  BACKLOG = 'backlog',
-  TODO = 'todo',
-  IN_PROGRESS = 'in_progress',
-  REVIEW = 'review',
-  DONE = 'done',
-}
+import { TaskStatus } from '../types';
 
 interface Task {
   id: number;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useProjects, useProjectTasks } from '../api';
 import DashboardLayout from '../layouts/DashboardLayout';
 
@@ -11,28 +11,6 @@ export default function ReportsPage() {
   const tasks = tasksData?.data || [];
 
   // Burndown data
-  const burndownData = [
-    { day: 'Day 1', remaining: 20 },
-    { day: 'Day 2', remaining: 18 },
-    { day: 'Day 3', remaining: 15 },
-    { day: 'Day 4', remaining: 12 },
-    { day: 'Day 5', remaining: 8 },
-    { day: 'Day 6', remaining: 5 },
-    { day: 'Day 7', remaining: 2 },
-    { day: 'Day 8', remaining: 0 },
-  ];
-
-  // Workload data
-  const workloadData = [
-    { member: 'User 1', tasks: 5, hours: 20 },
-    { member: 'User 2', tasks: 4, hours: 16 },
-    { member: 'User 3', tasks: 3, hours: 12 },
-    { member: 'User 4', tasks: 6, hours: 24 },
-    { member: 'User 5', tasks: 2, hours: 8 },
-  ];
-
-  // Task status distribution
-  const statusDistribution = [
     { status: 'Backlog', count: tasks.filter(t => t.status === 'backlog').length || 3 },
     { status: 'Todo', count: tasks.filter(t => t.status === 'todo').length || 4 },
     { status: 'In Progress', count: tasks.filter(t => t.status === 'in_progress').length || 2 },

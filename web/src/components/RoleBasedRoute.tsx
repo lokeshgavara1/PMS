@@ -13,7 +13,7 @@ export default function RoleBasedRoute({
   requiredRoles,
   fallbackPath = '/dashboard',
 }: RoleBasedRouteProps) {
-  const { role, user } = useRole();
+  const { role } = useRole();
 
   // If user doesn't have required role, redirect
   if (!requiredRoles.includes(role)) {

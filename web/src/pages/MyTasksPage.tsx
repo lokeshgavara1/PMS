@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useCurrentUser, useUpdateTaskStatus } from '../api';
 import { useNavigate } from 'react-router-dom';
 import { useRole } from '../hooks';
@@ -91,7 +91,7 @@ export default function MyTasksPage() {
     return colors[priority] || 'text-gray-600';
   };
 
-  const handleStatusChange = (taskId: number, newStatus: string) => {
+  const handleStatusChange = (_taskId: number, newStatus: string) => {
     updateStatus(newStatus as any);
   };
 

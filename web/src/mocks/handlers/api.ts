@@ -56,7 +56,7 @@ function validateAuth(request: Request): boolean {
 function sendError(statusCode: number, code: string, message: string, field?: string) {
   const response: ApiErrorResponse = {
     success: false,
-    error: { code, message, field: field || null, statusCode },
+    error: { code, message, field, statusCode },
   };
   return HttpResponse.json(response, { status: statusCode });
 }
@@ -270,7 +270,7 @@ export const handlers = [
       return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
     }
 
-    const body = await info.request.json();
+    const body = (await info.request.json()) as any;
     const newProject: Project = {
       id: Math.max(...store.projects.map((p) => p.id)) + 1,
       owner_id: currentSession.userId,
@@ -296,7 +296,7 @@ export const handlers = [
       return sendError(404, 'PROJECT_NOT_FOUND', `Project with ID ${projectId} not found`);
     }
 
-    const body = await info.request.json();
+    const body = (await info.request.json()) as any;
     const updated = { ...project, ...body, updated_at: new Date().toISOString() };
     Object.assign(project, updated);
 
@@ -357,7 +357,7 @@ export const handlers = [
     }
 
     const projectId = parseInt(info.params.projectId as string);
-    const body = await info.request.json();
+    const body = (await info.request.json()) as any;
 
     const newTask: Task = {
       id: Math.max(...store.tasks.map((t) => t.id), 0) + 1,
@@ -386,7 +386,7 @@ export const handlers = [
       return sendError(404, 'TASK_NOT_FOUND', `Task with ID ${taskId} not found`);
     }
 
-    const body = await info.request.json();
+    const body = (await info.request.json()) as any;
 
     // Validate status transition
     if (body.status && !isValidStatusTransition(task.status, body.status)) {
@@ -451,7 +451,7 @@ export const handlers = [
     }
 
     const taskId = parseInt(info.params.taskId as string);
-    const body = await info.request.json();
+    const body = (await info.request.json()) as any;
 
     const newComment: Comment = {
       id: Math.max(...store.comments.map((c) => c.id), 0) + 1,
@@ -486,7 +486,7 @@ export const handlers = [
     }
 
     const taskId = parseInt(info.params.taskId as string);
-    const body = await info.request.json();
+    const body = (await info.request.json()) as any;
 
     const newLog: TimeLog = {
       id: Math.max(...store.timeLogs.map((log) => log.id), 0) + 1,
@@ -610,7 +610,7 @@ export const handlers = [
       return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
     }
 
-    const body = await info.request.json();
+    const body = (await info.request.json()) as any;
     const newUser: User = {
       id: Math.max(...fixtures.users.map((u) => u.id)) + 1,
       created_at: new Date().toISOString(),
@@ -630,7 +630,7 @@ export const handlers = [
     }
 
     const userId = parseInt(info.params.id as string);
-    const body = await info.request.json();
+    const body = (await info.request.json()) as any;
 
     const user = fixtures.users.find((u) => u.id === userId);
     if (!user) {
@@ -696,7 +696,7 @@ export const handlers = [
       return sendError(404, 'TASK_NOT_FOUND', `Task with ID ${taskId} not found`);
     }
 
-    const body = await info.request.json();
+    const body = (await info.request.json()) as any;
     const updated = {
       ...task,
       approval_status: body.approval_status || 'pending',
@@ -738,7 +738,7 @@ export const handlers = [
       return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
     }
 
-    const body = await info.request.json();
+    const body = (await info.request.json()) as any;
     const projectId = body.projectId || 1;
 
     // Mock: calculate total hours from time logs for this project

@@ -4,95 +4,41 @@
 // ============================================================================
 
 // Enums
-export enum SystemRole {
-  ADMIN = 'admin',
-  HOD = 'hod',
-  FACULTY = 'faculty',
-  PM = 'pm',
-  STUDENT = 'student',
-  GUEST = 'guest',
-}
+export const SystemRole = {  ADMIN: 'admin' as const,  HOD: 'hod' as const,  FACULTY: 'faculty' as const,  PM: 'pm' as const,  STUDENT: 'student' as const,  GUEST: 'guest' as const,
+} as const
 
-export enum ProjectRole {
-  OWNER = 'owner',
-  LEAD = 'lead',
-  MEMBER = 'member',
-  VIEWER = 'viewer',
-}
+export const ProjectRole = {  OWNER: 'owner' as const,  LEAD: 'lead' as const,  MEMBER: 'member' as const,  VIEWER: 'viewer' as const,
+} as const
 
-export enum ProjectCategory {
-  ACADEMIC = 'academic',
-  RESEARCH = 'research',
-  ADMIN = 'admin',
-  INFRASTRUCTURE = 'infrastructure',
-}
+export const ProjectCategory = {  ACADEMIC: 'academic' as const,  RESEARCH: 'research' as const,  ADMIN: 'admin' as const,  INFRASTRUCTURE: 'infrastructure' as const,
+} as const
 
-export enum ProjectVisibility {
-  PRIVATE = 'private',
-  DEPARTMENT = 'department',
-  PUBLIC = 'public',
-}
+export const ProjectVisibility = {  PRIVATE: 'private' as const,  DEPARTMENT: 'department' as const,  PUBLIC: 'public' as const,
+} as const
 
-export enum ProjectStatus {
-  PLANNING = 'planning',
-  ACTIVE = 'active',
-  ON_HOLD = 'on_hold',
-  COMPLETED = 'completed',
-  ARCHIVED = 'archived',
-}
+export const ProjectStatus = {  PLANNING: 'planning' as const,  ACTIVE: 'active' as const,  ON_HOLD: 'on_hold' as const,  COMPLETED: 'completed' as const,  ARCHIVED: 'archived' as const,
+} as const
 
-export enum TaskType {
-  TASK = 'task',
-  BUG = 'bug',
-  FEATURE = 'feature',
-  IMPROVEMENT = 'improvement',
-  RESEARCH = 'research',
-  SUBMISSION = 'submission',
-}
+export const TaskType = {  TASK: 'task' as const,  BUG: 'bug' as const,  FEATURE: 'feature' as const,  IMPROVEMENT: 'improvement' as const,  RESEARCH: 'research' as const,  SUBMISSION: 'submission' as const,
+} as const
 
-export enum TaskPriority {
-  CRITICAL = 'critical',
-  HIGH = 'high',
-  MEDIUM = 'medium',
-  LOW = 'low',
-}
+export const TaskPriority = {  CRITICAL: 'critical' as const,  HIGH: 'high' as const,  MEDIUM: 'medium' as const,  LOW: 'low' as const,
+} as const
 
-export enum TaskStatus {
-  BACKLOG = 'backlog',
-  TODO = 'todo',
-  IN_PROGRESS = 'in_progress',
-  REVIEW = 'review',
-  DONE = 'done',
-}
+export const TaskStatus = {  BACKLOG: 'backlog' as const,  TODO: 'todo' as const,  IN_PROGRESS: 'in_progress' as const,  REVIEW: 'review' as const,  DONE: 'done' as const,
+} as const
 
-export enum SubmissionStatus {
-  SUBMITTED = 'submitted',
-  APPROVED = 'approved',
-  REVISION_REQUIRED = 'revision_required',
-  REJECTED = 'rejected',
-}
+export const SubmissionStatus = {  SUBMITTED: 'submitted' as const,  APPROVED: 'approved' as const,  REVISION_REQUIRED: 'revision_required' as const,  REJECTED: 'rejected' as const,
+} as const
 
-export enum DependencyType {
-  BLOCKS = 'blocks',
-  BLOCKED_BY = 'blocked_by',
-  RELATES_TO = 'relates_to',
-  DUPLICATES = 'duplicates',
-}
+export const DependencyType = {  BLOCKS: 'blocks' as const,  BLOCKED_BY: 'blocked_by' as const,  RELATES_TO: 'relates_to' as const,  DUPLICATES: 'duplicates' as const,
+} as const
 
-export enum SyncStatus {
-  PENDING = 'pending',
-  SYNCED = 'synced',
-  FAILED = 'failed',
-}
+export const SyncStatus = {  PENDING: 'pending' as const,  SYNCED: 'synced' as const,  FAILED: 'failed' as const,
+} as const
 
-export enum NotificationType {
-  TASK_ASSIGNED = 'task_assigned',
-  TASK_MENTIONED = 'task_mentioned',
-  MILESTONE_REMINDER = 'milestone_reminder',
-  STATUS_CHANGED = 'status_changed',
-  REVIEW_REQUESTED = 'review_requested',
-  COMMENT = 'comment',
-}
+export const NotificationType = {  TASK_ASSIGNED: 'task_assigned' as const,  TASK_MENTIONED: 'task_mentioned' as const,  MILESTONE_REMINDER: 'milestone_reminder' as const,  STATUS_CHANGED: 'status_changed' as const,  REVIEW_REQUESTED: 'review_requested' as const,  COMMENT: 'comment' as const,
+} as const
 
 // ============================================================================
 // CORE ENTITIES
@@ -105,7 +51,7 @@ export interface Department {
   head_id?: number;
   created_at: string;
   updated_at: string;
-}
+} as const
 
 export interface Batch {
   id: number;
@@ -116,7 +62,7 @@ export interface Batch {
   department_id: number;
   created_at: string;
   updated_at: string;
-}
+} as const
 
 export interface User {
   id: number;
@@ -130,7 +76,7 @@ export interface User {
   last_login_at?: string;
   created_at: string;
   updated_at: string;
-}
+} as const
 
 export interface Project {
   id: number;
@@ -146,7 +92,7 @@ export interface Project {
   is_archived: boolean;
   created_at: string;
   updated_at: string;
-}
+} as const
 
 export interface ProjectMember {
   id: number;
@@ -155,7 +101,7 @@ export interface ProjectMember {
   role: ProjectRole;
   joined_at: string;
   updated_at: string;
-}
+} as const
 
 export interface Milestone {
   id: number;
@@ -167,7 +113,7 @@ export interface Milestone {
   reviewer_id?: number;
   created_at: string;
   updated_at: string;
-}
+} as const
 
 export interface Sprint {
   id: number;
@@ -181,7 +127,7 @@ export interface Sprint {
   velocity?: number;
   created_at: string;
   updated_at: string;
-}
+} as const
 
 export interface Task {
   id: number;
@@ -203,7 +149,7 @@ export interface Task {
   submission_status?: SubmissionStatus;
   created_at: string;
   updated_at: string;
-}
+} as const
 
 export interface TaskDependency {
   id: number;
@@ -211,7 +157,7 @@ export interface TaskDependency {
   depends_on_task_id: number;
   dependency_type: DependencyType;
   created_at: string;
-}
+} as const
 
 export interface Comment {
   id: number;
@@ -221,7 +167,7 @@ export interface Comment {
   parent_comment_id?: number;
   created_at: string;
   updated_at: string;
-}
+} as const
 
 export interface Attachment {
   id: number;
@@ -233,7 +179,7 @@ export interface Attachment {
   mime_type: string;
   storage_path: string;
   created_at: string;
-}
+} as const
 
 export interface TimeLog {
   id: number;
@@ -248,7 +194,7 @@ export interface TimeLog {
   synced_at?: string;
   created_at: string;
   updated_at: string;
-}
+} as const
 
 export interface WorkflowConfig {
   id: number;
@@ -258,7 +204,7 @@ export interface WorkflowConfig {
   color?: string;
   created_at: string;
   updated_at: string;
-}
+} as const
 
 export interface Notification {
   id: number;
@@ -271,7 +217,7 @@ export interface Notification {
   is_read: boolean;
   read_at?: string;
   created_at: string;
-}
+} as const
 
 export interface ActivityLogEntry {
   id: number;
@@ -282,7 +228,7 @@ export interface ActivityLogEntry {
   old_value?: string;
   new_value?: string;
   created_at: string;
-}
+} as const
 
 export interface AuditLogEntry {
   id: number;
@@ -293,7 +239,7 @@ export interface AuditLogEntry {
   details?: string;
   ip_address?: string;
   created_at: string;
-}
+} as const
 
 // ============================================================================
 // API REQUEST/RESPONSE DTOs
@@ -303,12 +249,12 @@ export interface AuthTokens {
   accessToken: string;
   refreshToken: string;
   expiresIn: number;
-}
+} as const
 
 export interface LoginRequest {
   email: string;
   password: string;
-}
+} as const
 
 export interface LoginResponse {
   success: true;
@@ -316,7 +262,7 @@ export interface LoginResponse {
     user: User;
     tokens: AuthTokens;
   };
-}
+} as const
 
 export interface CreateProjectRequest {
   name: string;
@@ -326,7 +272,7 @@ export interface CreateProjectRequest {
   department_id?: number;
   start_date: string;
   end_date: string;
-}
+} as const
 
 export interface CreateTaskRequest {
   title: string;
@@ -338,22 +284,22 @@ export interface CreateTaskRequest {
   due_date?: string;
   estimate_hours?: number;
   parent_id?: number;
-}
+} as const
 
 export interface UpdateTaskStatusRequest {
   status: TaskStatus;
-}
+} as const
 
 export interface CreateCommentRequest {
   content: string;
   parent_comment_id?: number;
-}
+} as const
 
 export interface LogTimeRequest {
   hours_logged: number;
   log_date: string;
   description?: string;
-}
+} as const
 
 // ============================================================================
 // API ERROR RESPONSE
@@ -364,17 +310,17 @@ export interface ApiError {
   message: string;
   field?: string;
   statusCode: number;
-}
+} as const
 
 export interface ApiErrorResponse {
   success: false;
   error: ApiError;
-}
+} as const
 
 export interface ApiSuccessResponse<T = any> {
   success: true;
   data: T;
-}
+} as const
 
 // ============================================================================
 // PAGINATED RESPONSE
@@ -388,4 +334,4 @@ export interface PaginatedResponse<T> {
     limit: number;
     pages: number;
   };
-}
+} as const

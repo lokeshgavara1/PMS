@@ -4,7 +4,6 @@ import { GoogleLogin } from '@react-oauth/google';
 import { useLogin, useGoogleLogin, useCurrentUser } from '../api';
 import { useAppStore } from '../stores/app';
 import { LightningIcon, BarChartIcon, ChartIcon, ShieldIcon } from '../components/SidebarIcons';
-import centurionLogo from '../assets/cutm-logo.png';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -200,7 +199,7 @@ export default function LoginPage() {
                   onError={handleGoogleSignInError}
                   text="signin_with"
                   width="100%"
-                  disabled={isGoogleLoading}
+                  
                 />
               </div>
             ) : (

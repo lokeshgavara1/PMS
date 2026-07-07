@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useUsers, useCreateUser, useUpdateUser } from '../api';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { useRole } from '../hooks';
-import { UsersIcon, SettingsIcon, FolderIcon, CheckIcon, EditIcon as EditIconSVG } from '../components/SidebarIcons';
 
 export default function AdminPanel() {
   const { data: usersData } = useUsers();

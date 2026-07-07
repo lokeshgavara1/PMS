@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BarChartIcon, ChartIcon, LightningIcon, UsersIcon, ClockIcon, ShieldIcon } from '../components/SidebarIcons';
 import centurionLogo from '../assets/cutm-logo.png';

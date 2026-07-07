@@ -15,7 +15,7 @@ type SettingsTab = 'security' | 'notifications' | 'privacy' | 'display' | 'integ
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState<SettingsTab>('security');
-  const { data: user } = useCurrentUser();
+  const { data: _user } = useCurrentUser();
 
   const getTabIcon = (tabId: SettingsTab) => {
     const icons: Record<SettingsTab, React.ReactNode> = {

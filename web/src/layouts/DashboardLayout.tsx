@@ -1,4 +1,6 @@
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useAppStore } from '../stores/app';
 import Sidebar from '../components/Sidebar';
 import Topbar from '../components/Topbar';

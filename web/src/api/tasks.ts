@@ -115,7 +115,7 @@ export const useUpdateTask = (taskId: number) => {
       return response.data.data;
     },
     {
-      onSuccess: (data) => {
+      onSuccess: (_data) => {
         queryClient.invalidateQueries(['task', taskId]);
         queryClient.invalidateQueries('tasks');
       },

@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useUnreadNotificationCount, useNotifications, useLogout } from '../api';
 import { useCurrentUser } from '../api';
 import { useNavigate } from 'react-router-dom';
 import { NotificationIcon } from './SidebarIcons';
-import centurionLogo from '../assets/cutm-logo.png';
 
 export default function Topbar() {
   const { data: user } = useCurrentUser();

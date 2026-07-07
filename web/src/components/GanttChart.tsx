@@ -1,4 +1,3 @@
-import React from 'react';
 import { useGanttData } from '../api';
 
 interface GanttChartProps {
@@ -35,8 +34,8 @@ export default function GanttChart({ projectId }: GanttChartProps) {
     );
   }
 
-  const minDate = new Date(Math.min(...dates.map((d) => d.getTime())));
-  const maxDate = new Date(Math.max(...dates.map((d) => d.getTime())));
+  const minDate = new Date(Math.min(...dates.map((_d: Date) => _d.getTime())));
+  const maxDate = new Date(Math.max(...dates.map((_d: Date) => _d.getTime())));
 
   // Generate week headers
   const weeks: Date[] = [];

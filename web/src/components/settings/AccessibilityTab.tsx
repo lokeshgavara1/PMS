@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface AccessibilitySettings {
   fontSize: 'small' | 'normal' | 'large' | 'xlarge';
@@ -26,7 +26,7 @@ export default function AccessibilityTab() {
   };
 
   const handleToggle = (field: string) => {
-    setSettings({ ...settings, [field]: !settings[field] });
+    setSettings({ ...settings, [field]: !(settings as any)[field] } as AccessibilitySettings);
   };
 
   return (

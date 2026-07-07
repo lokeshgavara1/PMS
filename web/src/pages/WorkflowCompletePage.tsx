@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 interface ProjectMember {
@@ -102,7 +102,7 @@ export default function WorkflowCompletePage() {
     }
   };
 
-  const handleAddMember = async (userId: number) => {
+  const _handleAddMember = async (userId: number) => {
     try {
       const response = await fetch(`${baseUrl}/projects/${projectId}/members`, {
         method: 'POST',
@@ -118,7 +118,7 @@ export default function WorkflowCompletePage() {
     }
   };
 
-  const handleFileUpload = async (taskId: number, filename: string) => {
+  const _handleFileUpload = async (taskId: number, filename: string) => {
     try {
       const response = await fetch(`${baseUrl}/tasks/${taskId}/files`, {
         method: 'POST',

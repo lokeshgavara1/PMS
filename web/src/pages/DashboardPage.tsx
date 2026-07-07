@@ -1,4 +1,3 @@
-import React from 'react';
 import { useProjects } from '../api';
 import { Link } from 'react-router-dom';
 import { BarChartIcon, FolderIcon, CheckIcon } from '../components/SidebarIcons';

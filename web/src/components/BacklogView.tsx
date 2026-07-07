@@ -52,7 +52,7 @@ export default function BacklogView({ projectId, tasks, sprints }: BacklogViewPr
     });
   };
 
-  const handleMoveToSprint = (taskId: number, sprintId: number) => {
+  const handleMoveToSprint = (_taskId: number, sprintId: number) => {
     updateTask({ sprint_id: sprintId } as any);
   };
 
