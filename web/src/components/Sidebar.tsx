@@ -8,7 +8,6 @@ import { HomeIcon, TasksIcon, ProjectsIcon, ReportsIcon, TimesheetIcon, Workflow
 
 export default function Sidebar() {
   const sidebarOpen = useAppStore((state) => state.sidebarOpen);
-  const _currentUser = useAppStore((state) => state.currentUser);
   const { data: user } = useCurrentUser();
   const { mutate: logout } = useLogout();
   const navigate = useNavigate();

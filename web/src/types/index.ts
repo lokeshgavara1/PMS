@@ -68,7 +68,7 @@ export interface User {
   id: number;
   email: string;
   name: string;
-  system_role?: typeof SystemRole[keyof typeof SystemRole];
+  system_role?: any;
   department_id?: number;
   batch_id?: number;
   ldap_uid: string;
@@ -82,9 +82,9 @@ export interface Project {
   id: number;
   name: string;
   description: string;
-  category: typeof ProjectCategory[keyof typeof ProjectCategory];
-  visibility: typeof ProjectVisibility[keyof typeof ProjectVisibility];
-  status: typeof ProjectStatus[keyof typeof ProjectStatus];
+  category: any;
+  visibility: any;
+  status: any;
   department_id?: number;
   owner_id: number;
   start_date: string;
@@ -98,7 +98,7 @@ export interface ProjectMember {
   id: number;
   project_id: number;
   user_id: number;
-  role: ProjectRole;
+  role: typeof ProjectRole[keyof typeof ProjectRole];
   joined_at: string;
   updated_at: string;
 }
@@ -109,7 +109,7 @@ export interface Milestone {
   name: string;
   description?: string;
   due_date: string;
-  status: typeof TaskStatus[keyof typeof TaskStatus];
+  status: any;
   reviewer_id?: number;
   created_at: string;
   updated_at: string;
@@ -136,9 +136,9 @@ export interface Task {
   parent_id?: number;
   title: string;
   description?: string;
-  type: typeof TaskType[keyof typeof TaskType];
-  priority: typeof TaskPriority[keyof typeof TaskPriority];
-  status: typeof TaskStatus[keyof typeof TaskStatus];
+  type: any;
+  priority: any;
+  status: any;
   assignee_id?: number;
   reporter_id: number;
   milestone_id?: number;
@@ -146,7 +146,7 @@ export interface Task {
   estimate_hours?: number;
   position: number;
   is_archived: boolean;
-  submission_status?: typeof SubmissionStatus[keyof typeof SubmissionStatus];
+  submission_status?: any;
   created_at: string;
   updated_at: string;
 }
@@ -155,7 +155,7 @@ export interface TaskDependency {
   id: number;
   task_id: number;
   depends_on_task_id: number;
-  dependency_type: typeof DependencyType[keyof typeof DependencyType];
+  dependency_type: any;
   created_at: string;
 }
 
@@ -189,7 +189,7 @@ export interface TimeLog {
   log_date: string;
   description?: string;
   synced_to_timesheet: boolean;
-  sync_status: typeof SyncStatus[keyof typeof SyncStatus];
+  sync_status: any;
   external_id?: string;
   synced_at?: string;
   created_at: string;
@@ -209,7 +209,7 @@ export interface WorkflowConfig {
 export interface Notification {
   id: number;
   user_id: number;
-  type: typeof NotificationType[keyof typeof NotificationType];
+  type: any;
   related_task_id?: number;
   related_project_id?: number;
   related_user_id?: number;
@@ -267,8 +267,8 @@ export interface LoginResponse {
 export interface CreateProjectRequest {
   name: string;
   description: string;
-  category: typeof ProjectCategory[keyof typeof ProjectCategory];
-  visibility: typeof ProjectVisibility[keyof typeof ProjectVisibility];
+  category: any;
+  visibility: any;
   department_id?: number;
   start_date: string;
   end_date: string;
@@ -277,8 +277,8 @@ export interface CreateProjectRequest {
 export interface CreateTaskRequest {
   title: string;
   description?: string;
-  type: typeof TaskType[keyof typeof TaskType];
-  priority: typeof TaskPriority[keyof typeof TaskPriority];
+  type: any;
+  priority: any;
   sprint_id?: number;
   assignee_id?: number;
   due_date?: string;
@@ -287,7 +287,7 @@ export interface CreateTaskRequest {
 }
 
 export interface UpdateTaskStatusRequest {
-  status: typeof TaskStatus[keyof typeof TaskStatus];
+  status: any;
 }
 
 export interface CreateCommentRequest {

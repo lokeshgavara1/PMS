@@ -17,9 +17,9 @@ export interface Task {
   parent_id?: number;
   title: string;
   description?: string;
-  type: typeof TaskType[keyof typeof TaskType];
+  type: any;
   priority: TaskPriority;
-  status: typeof TaskStatus[keyof typeof TaskStatus];
+  status: any;
   assignee_id?: number;
   reporter_id: number;
   milestone_id?: number;
@@ -27,7 +27,7 @@ export interface Task {
   estimate_hours?: number;
   position: number;
   is_archived: boolean;
-  submission_status?: typeof SubmissionStatus[keyof typeof SubmissionStatus];
+  submission_status?: any;
   created_at: string;
   updated_at: string;
 }

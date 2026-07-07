@@ -8,7 +8,6 @@ import type {
   Task,
   Comment,
   TimeLog,
-  Notification,
   PaginatedResponse,
   LoginResponse,
   AuthTokens,
@@ -415,9 +414,9 @@ export const handlers = [
       return sendError(404, 'TASK_NOT_FOUND', `Task with ID ${taskId} not found`);
     }
 
-    const body = (await info.request.json()) as { status: TaskStatus };
+    const body = (await info.request.json()) as { status: typeof TaskStatus[keyof typeof TaskStatus] };
 
-    if (!isValidStatusTransition(task.status, body.status)) {
+    if (!isValidStatusTransition(task.status as typeof TaskStatus[keyof typeof TaskStatus], body.status)) {
       return sendError(
         422,
         'INVALID_STATUS',
@@ -661,7 +660,6 @@ export const handlers = [
       return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
     }
 
-    const projectId = parseInt(info.params.projectId as string);
     // Mock: return users assigned to this project
     const projectMembers = fixtures.users.slice(0, 3).map((u) => ({
       id: u.id,
@@ -697,7 +695,7 @@ export const handlers = [
     }
 
     const body = (await info.request.json()) as any;
-    const updated = {
+    const updated: any = {
       ...task,
       approval_status: body.approval_status || 'pending',
       approval_notes: body.approval_notes,
@@ -723,10 +721,10 @@ export const handlers = [
     }
 
     return sendSuccess({
-      approval_status: task.approval_status || 'pending',
-      approval_notes: task.approval_notes,
-      approval_by: task.approval_by,
-      approval_date: task.approval_date,
+      approval_status: (task as any).approval_status || 'pending',
+      approval_notes: (task as any).approval_notes,
+      approval_by: (task as any).approval_by,
+      approval_date: (task as any).approval_date,
     });
   }),
 
@@ -747,7 +745,7 @@ export const handlers = [
       return task && task.project_id === projectId;
     });
 
-    const totalHours = projectTimeLogs.reduce((sum, log) => sum + (log.hours || 0), 0);
+    const totalHours = projectTimeLogs.reduce((sum, log) => sum + (log.hours_logged || 0), 0);
 
     const timesheet = {
       id: Math.random(),
@@ -802,7 +800,6 @@ export const handlers = [
       return sendError(401, 'UNAUTHORIZED', 'Not authenticated');
     }
 
-    const taskId = parseInt(info.params.taskId as string);
     // Mock: return empty files array
     return sendSuccess({ files: [] });
   }),
@@ -841,8 +838,8 @@ export const handlers = [
 ];
 
 // Helper function to validate status transitions
-function isValidStatusTransition(from: TaskStatus, to: TaskStatus): boolean {
-  const validTransitions: Record<TaskStatus, TaskStatus[]> = {
+function isValidStatusTransition(from: typeof TaskStatus[keyof typeof TaskStatus], to: typeof TaskStatus[keyof typeof TaskStatus]): boolean {
+  const validTransitions: Record<typeof TaskStatus[keyof typeof TaskStatus], typeof TaskStatus[keyof typeof TaskStatus][]> = {
     [TaskStatus.BACKLOG]: [TaskStatus.TODO],
     [TaskStatus.TODO]: [TaskStatus.IN_PROGRESS, TaskStatus.BACKLOG],
     [TaskStatus.IN_PROGRESS]: [TaskStatus.REVIEW, TaskStatus.TODO],

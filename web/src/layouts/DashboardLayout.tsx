@@ -1,7 +1,4 @@
 import type { ReactNode } from 'react';
-import { ReactNode } from 'react';
-import type { ReactNode } from 'react';
-import { useAppStore } from '../stores/app';
 import Sidebar from '../components/Sidebar';
 import Topbar from '../components/Topbar';
 
@@ -10,8 +7,6 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const sidebarOpen = useAppStore((state) => state.sidebarOpen);
-
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}

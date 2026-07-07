@@ -11,7 +11,7 @@ interface Task {
   description?: string;
   type: string;
   priority: string;
-  status: TaskStatus;
+  status: typeof TaskStatus[keyof typeof TaskStatus];
   assignee_id?: number;
   reporter_id: number;
   milestone_id?: number;
@@ -29,7 +29,7 @@ interface KanbanBoardProps {
   tasks: Task[];
 }
 
-const COLUMNS: { status: TaskStatus; label: string; color: string }[] = [
+const COLUMNS: { status: typeof TaskStatus[keyof typeof TaskStatus]; label: string; color: string }[] = [
   { status: TaskStatus.BACKLOG, label: 'Backlog', color: 'bg-gray-50' },
   { status: TaskStatus.TODO, label: 'To Do', color: 'bg-blue-50' },
   { status: TaskStatus.IN_PROGRESS, label: 'In Progress', color: 'bg-yellow-50' },
@@ -37,7 +37,7 @@ const COLUMNS: { status: TaskStatus; label: string; color: string }[] = [
   { status: TaskStatus.DONE, label: 'Done', color: 'bg-green-50' },
 ];
 
-export default function KanbanBoard({ projectId, tasks }: KanbanBoardProps) {
+export default function KanbanBoard({ projectId: _projectId, tasks }: KanbanBoardProps) {
   const { mutate: updateStatus } = useUpdateTaskStatus(0); // Will update with actual task ID
   const [draggedTask, setDraggedTask] = useState<Task | null>(null);
 
@@ -49,7 +49,7 @@ export default function KanbanBoard({ projectId, tasks }: KanbanBoardProps) {
     e.preventDefault();
   };
 
-  const handleDrop = (status: TaskStatus) => {
+  const handleDrop = (status: typeof TaskStatus[keyof typeof TaskStatus]) => {
     if (draggedTask && draggedTask.status !== status) {
       updateStatus(status, {
         onSuccess: () => {

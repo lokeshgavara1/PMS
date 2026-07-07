@@ -1,4 +1,5 @@
 import type { Task, PaginatedResponse, CreateTaskRequest } from '../types/index';
+import { TaskStatus } from '../types/task';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { apiClient } from './client';
 
@@ -130,7 +131,7 @@ export const useUpdateTaskStatus = (taskId: number) => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async (newStatus: TaskStatus) => {
+    async (newStatus: typeof TaskStatus[keyof typeof TaskStatus]) => {
       const response = await apiClient.patch<{ success: boolean; data: Task }>(
         `/tasks/${taskId}/status`,
         { status: newStatus },

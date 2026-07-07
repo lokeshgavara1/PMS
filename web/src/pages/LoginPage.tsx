@@ -4,6 +4,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { useLogin, useGoogleLogin, useCurrentUser } from '../api';
 import { useAppStore } from '../stores/app';
 import { LightningIcon, BarChartIcon, ChartIcon, ShieldIcon } from '../components/SidebarIcons';
+import centurionLogo from '../assets/cutm-logo.png';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -92,6 +93,8 @@ export default function LoginPage() {
     { email: 'pm@cutm.ac.in', role: 'Project Manager' },
     { email: 'student1@cutm.ac.in', role: 'Student' },
   ];
+
+  const errorMessage: string = String(localError || (error as any)?.response?.data?.error?.message || (googleError as any)?.response?.data?.error?.message || 'An error occurred');
 
   return (
     <div className="min-h-screen flex bg-gradient-to-br from-white via-sky-blue-50 to-beige-50">
@@ -182,13 +185,13 @@ export default function LoginPage() {
           <p className="text-gray-600 mb-8">Sign in to your project dashboard</p>
 
           {/* Error Message */}
-          {(localError || error || googleError) && (
+          {(localError || error || googleError) ? (
             <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
               <p className="text-red-700 text-sm">
-                {localError || (error as any)?.response?.data?.error?.message || (googleError as any)?.response?.data?.error?.message || 'An error occurred'}
+                {errorMessage}
               </p>
             </div>
-          )}
+          ) : null}
 
           {/* Google Sign In Button */}
           <div className="w-full mb-6">
