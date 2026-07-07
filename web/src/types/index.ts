@@ -5,40 +5,40 @@
 
 // Enums
 export const SystemRole = {  ADMIN: 'admin' as const,  HOD: 'hod' as const,  FACULTY: 'faculty' as const,  PM: 'pm' as const,  STUDENT: 'student' as const,  GUEST: 'guest' as const,
-} as const
+}
 
 export const ProjectRole = {  OWNER: 'owner' as const,  LEAD: 'lead' as const,  MEMBER: 'member' as const,  VIEWER: 'viewer' as const,
-} as const
+}
 
 export const ProjectCategory = {  ACADEMIC: 'academic' as const,  RESEARCH: 'research' as const,  ADMIN: 'admin' as const,  INFRASTRUCTURE: 'infrastructure' as const,
-} as const
+}
 
 export const ProjectVisibility = {  PRIVATE: 'private' as const,  DEPARTMENT: 'department' as const,  PUBLIC: 'public' as const,
-} as const
+}
 
 export const ProjectStatus = {  PLANNING: 'planning' as const,  ACTIVE: 'active' as const,  ON_HOLD: 'on_hold' as const,  COMPLETED: 'completed' as const,  ARCHIVED: 'archived' as const,
-} as const
+}
 
 export const TaskType = {  TASK: 'task' as const,  BUG: 'bug' as const,  FEATURE: 'feature' as const,  IMPROVEMENT: 'improvement' as const,  RESEARCH: 'research' as const,  SUBMISSION: 'submission' as const,
-} as const
+}
 
 export const TaskPriority = {  CRITICAL: 'critical' as const,  HIGH: 'high' as const,  MEDIUM: 'medium' as const,  LOW: 'low' as const,
-} as const
+}
 
 export const TaskStatus = {  BACKLOG: 'backlog' as const,  TODO: 'todo' as const,  IN_PROGRESS: 'in_progress' as const,  REVIEW: 'review' as const,  DONE: 'done' as const,
-} as const
+}
 
 export const SubmissionStatus = {  SUBMITTED: 'submitted' as const,  APPROVED: 'approved' as const,  REVISION_REQUIRED: 'revision_required' as const,  REJECTED: 'rejected' as const,
-} as const
+}
 
 export const DependencyType = {  BLOCKS: 'blocks' as const,  BLOCKED_BY: 'blocked_by' as const,  RELATES_TO: 'relates_to' as const,  DUPLICATES: 'duplicates' as const,
-} as const
+}
 
 export const SyncStatus = {  PENDING: 'pending' as const,  SYNCED: 'synced' as const,  FAILED: 'failed' as const,
-} as const
+}
 
 export const NotificationType = {  TASK_ASSIGNED: 'task_assigned' as const,  TASK_MENTIONED: 'task_mentioned' as const,  MILESTONE_REMINDER: 'milestone_reminder' as const,  STATUS_CHANGED: 'status_changed' as const,  REVIEW_REQUESTED: 'review_requested' as const,  COMMENT: 'comment' as const,
-} as const
+}
 
 // ============================================================================
 // CORE ENTITIES
@@ -51,7 +51,7 @@ export interface Department {
   head_id?: number;
   created_at: string;
   updated_at: string;
-} as const
+}
 
 export interface Batch {
   id: number;
@@ -62,7 +62,7 @@ export interface Batch {
   department_id: number;
   created_at: string;
   updated_at: string;
-} as const
+}
 
 export interface User {
   id: number;
@@ -76,15 +76,15 @@ export interface User {
   last_login_at?: string;
   created_at: string;
   updated_at: string;
-} as const
+}
 
 export interface Project {
   id: number;
   name: string;
   description: string;
-  category: ProjectCategory;
-  visibility: ProjectVisibility;
-  status: ProjectStatus;
+  category: typeof ProjectCategory[keyof typeof ProjectCategory];
+  visibility: typeof ProjectVisibility[keyof typeof ProjectVisibility];
+  status: typeof ProjectStatus[keyof typeof ProjectStatus];
   department_id?: number;
   owner_id: number;
   start_date: string;
@@ -92,7 +92,7 @@ export interface Project {
   is_archived: boolean;
   created_at: string;
   updated_at: string;
-} as const
+}
 
 export interface ProjectMember {
   id: number;
@@ -101,7 +101,7 @@ export interface ProjectMember {
   role: ProjectRole;
   joined_at: string;
   updated_at: string;
-} as const
+}
 
 export interface Milestone {
   id: number;
@@ -109,11 +109,11 @@ export interface Milestone {
   name: string;
   description?: string;
   due_date: string;
-  status: TaskStatus;
+  status: typeof TaskStatus[keyof typeof TaskStatus];
   reviewer_id?: number;
   created_at: string;
   updated_at: string;
-} as const
+}
 
 export interface Sprint {
   id: number;
@@ -127,7 +127,7 @@ export interface Sprint {
   velocity?: number;
   created_at: string;
   updated_at: string;
-} as const
+}
 
 export interface Task {
   id: number;
@@ -136,9 +136,9 @@ export interface Task {
   parent_id?: number;
   title: string;
   description?: string;
-  type: TaskType;
+  type: typeof TaskType[keyof typeof TaskType];
   priority: TaskPriority;
-  status: TaskStatus;
+  status: typeof TaskStatus[keyof typeof TaskStatus];
   assignee_id?: number;
   reporter_id: number;
   milestone_id?: number;
@@ -146,18 +146,18 @@ export interface Task {
   estimate_hours?: number;
   position: number;
   is_archived: boolean;
-  submission_status?: SubmissionStatus;
+  submission_status?: typeof SubmissionStatus[keyof typeof SubmissionStatus];
   created_at: string;
   updated_at: string;
-} as const
+}
 
 export interface TaskDependency {
   id: number;
   task_id: number;
   depends_on_task_id: number;
-  dependency_type: DependencyType;
+  dependency_type: typeof DependencyType[keyof typeof DependencyType];
   created_at: string;
-} as const
+}
 
 export interface Comment {
   id: number;
@@ -167,7 +167,7 @@ export interface Comment {
   parent_comment_id?: number;
   created_at: string;
   updated_at: string;
-} as const
+}
 
 export interface Attachment {
   id: number;
@@ -179,7 +179,7 @@ export interface Attachment {
   mime_type: string;
   storage_path: string;
   created_at: string;
-} as const
+}
 
 export interface TimeLog {
   id: number;
@@ -194,7 +194,7 @@ export interface TimeLog {
   synced_at?: string;
   created_at: string;
   updated_at: string;
-} as const
+}
 
 export interface WorkflowConfig {
   id: number;
@@ -204,12 +204,12 @@ export interface WorkflowConfig {
   color?: string;
   created_at: string;
   updated_at: string;
-} as const
+}
 
 export interface Notification {
   id: number;
   user_id: number;
-  type: NotificationType;
+  type: typeof NotificationType[keyof typeof NotificationType];
   related_task_id?: number;
   related_project_id?: number;
   related_user_id?: number;
@@ -217,7 +217,7 @@ export interface Notification {
   is_read: boolean;
   read_at?: string;
   created_at: string;
-} as const
+}
 
 export interface ActivityLogEntry {
   id: number;
@@ -228,7 +228,7 @@ export interface ActivityLogEntry {
   old_value?: string;
   new_value?: string;
   created_at: string;
-} as const
+}
 
 export interface AuditLogEntry {
   id: number;
@@ -239,7 +239,7 @@ export interface AuditLogEntry {
   details?: string;
   ip_address?: string;
   created_at: string;
-} as const
+}
 
 // ============================================================================
 // API REQUEST/RESPONSE DTOs
@@ -249,12 +249,12 @@ export interface AuthTokens {
   accessToken: string;
   refreshToken: string;
   expiresIn: number;
-} as const
+}
 
 export interface LoginRequest {
   email: string;
   password: string;
-} as const
+}
 
 export interface LoginResponse {
   success: true;
@@ -262,44 +262,44 @@ export interface LoginResponse {
     user: User;
     tokens: AuthTokens;
   };
-} as const
+}
 
 export interface CreateProjectRequest {
   name: string;
   description: string;
-  category: ProjectCategory;
-  visibility: ProjectVisibility;
+  category: typeof ProjectCategory[keyof typeof ProjectCategory];
+  visibility: typeof ProjectVisibility[keyof typeof ProjectVisibility];
   department_id?: number;
   start_date: string;
   end_date: string;
-} as const
+}
 
 export interface CreateTaskRequest {
   title: string;
   description?: string;
-  type: TaskType;
+  type: typeof TaskType[keyof typeof TaskType];
   priority: TaskPriority;
   sprint_id?: number;
   assignee_id?: number;
   due_date?: string;
   estimate_hours?: number;
   parent_id?: number;
-} as const
+}
 
 export interface UpdateTaskStatusRequest {
-  status: TaskStatus;
-} as const
+  status: typeof TaskStatus[keyof typeof TaskStatus];
+}
 
 export interface CreateCommentRequest {
   content: string;
   parent_comment_id?: number;
-} as const
+}
 
 export interface LogTimeRequest {
   hours_logged: number;
   log_date: string;
   description?: string;
-} as const
+}
 
 // ============================================================================
 // API ERROR RESPONSE
@@ -310,17 +310,17 @@ export interface ApiError {
   message: string;
   field?: string;
   statusCode: number;
-} as const
+}
 
 export interface ApiErrorResponse {
   success: false;
   error: ApiError;
-} as const
+}
 
 export interface ApiSuccessResponse<T = any> {
   success: true;
   data: T;
-} as const
+}
 
 // ============================================================================
 // PAGINATED RESPONSE
@@ -334,4 +334,4 @@ export interface PaginatedResponse<T> {
     limit: number;
     pages: number;
   };
-} as const
+}
