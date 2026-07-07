@@ -68,7 +68,7 @@ export interface User {
   id: number;
   email: string;
   name: string;
-  system_role: SystemRole;
+  system_role?: typeof SystemRole[keyof typeof SystemRole];
   department_id?: number;
   batch_id?: number;
   ldap_uid: string;
@@ -137,7 +137,7 @@ export interface Task {
   title: string;
   description?: string;
   type: typeof TaskType[keyof typeof TaskType];
-  priority: TaskPriority;
+  priority: typeof TaskPriority[keyof typeof TaskPriority];
   status: typeof TaskStatus[keyof typeof TaskStatus];
   assignee_id?: number;
   reporter_id: number;
@@ -189,7 +189,7 @@ export interface TimeLog {
   log_date: string;
   description?: string;
   synced_to_timesheet: boolean;
-  sync_status: SyncStatus;
+  sync_status: typeof SyncStatus[keyof typeof SyncStatus];
   external_id?: string;
   synced_at?: string;
   created_at: string;
@@ -278,7 +278,7 @@ export interface CreateTaskRequest {
   title: string;
   description?: string;
   type: typeof TaskType[keyof typeof TaskType];
-  priority: TaskPriority;
+  priority: typeof TaskPriority[keyof typeof TaskPriority];
   sprint_id?: number;
   assignee_id?: number;
   due_date?: string;

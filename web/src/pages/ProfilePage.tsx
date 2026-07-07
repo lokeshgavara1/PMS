@@ -8,7 +8,7 @@ export default function ProfilePage() {
   const [formData, setFormData] = useState({
     name: user?.name || '',
     email: user?.email || '',
-    role: user?.role || '',
+    role: user?.system_role || '',
     department: 'Computer Science',
     phone: '+91 98765 43210',
     bio: 'Passionate about project management and team collaboration',
@@ -60,8 +60,8 @@ export default function ProfilePage() {
             <h2 className="text-2xl font-bold mb-2 text-gray-900">{user?.name || 'User Name'}</h2>
             <p className="text-teal-500">{user?.email || 'user@cutm.ac.in'}</p>
             <div className="flex gap-2 mt-3">
-              <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getRoleColor(user?.role || '')}`}>
-                {user?.role?.toUpperCase() || 'ROLE'}
+              <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getRoleColor(user?.system_role || '')}`}>
+                {user?.system_role?.toUpperCase() || 'ROLE'}
               </span>
               <span className="px-3 py-1 bg-sky-blue-100 text-teal-600 rounded-full text-sm font-medium">
                 Active
@@ -131,8 +131,8 @@ export default function ProfilePage() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Role</label>
-              <div className={`px-4 py-2 rounded-lg font-semibold text-sm ${getRoleColor(user?.role || '')}`}>
-                {user?.role?.toUpperCase() || 'ROLE'}
+              <div className={`px-4 py-2 rounded-lg font-semibold text-sm ${getRoleColor(user?.system_role || '')}`}>
+                {user?.system_role?.toUpperCase() || 'ROLE'}
               </div>
             </div>
 

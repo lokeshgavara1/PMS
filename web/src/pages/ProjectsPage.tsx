@@ -14,8 +14,8 @@ export default function ProjectsPage() {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    category: ProjectCategory.ACADEMIC as ProjectCategory,
-    visibility: ProjectVisibility.PUBLIC as ProjectVisibility,
+    category: 'academic',
+    visibility: 'public',
     start_date: new Date().toISOString().split('T')[0],
     end_date: '',
   });
@@ -37,8 +37,8 @@ export default function ProjectsPage() {
         setFormData({
           name: '',
           description: '',
-          category: ProjectCategory.ACADEMIC,
-          visibility: ProjectVisibility.PUBLIC,
+          category: 'academic' as any,
+          visibility: 'public' as any,
           start_date: new Date().toISOString().split('T')[0],
           end_date: '',
         });
@@ -160,7 +160,7 @@ export default function ProjectsPage() {
                 <label className="block text-sm font-medium text-gray-900 mb-1">Category *</label>
                 <select
                   value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value as ProjectCategory })}
+                  onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
                   <option value={ProjectCategory.ACADEMIC}>Academic</option>
@@ -175,7 +175,7 @@ export default function ProjectsPage() {
                 <label className="block text-sm font-medium text-gray-900 mb-1">Visibility *</label>
                 <select
                   value={formData.visibility}
-                  onChange={(e) => setFormData({ ...formData, visibility: e.target.value as ProjectVisibility })}
+                  onChange={(e) => setFormData({ ...formData, visibility: e.target.value as any })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
                   <option value={ProjectVisibility.PRIVATE}>Private</option>

@@ -102,40 +102,6 @@ export default function WorkflowCompletePage() {
     }
   };
 
-  const _handleAddMember = async (userId: number) => {
-    try {
-      const response = await fetch(`${baseUrl}/projects/${projectId}/members`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: userId })
-      });
-      if (response.ok) {
-        loadProjectMembers();
-        alert('Member added to project');
-      }
-    } catch (err) {
-      console.error('Failed to add member:', err);
-    }
-  };
-
-  const _handleFileUpload = async (taskId: number, filename: string) => {
-    try {
-      const response = await fetch(`${baseUrl}/tasks/${taskId}/files`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          filename,
-          file_url: `uploads/${filename}`,
-          file_size: 0
-        })
-      });
-      if (response.ok) {
-        alert('File uploaded successfully');
-      }
-    } catch (err) {
-      console.error('Failed to upload file:', err);
-    }
-  };
 
   return (
     <div className="space-y-6">

@@ -10,14 +10,6 @@ export default function ReportsPage() {
   const projects = projectsData?.data || [];
   const tasks = tasksData?.data || [];
 
-  // Task distribution data
-  const taskDistribution = [
-    { status: 'Backlog', count: tasks.filter((t: any) => t.status === 'backlog').length || 3 },
-    { status: 'Todo', count: tasks.filter((t: any) => t.status === 'todo').length || 4 },
-    { status: 'In Progress', count: tasks.filter((t: any) => t.status === 'in_progress').length || 2 },
-    { status: 'Review', count: tasks.filter((t: any) => t.status === 'review').length || 1 },
-    { status: 'Done', count: tasks.filter((t: any) => t.status === 'done').length || 5 },
-  ];
 
   const handleExportCSV = () => {
     const csv = [

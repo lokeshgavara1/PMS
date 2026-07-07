@@ -27,7 +27,7 @@ export interface Task {
   estimate_hours?: number;
   position: number;
   is_archived: boolean;
-  submission_status?: SubmissionStatus;
+  submission_status?: typeof SubmissionStatus[keyof typeof SubmissionStatus];
   created_at: string;
   updated_at: string;
 }

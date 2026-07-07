@@ -1,7 +1,6 @@
+import type { Task, PaginatedResponse, CreateTaskRequest } from '../types/index';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { apiClient } from './client';
-import type { Task, CreateTaskRequest, UpdateTaskStatusRequest, PaginatedResponse } from '../types/index';
-import { TaskStatus } from '../types/index';
 
 /**
  * GET /api/v2/tasks
