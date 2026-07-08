@@ -52,6 +52,7 @@ cutm-pms/
 - **MySQL 8.0** for persistent data storage
 - **JWT** for token-based authentication
 - **google-auth-library** for OAuth token verification
+- **bcryptjs** for password hashing
 
 ## 🚀 Quick Start
 
@@ -324,6 +325,7 @@ Error: Access denied for user 'root'@'127.0.0.1'
 - Verify MySQL is running
 - Check DB_HOST, DB_USER, DB_PASSWORD in .env
 - Ensure database exists: `mysql -u root -p < init-db.sql`
+- Check port (default 3308 for local MySQL Workbench)
 
 ### Frontend Build Errors
 ```
