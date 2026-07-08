@@ -50,6 +50,7 @@ const Project = sequelize.define('Project', {
 }, {
   tableName: 'projects',
   timestamps: true,
+  underscored: true,
 });
 
 module.exports = Project;

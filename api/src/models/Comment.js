@@ -26,6 +26,7 @@ const Comment = sequelize.define('Comment', {
 }, {
   tableName: 'comments',
   timestamps: true,
+  underscored: true,
 });
 
 module.exports = Comment;

@@ -38,6 +38,7 @@ const Sprint = sequelize.define('Sprint', {
 }, {
   tableName: 'sprints',
   timestamps: true,
+  underscored: true,
 });
 
 module.exports = Sprint;

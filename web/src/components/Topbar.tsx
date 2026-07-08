@@ -16,7 +16,9 @@ export default function Topbar() {
   const handleLogout = () => {
     logout(undefined, {
       onSuccess: () => {
-        navigate('/login');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        navigate('/login', { replace: true });
       },
     });
   };
@@ -24,8 +26,8 @@ export default function Topbar() {
   const unread = unreadCount?.unreadCount || 0;
 
   return (
-    <header className="bg-white border-b border-gray-200 px-8 py-6 flex items-center gap-8 shadow-sm">
-      <h1 className="text-lg font-semibold text-gray-900 tracking-tight flex-1 text-center">Centurion University of Technology and Management</h1>
+    <header className="bg-white border-b border-gray-200 px-6 py-3 flex items-center gap-6 shadow-sm">
+      <h1 className="text-sm font-semibold text-gray-700 tracking-tight flex-1 text-center">Centurion University of Technology and Management</h1>
 
       <div className="flex items-center gap-6">
         {/* Notifications */}

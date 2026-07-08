@@ -29,14 +29,14 @@ sequelize.authenticate()
     process.exit(1);
   });
 
-// Sync models
-sequelize.sync({ alter: true })
-  .then(() => {
-    console.log('✅ Models synced with database');
-  })
-  .catch(err => {
-    console.error('❌ Failed to sync models:', err);
-  });
+// Sync models (disabled - using manual SQL schema)
+// sequelize.sync({ alter: false })
+//   .then(() => {
+//     console.log('✅ Models synced with database');
+//   })
+//   .catch(err => {
+//     console.error('❌ Failed to sync models:', err);
+//   });
 
 // Routes
 app.use('/api/v2/auth', require('./routes/auth.routes'));

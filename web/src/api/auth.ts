@@ -43,9 +43,14 @@ export const useGoogleLogin = () => {
  */
 export const useLogout = () => {
   return useMutation(async () => {
-    await apiClient.post('/auth/logout');
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+    try {
+      await apiClient.post('/auth/logout');
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+    }
   });
 };
 

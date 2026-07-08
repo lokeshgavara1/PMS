@@ -38,6 +38,7 @@ const TimeLog = sequelize.define('TimeLog', {
 }, {
   tableName: 'time_logs',
   timestamps: true,
+  underscored: true,
 });
 
 module.exports = TimeLog;
