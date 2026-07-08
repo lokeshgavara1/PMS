@@ -73,9 +73,33 @@ export default function LoginPage() {
               <br />
               <span className="text-teal-500">Smarter & Faster</span>
             </h2>
-            <p className="text-gray-600 text-base leading-relaxed">
+            <p className="text-gray-600 text-base leading-relaxed mb-8">
               Intelligent task tracking, automated workflows, real-time analytics, and seamless collaboration — all in one platform.
             </p>
+
+            {/* Features Grid */}
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex flex-col gap-3">
+                <div className="text-4xl">📊</div>
+                <p className="font-semibold text-gray-900">Smart Tracking</p>
+                <p className="text-gray-600 text-sm">Intelligent task tracking and management</p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="text-4xl">⚡</div>
+                <p className="font-semibold text-gray-900">Fast Workflows</p>
+                <p className="text-gray-600 text-sm">Automated processes and automation</p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="text-4xl">📈</div>
+                <p className="font-semibold text-gray-900">Real Analytics</p>
+                <p className="text-gray-600 text-sm">Real-time insights and reporting</p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="text-4xl">👥</div>
+                <p className="font-semibold text-gray-900">Collaboration</p>
+                <p className="text-gray-600 text-sm">Seamless team collaboration</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -148,30 +172,6 @@ export default function LoginPage() {
             <p className="text-xs text-sky-blue-500">
               ✓ @cutm.ac.in • @cutmap.ac.in • @thegttech.com • @esse.co.in • @ftl.org.in
             </p>
-          </div>
-
-          {/* Features Grid */}
-          <div className="mt-8 grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <div className="text-teal-500 text-2xl">📊</div>
-              <p className="font-semibold text-gray-900 text-sm">Smart Tracking</p>
-              <p className="text-gray-600 text-xs">Intelligent task tracking and management</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="text-teal-500 text-2xl">⚡</div>
-              <p className="font-semibold text-gray-900 text-sm">Fast Workflows</p>
-              <p className="text-gray-600 text-xs">Automated processes and automation</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="text-teal-500 text-2xl">📈</div>
-              <p className="font-semibold text-gray-900 text-sm">Real Analytics</p>
-              <p className="text-gray-600 text-xs">Real-time insights and reporting</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="text-teal-500 text-2xl">👥</div>
-              <p className="font-semibold text-gray-900 text-sm">Collaboration</p>
-              <p className="text-gray-600 text-xs">Seamless team collaboration</p>
-            </div>
           </div>
         </div>
       </div>
