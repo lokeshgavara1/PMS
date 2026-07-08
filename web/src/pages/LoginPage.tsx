@@ -138,14 +138,19 @@ export default function LoginPage() {
 
           {/* Google Sign In Button */}
           <div className="w-full mb-6">
+            <style>{`
+              .google-button-container div {
+                gap: 8px !important;
+              }
+            `}</style>
             {import.meta.env.VITE_GOOGLE_CLIENT_ID ? (
-              <div className={isGoogleLoading ? 'opacity-50 pointer-events-none' : ''}>
+              <div className={`google-button-container ${isGoogleLoading ? 'opacity-50 pointer-events-none' : ''}`}>
                 <GoogleLogin
                   onSuccess={handleGoogleSignInSuccess}
                   onError={handleGoogleSignInError}
                   text="signin_with"
                   width="100%"
-                  
+
                 />
               </div>
             ) : (
