@@ -118,10 +118,14 @@ export default function LoginPage() {
       </div>
 
       {/* Right Section - Login Form */}
-      <div className="w-1/2 bg-white p-8 flex flex-col justify-center items-center">
+      <div className="w-1/2 bg-white p-12 flex flex-col justify-center items-center">
         <div className="w-full max-w-md">
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">Welcome back</h3>
-          <p className="text-gray-600 mb-6 text-sm">Sign in with Google to your project dashboard</p>
+          <div className="mb-8">
+            <h3 className="text-3xl font-bold text-gray-900 mb-3">Welcome back</h3>
+            <p className="text-gray-600 text-base leading-relaxed">Sign in with Google to access your project dashboard</p>
+          </div>
+
+          <div className="w-12 h-1 bg-gradient-to-r from-teal-500 to-transparent mb-8"></div>
 
           {/* Error Message */}
           {(localError || googleError) ? (
@@ -176,10 +180,20 @@ export default function LoginPage() {
 
 
           {/* Supported Domains */}
-          <div className="mt-4 p-3 bg-sky-blue-50 border border-sky-blue-100 rounded-lg">
-            <p className="text-xs text-sky-blue-500">
-              ✓ @cutm.ac.in • @cutmap.ac.in • @thegttech.com • @esse.co.in • @ftl.org.in
-            </p>
+          <div className="mt-8 p-4 bg-gradient-to-br from-teal-50 to-emerald-50 border border-teal-200 rounded-xl">
+            <div className="flex items-start gap-3">
+              <div className="text-teal-600 mt-0.5">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <p className="text-xs font-semibold text-teal-900 mb-2">Supported email domains</p>
+                <p className="text-xs text-teal-700 leading-relaxed">
+                  @cutm.ac.in • @cutmap.ac.in • @thegttech.com • @esse.co.in • @ftl.org.in
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
