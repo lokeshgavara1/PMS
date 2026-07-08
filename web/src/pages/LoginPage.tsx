@@ -149,6 +149,30 @@ export default function LoginPage() {
               ✓ @cutm.ac.in • @cutmap.ac.in • @thegttech.com • @esse.co.in • @ftl.org.in
             </p>
           </div>
+
+          {/* Features Grid */}
+          <div className="mt-8 grid grid-cols-2 gap-4">
+            <div className="flex flex-col gap-2">
+              <div className="text-teal-500 text-2xl">📊</div>
+              <p className="font-semibold text-gray-900 text-sm">Smart Tracking</p>
+              <p className="text-gray-600 text-xs">Intelligent task tracking and management</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="text-teal-500 text-2xl">⚡</div>
+              <p className="font-semibold text-gray-900 text-sm">Fast Workflows</p>
+              <p className="text-gray-600 text-xs">Automated processes and automation</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="text-teal-500 text-2xl">📈</div>
+              <p className="font-semibold text-gray-900 text-sm">Real Analytics</p>
+              <p className="text-gray-600 text-xs">Real-time insights and reporting</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="text-teal-500 text-2xl">👥</div>
+              <p className="font-semibold text-gray-900 text-sm">Collaboration</p>
+              <p className="text-gray-600 text-xs">Seamless team collaboration</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
