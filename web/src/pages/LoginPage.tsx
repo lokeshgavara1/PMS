@@ -147,7 +147,11 @@ export default function LoginPage() {
               }
               .google-signin-wrapper button {
                 width: 100% !important;
-                gap: 4px !important;
+                gap: 0px !important;
+                padding: 10px 16px !important;
+              }
+              .google-signin-wrapper svg {
+                margin-right: 4px !important;
               }
             `}</style>
             {import.meta.env.VITE_GOOGLE_CLIENT_ID ? (
