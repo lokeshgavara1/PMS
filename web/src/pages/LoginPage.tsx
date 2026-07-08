@@ -80,22 +80,30 @@ export default function LoginPage() {
             {/* Features Grid */}
             <div className="grid grid-cols-2 gap-6">
               <div className="flex flex-col gap-3">
-                <div className="text-4xl">📊</div>
+                <svg className="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
                 <p className="font-semibold text-gray-900">Smart Tracking</p>
                 <p className="text-gray-600 text-sm">Intelligent task tracking and management</p>
               </div>
               <div className="flex flex-col gap-3">
-                <div className="text-4xl">⚡</div>
+                <svg className="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
                 <p className="font-semibold text-gray-900">Fast Workflows</p>
                 <p className="text-gray-600 text-sm">Automated processes and automation</p>
               </div>
               <div className="flex flex-col gap-3">
-                <div className="text-4xl">📈</div>
+                <svg className="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
                 <p className="font-semibold text-gray-900">Real Analytics</p>
                 <p className="text-gray-600 text-sm">Real-time insights and reporting</p>
               </div>
               <div className="flex flex-col gap-3">
-                <div className="text-4xl">👥</div>
+                <svg className="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.856-1.487M15 10a3 3 0 11-6 0 3 3 0 016 0zM15 20H9m6 0h6m-3-3a6 6 0 00-12 0v2a2 2 0 002 2h8a2 2 0 002-2v-2z" />
+                </svg>
                 <p className="font-semibold text-gray-900">Collaboration</p>
                 <p className="text-gray-600 text-sm">Seamless team collaboration</p>
               </div>
