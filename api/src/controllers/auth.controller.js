@@ -225,19 +225,38 @@ exports.googleLogin = async (req, res) => {
     const { OAuth2Client } = require('google-auth-library');
     const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: process.env.GOOGLE_CLIENT_ID,
-    });
+    let ticket;
+    try {
+      ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.GOOGLE_CLIENT_ID,
+      });
+    } catch (verifyError) {
+      console.error('Token verification failed:', {
+        error: verifyError.message,
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        tokenLength: token.length,
+      });
+      return res.status(401).json({
+        success: false,
+        error: {
+          code: 'INVALID_TOKEN',
+          message: 'Invalid Google token: ' + verifyError.message,
+        },
+      });
+    }
 
     const payload = ticket.getPayload();
     const email = payload.email;
     const name = payload.name;
 
+    console.log('Google login attempt:', { email, tokenExpiry: payload.exp });
+
     const allowedDomains = ['cutm.ac.in', 'cutmap.ac.in', 'thegttech.com', 'esse.co.in', 'ftl.org.in'];
     const emailDomain = email.split('@')[1];
 
     if (!allowedDomains.includes(emailDomain)) {
+      console.log('Domain rejected:', { email, domain: emailDomain });
       return res.status(403).json({
         success: false,
         error: {
@@ -257,8 +276,10 @@ exports.googleLogin = async (req, res) => {
         system_role: systemRole,
         is_active: true,
       });
+      console.log('New user created:', { email, role: systemRole });
     } else {
       await user.update({ last_login_at: new Date() });
+      console.log('Existing user logged in:', { email });
     }
 
     const accessToken = generateAccessToken(user);

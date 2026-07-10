@@ -96,7 +96,7 @@ export default function AccessibilityTab() {
               <button
                 onClick={() => handleToggle('highContrast')}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-                  settings.highContrast ? 'bg-blue-600' : 'bg-gray-300'
+                  settings.highContrast ? 'bg-teal-600' : 'bg-gray-300'
                 }`}
               >
                 <span
@@ -118,7 +118,7 @@ export default function AccessibilityTab() {
               <button
                 onClick={() => handleToggle('focusIndicator')}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-                  settings.focusIndicator ? 'bg-blue-600' : 'bg-gray-300'
+                  settings.focusIndicator ? 'bg-teal-600' : 'bg-gray-300'
                 }`}
               >
                 <span
@@ -140,7 +140,7 @@ export default function AccessibilityTab() {
               <button
                 onClick={() => handleToggle('dyslexiaFont')}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-                  settings.dyslexiaFont ? 'bg-blue-600' : 'bg-gray-300'
+                  settings.dyslexiaFont ? 'bg-teal-600' : 'bg-gray-300'
                 }`}
               >
                 <span
@@ -170,7 +170,7 @@ export default function AccessibilityTab() {
             <button
               onClick={() => handleToggle('reduceMotion')}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-                settings.reduceMotion ? 'bg-blue-600' : 'bg-gray-300'
+                settings.reduceMotion ? 'bg-teal-600' : 'bg-gray-300'
               }`}
             >
               <span
@@ -200,7 +200,7 @@ export default function AccessibilityTab() {
               <button
                 onClick={() => handleToggle('screenReader')}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-                  settings.screenReader ? 'bg-blue-600' : 'bg-gray-300'
+                  settings.screenReader ? 'bg-teal-600' : 'bg-gray-300'
                 }`}
               >
                 <span
@@ -256,7 +256,7 @@ export default function AccessibilityTab() {
               <button
                 onClick={() => handleToggle('keyboardShortcuts')}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-                  settings.keyboardShortcuts ? 'bg-blue-600' : 'bg-gray-300'
+                  settings.keyboardShortcuts ? 'bg-teal-600' : 'bg-gray-300'
                 }`}
               >
                 <span
@@ -354,7 +354,7 @@ export default function AccessibilityTab() {
 
       {/* Save Button */}
       <div className="flex gap-3">
-        <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
+        <button className="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium">
           Save Accessibility Settings
         </button>
         <button className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-medium">

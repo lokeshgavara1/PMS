@@ -31,7 +31,7 @@ interface KanbanBoardProps {
 
 const COLUMNS: { status: typeof TaskStatus[keyof typeof TaskStatus]; label: string; color: string }[] = [
   { status: TaskStatus.BACKLOG, label: 'Backlog', color: 'bg-gray-50' },
-  { status: TaskStatus.TODO, label: 'To Do', color: 'bg-blue-50' },
+  { status: TaskStatus.TODO, label: 'To Do', color: 'bg-teal-50' },
   { status: TaskStatus.IN_PROGRESS, label: 'In Progress', color: 'bg-yellow-50' },
   { status: TaskStatus.REVIEW, label: 'Review', color: 'bg-purple-50' },
   { status: TaskStatus.DONE, label: 'Done', color: 'bg-green-50' },
@@ -84,7 +84,7 @@ export default function KanbanBoard({ projectId: _projectId, tasks }: KanbanBoar
                   key={task.id}
                   draggable
                   onDragStart={() => handleDragStart(task)}
-                  className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md cursor-move transition border-l-4 border-blue-500"
+                  className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md cursor-move transition border-l-4 border-teal-500"
                 >
                   <h4 className="font-medium text-gray-900 text-sm">{task.title}</h4>
                   <p className="text-xs text-gray-600 mt-2 line-clamp-2">

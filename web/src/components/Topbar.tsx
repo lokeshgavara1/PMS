@@ -101,7 +101,7 @@ export default function Topbar() {
                 <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold capitalize shadow-sm ${
                   user.system_role === 'admin' ? 'bg-red-100 text-red-700' :
                   user.system_role === 'hod' ? 'bg-purple-100 text-purple-700' :
-                  user.system_role === 'faculty' ? 'bg-blue-100 text-blue-700' :
+                  user.system_role === 'faculty' ? 'bg-teal-100 text-teal-700' :
                   user.system_role === 'student' ? 'bg-green-100 text-green-700' :
                   user.system_role === 'pm' ? 'bg-orange-100 text-orange-700' :
                   'bg-gray-100 text-gray-700'
@@ -131,7 +131,7 @@ export default function Topbar() {
                     <div className="flex-1">
                       <p className="font-bold text-gray-900 text-base">{user.name.toUpperCase()}</p>
                       <p className="text-xs text-gray-600 mt-1">{user.email}</p>
-                      <p className="text-sm text-blue-600 font-medium mt-2 capitalize">{user.system_role}</p>
+                      <p className="text-sm text-teal-600 font-medium mt-2 capitalize">{user.system_role}</p>
                     </div>
                   </div>
                 </div>

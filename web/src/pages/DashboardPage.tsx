@@ -29,12 +29,12 @@ export default function DashboardPage() {
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-gradient-to-br from-sky-blue-light to-sky-blue-50 rounded-2xl shadow p-8 text-gray-900 overflow-hidden relative group hover:shadow-lg transition duration-300 border border-sky-blue-100">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-sky-blue-100 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300 opacity-50"></div>
+        <div className="bg-gradient-to-br from-sky-blue-light to-sky-blue-50 rounded-2xl shadow p-8 text-gray-900 overflow-hidden relative group hover:shadow-lg transition duration-300 border border-sky-teal-100">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-sky-teal-100 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition duration-300 opacity-50"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-4">
-              <p className="text-sky-blue-500 text-sm font-semibold">Total Projects</p>
-              <BarChartIcon size={32} className="text-sky-blue-500" />
+              <p className="text-sky-teal-500 text-sm font-semibold">Total Projects</p>
+              <BarChartIcon size={32} className="text-sky-teal-500" />
             </div>
             <p className="text-5xl font-bold text-navy-500">{projectsData?.pagination.total || 0}</p>
             <p className="text-teal-500 text-sm mt-3">Active projects in system</p>
@@ -97,7 +97,7 @@ export default function DashboardPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="inline-block px-2 py-1 text-xs font-medium bg-sky-blue-100 text-sky-blue-500 rounded">
+                      <span className="inline-block px-2 py-1 text-xs font-medium bg-sky-teal-100 text-sky-teal-500 rounded">
                         {project.category}
                       </span>
                     </td>

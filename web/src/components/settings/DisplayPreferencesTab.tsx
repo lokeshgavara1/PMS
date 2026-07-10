@@ -49,7 +49,7 @@ export default function DisplayPreferencesTab() {
               onClick={() => handleChange('theme', option.value)}
               className={`p-4 rounded-lg border-2 transition text-center ${
                 settings.theme === option.value
-                  ? 'border-blue-600 bg-teal-50'
+                  ? 'border-teal-600 bg-teal-50'
                   : 'border-gray-200 hover:border-gray-300'
               }`}
             >
@@ -191,7 +191,7 @@ export default function DisplayPreferencesTab() {
               <button
                 onClick={() => handleToggle('compactView')}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-                  settings.compactView ? 'bg-blue-600' : 'bg-gray-300'
+                  settings.compactView ? 'bg-teal-600' : 'bg-gray-300'
                 }`}
               >
                 <span
@@ -221,7 +221,7 @@ export default function DisplayPreferencesTab() {
             <button
               onClick={() => handleToggle('sidebarCollapsed')}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-                settings.sidebarCollapsed ? 'bg-blue-600' : 'bg-gray-300'
+                settings.sidebarCollapsed ? 'bg-teal-600' : 'bg-gray-300'
               }`}
             >
               <span
@@ -263,7 +263,7 @@ export default function DisplayPreferencesTab() {
 
       {/* Save Button */}
       <div className="flex gap-3">
-        <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
+        <button className="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium">
           Save Display Preferences
         </button>
         <button className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-medium">

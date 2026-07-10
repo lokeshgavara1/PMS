@@ -117,7 +117,7 @@ export default function WorkflowCompletePage() {
             onClick={() => setActiveTab('members')}
             className={`py-3 px-1 border-b-2 font-medium text-sm ${
               activeTab === 'members'
-                ? 'border-blue-500 text-teal-500'
+                ? 'border-teal-500 text-teal-500'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -127,7 +127,7 @@ export default function WorkflowCompletePage() {
             onClick={() => setActiveTab('tasks')}
             className={`py-3 px-1 border-b-2 font-medium text-sm ${
               activeTab === 'tasks'
-                ? 'border-blue-500 text-teal-500'
+                ? 'border-teal-500 text-teal-500'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -137,7 +137,7 @@ export default function WorkflowCompletePage() {
             onClick={() => setActiveTab('timesheets')}
             className={`py-3 px-1 border-b-2 font-medium text-sm ${
               activeTab === 'timesheets'
-                ? 'border-blue-500 text-teal-500'
+                ? 'border-teal-500 text-teal-500'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -158,7 +158,7 @@ export default function WorkflowCompletePage() {
                     <div>
                       <p className="font-medium text-gray-900">{member.name}</p>
                       <p className="text-sm text-gray-600">{member.email}</p>
-                      <span className="inline-block mt-2 px-2 py-1 bg-sky-blue-100 text-teal-600 text-xs font-medium rounded">
+                      <span className="inline-block mt-2 px-2 py-1 bg-sky-teal-100 text-teal-600 text-xs font-medium rounded">
                         {member.system_role}
                       </span>
                     </div>
@@ -195,7 +195,7 @@ export default function WorkflowCompletePage() {
                     {task.status === 'review' && (
                       <button
                         onClick={() => setSelectedTaskId(task.id)}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
+                        className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 text-sm"
                       >
                         Review
                       </button>
@@ -267,7 +267,7 @@ export default function WorkflowCompletePage() {
                     </div>
                     <button
                       onClick={() => loadTimesheets()}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
+                      className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 text-sm"
                     >
                       Sync
                     </button>

@@ -85,7 +85,7 @@ export default function AcademicWorkflowPage() {
                     onClick={() => setActiveTab('submissions')}
                     className={`flex-1 px-6 py-4 text-center font-medium ${
                       activeTab === 'submissions'
-                        ? 'text-teal-500 border-b-2 border-blue-600'
+                        ? 'text-teal-500 border-b-2 border-teal-600'
                         : 'text-gray-700 hover:text-gray-900'
                     }`}
                   >
@@ -99,7 +99,7 @@ export default function AcademicWorkflowPage() {
                     onClick={() => setActiveTab('review')}
                     className={`flex-1 px-6 py-4 text-center font-medium ${
                       activeTab === 'review'
-                        ? 'text-teal-500 border-b-2 border-blue-600'
+                        ? 'text-teal-500 border-b-2 border-teal-600'
                         : 'text-gray-700 hover:text-gray-900'
                     }`}
                   >
@@ -113,7 +113,7 @@ export default function AcademicWorkflowPage() {
                     onClick={() => setActiveTab('dashboard')}
                     className={`flex-1 px-6 py-4 text-center font-medium ${
                       activeTab === 'dashboard'
-                        ? 'text-teal-500 border-b-2 border-blue-600'
+                        ? 'text-teal-500 border-b-2 border-teal-600'
                         : 'text-gray-700 hover:text-gray-900'
                     }`}
                   >
@@ -169,7 +169,7 @@ export default function AcademicWorkflowPage() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
+                  className="w-full px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 font-medium"
                 >
                   Submit Work
                 </button>
@@ -195,7 +195,7 @@ export default function AcademicWorkflowPage() {
                         <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
                           sub.status === 'approved' ? 'bg-green-100 text-green-700' :
                           sub.status === 'under_review' ? 'bg-yellow-100 text-yellow-700' :
-                          'bg-sky-blue-100 text-teal-600'
+                          'bg-sky-teal-100 text-teal-600'
                         }`}>
                           {sub.status === 'under_review' ? 'Under Review' : sub.status.charAt(0).toUpperCase() + sub.status.slice(1)}
                         </span>
@@ -323,7 +323,7 @@ export default function AcademicWorkflowPage() {
 
             {/* Workflow Statistics */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-gradient-to-br from-sky-blue-50 to-blue-100 rounded-lg shadow p-6 border border-teal-100">
+              <div className="bg-gradient-to-br from-sky-blue-50 to-teal-100 rounded-lg shadow p-6 border border-teal-100">
                 <p className="text-teal-600 text-sm font-medium">Active Projects</p>
                 <p className="text-4xl font-bold text-teal-600 mt-2">{projects.length}</p>
                 <p className="text-teal-500 text-xs mt-2">Projects in progress</p>
@@ -353,7 +353,7 @@ export default function AcademicWorkflowPage() {
                       <span className="text-sm font-medium text-gray-900">78%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="bg-blue-600 h-2 rounded-full" style={{width: '78%'}}></div>
+                      <div className="bg-teal-600 h-2 rounded-full" style={{width: '78%'}}></div>
                     </div>
                   </div>
                   <div>

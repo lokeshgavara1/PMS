@@ -12,4 +12,10 @@ router.delete('/:id', verifyToken, projectController.deleteProject);
 // Task routes
 router.use('/:projectId/tasks', require('./tasks.routes'));
 
+// Milestone routes
+router.use('/:projectId/milestones', require('./milestones.routes'));
+
+// Sprint routes
+router.use('/:projectId/sprints', require('./sprints.routes'));
+
 module.exports = router;

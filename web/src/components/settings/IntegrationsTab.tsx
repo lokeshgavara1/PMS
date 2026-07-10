@@ -147,7 +147,7 @@ export default function IntegrationsTab() {
               ) : (
                 <button
                   onClick={() => handleConnect(integration.id)}
-                  className="w-full px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm font-medium"
+                  className="w-full px-3 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 transition text-sm font-medium"
                 >
                   Connect
                 </button>
@@ -172,7 +172,7 @@ export default function IntegrationsTab() {
             </div>
             <button
               // onClick={handleToggle}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium text-sm"
+              className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium text-sm"
             >
               Enable Sync
             </button>
@@ -196,7 +196,7 @@ export default function IntegrationsTab() {
               <p className="font-medium text-gray-900">Sync with Outlook Calendar</p>
               <p className="text-sm text-gray-600">Automatically add deadlines to your Outlook Calendar</p>
             </div>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium text-sm">
+            <button className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium text-sm">
               Enable Sync
             </button>
           </div>
@@ -230,7 +230,7 @@ export default function IntegrationsTab() {
             <p className="text-xs text-gray-500 mt-1">A verification email will be sent</p>
           </div>
 
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
+          <button className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium">
             Save Email Address
           </button>
         </div>
@@ -248,7 +248,7 @@ export default function IntegrationsTab() {
             Configure webhooks to receive HTTP POST requests when important events happen in your projects.
           </p>
 
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
+          <button className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium">
             + Add Webhook
           </button>
 
@@ -266,14 +266,14 @@ export default function IntegrationsTab() {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Browse Integrations</h3>
         <p className="text-sm text-gray-600 mb-4">Discover more integrations from our marketplace</p>
 
-        <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
+        <button className="px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium">
           Browse Integration Marketplace →
         </button>
       </div>
 
       {/* Save Button */}
       <div className="flex gap-3">
-        <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
+        <button className="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium">
           Save Integration Settings
         </button>
       </div>

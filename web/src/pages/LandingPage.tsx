@@ -130,10 +130,10 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="bg-gradient-to-r from-teal-500 to-navy-500 rounded-2xl p-12 text-white text-center">
             <h2 className="text-3xl font-bold mb-4">Enterprise Security</h2>
-            <p className="text-lg text-sky-blue-100 mb-6">
+            <p className="text-lg text-sky-teal-100 mb-6">
               🔐 Your data is protected with enterprise-grade security and compliance standards
             </p>
-            <p className="text-sky-blue-100 text-sm">
+            <p className="text-sky-teal-100 text-sm">
               Restricted Access: Login is limited to official cutm.ac.in / cutmap.ac.in accounts
             </p>
           </div>

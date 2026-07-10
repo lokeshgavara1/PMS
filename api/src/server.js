@@ -43,6 +43,7 @@ app.use('/api/v2/auth', require('./routes/auth.routes'));
 app.use('/api/v2/projects', require('./routes/projects.routes'));
 app.use('/api/v2/users', require('./routes/users.routes'));
 app.use('/api/v2/tasks', require('./routes/tasks.routes'));
+app.use('/api/v2/notifications', require('./routes/notifications.routes'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {

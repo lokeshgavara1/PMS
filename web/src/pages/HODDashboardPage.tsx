@@ -65,7 +65,7 @@ export default function HODDashboardPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl shadow p-6 text-gray-900 border border-teal-100">
+        <div className="bg-gradient-to-br from-teal-100 to-blue-50 rounded-2xl shadow p-6 text-gray-900 border border-teal-100">
           <p className="text-teal-600 text-sm font-semibold">Total Projects</p>
           <p className="text-4xl font-bold text-teal-600 mt-2">{totalProjects}</p>
           <p className="text-teal-500 text-sm mt-2">Across all departments</p>
@@ -97,7 +97,7 @@ export default function HODDashboardPage() {
             onClick={() => setFilter('all')}
             className={`py-3 px-1 border-b-2 font-medium text-sm ${
               filter === 'all'
-                ? 'border-blue-500 text-teal-500'
+                ? 'border-teal-500 text-teal-500'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -107,7 +107,7 @@ export default function HODDashboardPage() {
             onClick={() => setFilter('active')}
             className={`py-3 px-1 border-b-2 font-medium text-sm ${
               filter === 'active'
-                ? 'border-blue-500 text-teal-500'
+                ? 'border-teal-500 text-teal-500'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -117,7 +117,7 @@ export default function HODDashboardPage() {
             onClick={() => setFilter('completed')}
             className={`py-3 px-1 border-b-2 font-medium text-sm ${
               filter === 'completed'
-                ? 'border-blue-500 text-teal-500'
+                ? 'border-teal-500 text-teal-500'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -144,7 +144,7 @@ export default function HODDashboardPage() {
                 </div>
                 <span className={`px-3 py-1 text-xs font-bold rounded-lg ${
                   project.status === 'active' ? 'bg-green-100 text-green-700' :
-                  project.status === 'completed' ? 'bg-sky-blue-100 text-teal-600' :
+                  project.status === 'completed' ? 'bg-sky-teal-100 text-teal-600' :
                   project.status === 'planning' ? 'bg-yellow-100 text-yellow-700' :
                   'bg-gray-100 text-gray-700'
                 }`}>
