@@ -140,15 +140,14 @@ CREATE TABLE IF NOT EXISTS tasks (
 CREATE TABLE IF NOT EXISTS comments (
   id INT AUTO_INCREMENT PRIMARY KEY,
   task_id INT NOT NULL,
-  user_id INT NOT NULL,
-  content LONGTEXT NOT NULL,
-  parent_comment_id INT,
+  author_id INT NOT NULL,
+  body LONGTEXT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE,
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-  FOREIGN KEY (parent_comment_id) REFERENCES comments(id),
-  INDEX idx_task (task_id)
+  FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE,
+  INDEX idx_task (task_id),
+  INDEX idx_author (author_id)
 );
 
 -- ============================================================================
@@ -158,9 +157,9 @@ CREATE TABLE IF NOT EXISTS time_logs (
   id INT AUTO_INCREMENT PRIMARY KEY,
   task_id INT NOT NULL,
   user_id INT NOT NULL,
-  hours_logged FLOAT NOT NULL,
-  log_date DATETIME NOT NULL,
-  description LONGTEXT,
+  hours FLOAT NOT NULL,
+  date DATETIME NOT NULL,
+  notes LONGTEXT,
   synced_to_timesheet BOOLEAN DEFAULT FALSE,
   sync_status ENUM('pending', 'synced', 'failed') DEFAULT 'pending',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -168,8 +167,35 @@ CREATE TABLE IF NOT EXISTS time_logs (
   FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   INDEX idx_task (task_id),
-  INDEX idx_user (user_id)
+  INDEX idx_user (user_id),
+  INDEX idx_date (date)
 );
+
+-- ============================================================================
+-- NOTIFICATIONS TABLE
+-- ============================================================================
+CREATE TABLE IF NOT EXISTS notifications (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  type ENUM('task_assigned', 'comment', 'milestone', 'sprint', 'general') DEFAULT 'general',
+  message TEXT NOT NULL,
+  related_entity_id INT,
+  related_entity_type VARCHAR(50),
+  read_at TIMESTAMP NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  INDEX idx_user (user_id),
+  INDEX idx_read_status (read_at),
+  INDEX idx_created (created_at)
+);
+
+-- ============================================================================
+-- MILESTONES UPDATE - Add Reviewer Field
+-- ============================================================================
+-- Note: Alter table to add reviewer_id if not exists
+ALTER TABLE milestones ADD COLUMN reviewer_id INT;
+ALTER TABLE milestones ADD FOREIGN KEY (reviewer_id) REFERENCES users(id);
 
 -- ============================================================================
 -- VERIFICATION QUERIES

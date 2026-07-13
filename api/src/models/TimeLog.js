@@ -15,15 +15,15 @@ const TimeLog = sequelize.define('TimeLog', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  hours_logged: {
+  hours: {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  log_date: {
+  date: {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  description: {
+  notes: {
     type: DataTypes.TEXT,
     allowNull: true,
   },

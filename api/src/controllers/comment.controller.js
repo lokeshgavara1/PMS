@@ -5,7 +5,7 @@ exports.getTaskComments = async (req, res) => {
     const { taskId } = req.params;
     const comments = await Comment.findAll({
       where: { task_id: taskId },
-      include: [{ model: User, attributes: ['id', 'name', 'email'] }],
+      include: [{ model: User, as: 'author', attributes: ['id', 'name', 'email'] }],
       order: [['created_at', 'ASC']],
     });
 
@@ -42,10 +42,12 @@ exports.createComment = async (req, res) => {
       task_id: taskId,
       author_id: req.user.id,
       body,
+      created_at: new Date(),
+      updated_at: new Date(),
     });
 
     const commentWithUser = await Comment.findByPk(comment.id, {
-      include: [{ model: User, attributes: ['id', 'name', 'email'] }],
+      include: [{ model: User, as: 'author', attributes: ['id', 'name', 'email'] }],
     });
 
     res.status(201).json({ success: true, data: commentWithUser });
@@ -80,7 +82,7 @@ exports.updateComment = async (req, res) => {
     await comment.update({ body });
 
     const updated = await Comment.findByPk(commentId, {
-      include: [{ model: User, attributes: ['id', 'name', 'email'] }],
+      include: [{ model: User, as: 'author', attributes: ['id', 'name', 'email'] }],
     });
 
     res.json({ success: true, data: updated });

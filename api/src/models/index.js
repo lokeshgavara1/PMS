@@ -31,8 +31,8 @@ Sprint.belongsTo(Project, { foreignKey: 'project_id' });
 Task.hasMany(Comment, { foreignKey: 'task_id' });
 Comment.belongsTo(Task, { foreignKey: 'task_id' });
 
-User.hasMany(Comment, { foreignKey: 'user_id' });
-Comment.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Comment, { foreignKey: 'author_id', as: 'comments' });
+Comment.belongsTo(User, { foreignKey: 'author_id', as: 'author' });
 
 Task.hasMany(TimeLog, { foreignKey: 'task_id' });
 TimeLog.belongsTo(Task, { foreignKey: 'task_id' });
