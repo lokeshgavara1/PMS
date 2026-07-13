@@ -7,6 +7,7 @@ const Milestone = require('./Milestone');
 const Sprint = require('./Sprint');
 const Comment = require('./Comment');
 const TimeLog = require('./TimeLog');
+const Notification = require('./Notification');
 
 // Define associations
 User.hasMany(Project, { foreignKey: 'owner_id' });
@@ -39,6 +40,20 @@ TimeLog.belongsTo(Task, { foreignKey: 'task_id' });
 User.hasMany(TimeLog, { foreignKey: 'user_id' });
 TimeLog.belongsTo(User, { foreignKey: 'user_id' });
 
+User.hasMany(Notification, { foreignKey: 'user_id' });
+Notification.belongsTo(User, { foreignKey: 'user_id' });
+
+Milestone.belongsTo(User, { foreignKey: 'reviewer_id', as: 'reviewer' });
+User.hasMany(Milestone, { foreignKey: 'reviewer_id' });
+
+Task.belongsTo(User, { foreignKey: 'assignee_id', as: 'assignee' });
+Task.belongsTo(User, { foreignKey: 'reporter_id', as: 'reporter' });
+User.hasMany(Task, { foreignKey: 'assignee_id' });
+User.hasMany(Task, { foreignKey: 'reporter_id' });
+
+Task.belongsTo(Sprint, { foreignKey: 'sprint_id' });
+Sprint.hasMany(Task, { foreignKey: 'sprint_id' });
+
 module.exports = {
   sequelize,
   User,
@@ -49,4 +64,5 @@ module.exports = {
   Sprint,
   Comment,
   TimeLog,
+  Notification,
 };
