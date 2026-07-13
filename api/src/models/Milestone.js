@@ -30,6 +30,7 @@ const Milestone = sequelize.define('Milestone', {
 }, {
   tableName: 'milestones',
   timestamps: true,
+  underscored: true,
 });
 
 module.exports = Milestone;

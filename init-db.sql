@@ -140,15 +140,14 @@ CREATE TABLE IF NOT EXISTS tasks (
 CREATE TABLE IF NOT EXISTS comments (
   id INT AUTO_INCREMENT PRIMARY KEY,
   task_id INT NOT NULL,
-  user_id INT NOT NULL,
-  content LONGTEXT NOT NULL,
-  parent_comment_id INT,
+  author_id INT NOT NULL,
+  body LONGTEXT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE,
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-  FOREIGN KEY (parent_comment_id) REFERENCES comments(id),
-  INDEX idx_task (task_id)
+  FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE,
+  INDEX idx_task (task_id),
+  INDEX idx_author (author_id)
 );
 
 -- ============================================================================
@@ -158,9 +157,9 @@ CREATE TABLE IF NOT EXISTS time_logs (
   id INT AUTO_INCREMENT PRIMARY KEY,
   task_id INT NOT NULL,
   user_id INT NOT NULL,
-  hours_logged FLOAT NOT NULL,
-  log_date DATETIME NOT NULL,
-  description LONGTEXT,
+  hours FLOAT NOT NULL,
+  date DATETIME NOT NULL,
+  notes LONGTEXT,
   synced_to_timesheet BOOLEAN DEFAULT FALSE,
   sync_status ENUM('pending', 'synced', 'failed') DEFAULT 'pending',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -168,45 +167,38 @@ CREATE TABLE IF NOT EXISTS time_logs (
   FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   INDEX idx_task (task_id),
-  INDEX idx_user (user_id)
+  INDEX idx_user (user_id),
+  INDEX idx_date (date)
 );
 
 -- ============================================================================
--- INSERT DEFAULT USERS
+-- NOTIFICATIONS TABLE
 -- ============================================================================
-INSERT INTO users (email, name, password_hash, system_role, is_active) VALUES
-('admin@cutm.ac.in', 'Admin User', '$2a$10$N9qo8uLOickgx2ZMRZoMye4j0Dn8e.ZfOm5KzxV3F.4Z0a9E7p5ve', 'admin', TRUE),
-('hod@cutm.ac.in', 'HOD User', '$2a$10$N9qo8uLOickgx2ZMRZoMye4j0Dn8e.ZfOm5KzxV3F.4Z0a9E7p5ve', 'hod', TRUE),
-('faculty@cutm.ac.in', 'Faculty User', '$2a$10$N9qo8uLOickgx2ZMRZoMye4j0Dn8e.ZfOm5KzxV3F.4Z0a9E7p5ve', 'faculty', TRUE),
-('student@cutm.ac.in', 'Student User', '$2a$10$N9qo8uLOickgx2ZMRZoMye4j0Dn8e.ZfOm5KzxV3F.4Z0a9E7p5ve', 'student', TRUE);
+CREATE TABLE IF NOT EXISTS notifications (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  type ENUM('task_assigned', 'comment', 'milestone', 'sprint', 'general') DEFAULT 'general',
+  message TEXT NOT NULL,
+  related_entity_id INT,
+  related_entity_type VARCHAR(50),
+  read_at TIMESTAMP NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  INDEX idx_user (user_id),
+  INDEX idx_read_status (read_at),
+  INDEX idx_created (created_at)
+);
 
 -- ============================================================================
--- INSERT SAMPLE DATA
+-- MILESTONES UPDATE - Add Reviewer Field
 -- ============================================================================
-INSERT INTO projects (name, description, category, visibility, status, owner_id, start_date, end_date) VALUES
-('Web Development Project', 'Building a modern web application', 'academic', 'private', 'active', 1, NOW(), DATE_ADD(NOW(), INTERVAL 3 MONTH)),
-('Mobile App Development', 'Developing a mobile application', 'academic', 'private', 'active', 1, NOW(), DATE_ADD(NOW(), INTERVAL 4 MONTH)),
-('Data Analytics Research', 'Research on data analytics', 'research', 'department', 'planning', 2, NOW(), DATE_ADD(NOW(), INTERVAL 6 MONTH));
-
-INSERT INTO project_members (project_id, user_id, role) VALUES
-(1, 1, 'owner'),
-(1, 3, 'member'),
-(1, 4, 'member'),
-(2, 1, 'owner'),
-(2, 2, 'lead'),
-(3, 2, 'owner');
-
-INSERT INTO tasks (project_id, title, description, type, priority, status, assignee_id, reporter_id, due_date, estimate_hours) VALUES
-(1, 'Setup project repository', 'Initialize Git repository and configure CI/CD', 'task', 'high', 'done', 3, 1, NOW(), 4),
-(1, 'Design database schema', 'Create and document database design', 'task', 'high', 'in_progress', 3, 1, DATE_ADD(NOW(), INTERVAL 2 DAY), 8),
-(1, 'Implement authentication', 'Add JWT-based authentication system', 'feature', 'critical', 'todo', 4, 1, DATE_ADD(NOW(), INTERVAL 5 DAY), 16),
-(2, 'API Development', 'Build RESTful API endpoints', 'feature', 'high', 'todo', 2, 2, DATE_ADD(NOW(), INTERVAL 10 DAY), 20);
+-- Note: Alter table to add reviewer_id if not exists
+ALTER TABLE milestones ADD COLUMN reviewer_id INT;
+ALTER TABLE milestones ADD FOREIGN KEY (reviewer_id) REFERENCES users(id);
 
 -- ============================================================================
 -- VERIFICATION QUERIES
 -- ============================================================================
 -- Verify database creation
-SELECT 'Database setup complete!' AS status;
-SELECT COUNT(*) as user_count FROM users;
-SELECT COUNT(*) as project_count FROM projects;
-SELECT COUNT(*) as task_count FROM tasks;
+SELECT 'Database schema setup complete!' AS status;

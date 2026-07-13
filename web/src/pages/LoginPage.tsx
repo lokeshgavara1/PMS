@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
-import { useLogin, useGoogleLogin, useCurrentUser } from '../api';
+import { useGoogleLogin, useCurrentUser } from '../api';
 import { useAppStore } from '../stores/app';
-import { LightningIcon, BarChartIcon, ChartIcon, ShieldIcon } from '../components/SidebarIcons';
 import centurionLogo from '../assets/cutm-logo.png';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { mutate: login, isLoading, error } = useLogin();
   const { mutate: googleLogin, isLoading: isGoogleLoading, error: googleError } = useGoogleLogin();
   const { data: user } = useCurrentUser();
   const setCurrentUser = useAppStore((state) => state.setCurrentUser);
 
-  const [email, setEmail] = useState('admin@cutm.ac.in');
-  const [password, setPassword] = useState('password123');
   const [localError, setLocalError] = useState('');
 
   // Redirect if already logged in
@@ -25,39 +21,6 @@ export default function LoginPage() {
     }
   }, [user, navigate, setCurrentUser]);
 
-  const validateEmail = (emailToCheck: string): boolean => {
-    const validDomains = ['cutm.ac.in', 'cutmap.ac.in'];
-    const domain = emailToCheck.split('@')[1];
-    return validDomains.includes(domain);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLocalError('');
-
-    if (!email || !password) {
-      setLocalError('Please fill in all fields');
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      setLocalError('Please use your official cutm.ac.in or cutmap.ac.in email address');
-      return;
-    }
-
-    login(
-      { email, password },
-      {
-        onSuccess: (data) => {
-          setCurrentUser(data.user);
-          navigate('/dashboard');
-        },
-        onError: (err: any) => {
-          setLocalError(err.response?.data?.error?.message || 'Login failed');
-        },
-      },
-    );
-  };
 
   const handleGoogleSignInSuccess = (credentialResponse: any) => {
     const idToken = credentialResponse.credential;
@@ -85,107 +48,87 @@ export default function LoginPage() {
     setLocalError('Google sign-in failed. Please try again.');
   };
 
-  // Demo users
-  const demoUsers = [
-    { email: 'admin@cutm.ac.in', role: 'Admin' },
-    { email: 'hod.cse@cutm.ac.in', role: 'HOD' },
-    { email: 'faculty1@cutm.ac.in', role: 'Faculty' },
-    { email: 'pm@cutm.ac.in', role: 'Project Manager' },
-    { email: 'student1@cutm.ac.in', role: 'Student' },
-  ];
+  // Demo users removed - use Google Sign-in or LDAP credentials
 
-  const errorMessage: string = String(localError || (error as any)?.response?.data?.error?.message || (googleError as any)?.response?.data?.error?.message || 'An error occurred');
+  const errorMessage: string = String(localError || (googleError as any)?.response?.data?.error?.message || 'An error occurred');
 
   return (
-    <div className="min-h-screen flex bg-gradient-to-br from-white via-sky-blue-50 to-beige-50">
-      {/* Left Section - Light Blue Marketing */}
-      <div className="w-1/2 bg-gradient-to-br from-sky-blue-50 via-white to-beige-50 border-r border-sky-blue-100 p-12 flex flex-col justify-between">
+    <div className="min-h-screen flex bg-white">
+      {/* Left Section - Branding */}
+      <div className="w-1/2 bg-gradient-to-br from-teal-50 to-white border-r border-teal-100 p-12 flex flex-col justify-between">
         <div>
-          {/* Logo */}
-          <div className="mb-12">
-            <img src={centurionLogo} alt="Centurion University" className="h-16 w-auto mb-3 rounded-full" />
-            <h1 className="text-2xl font-bold text-gray-900">CUTM-PMS</h1>
-            <p className="text-teal-500 text-sm mt-1">Project Management System</p>
+          {/* Logo and Title */}
+          <div className="mb-12 flex items-center gap-4">
+            <img src={centurionLogo} alt="Centurion University" className="h-14 w-auto rounded-full flex-shrink-0" />
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">CUTM-PMS</h1>
+              <p className="text-teal-500 text-sm">Project Management System</p>
+            </div>
           </div>
 
-          {/* AI Badge */}
-          <div className="inline-block px-4 py-2 border border-teal-300 rounded-full text-sm text-teal-700 mb-12 bg-teal-50 flex items-center gap-2">
-            <LightningIcon size={16} className="text-teal-700" />
-            Smart Project Management
-          </div>
-
-          {/* Main Heading */}
-          <div className="mb-8">
-            <h2 className="text-5xl font-bold leading-tight mb-4 text-gray-900">
+          {/* Main Heading - Clean and Simple */}
+          <div>
+            <h2 className="text-5xl font-bold leading-tight mb-3 text-gray-900">
               Manage Projects
               <br />
-              <span className="text-teal-500">Smarter &</span>
-              <br />
-              Faster.
+              <span className="text-teal-500">Smarter & Faster</span>
             </h2>
-            <p className="text-gray-700 text-lg leading-relaxed">
-              CUTM-PMS gives your team intelligent task tracking, automated workflows,
-              real-time analytics, and seamless collaboration — all in one place.
+            <p className="text-gray-600 text-base leading-relaxed mb-8">
+              Intelligent task tracking, automated workflows, real-time analytics, and seamless collaboration — all in one platform.
             </p>
+
+            {/* Features Grid */}
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex flex-col gap-3">
+                <svg className="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                <p className="font-semibold text-gray-900">Smart Tracking</p>
+                <p className="text-gray-600 text-sm">Intelligent task tracking and management</p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <svg className="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <p className="font-semibold text-gray-900">Fast Workflows</p>
+                <p className="text-gray-600 text-sm">Automated processes and automation</p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <svg className="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                <p className="font-semibold text-gray-900">Real Analytics</p>
+                <p className="text-gray-600 text-sm">Real-time insights and reporting</p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <svg className="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.856-1.487M15 10a3 3 0 11-6 0 3 3 0 016 0zM15 20H9m6 0h6m-3-3a6 6 0 00-12 0v2a2 2 0 002 2h8a2 2 0 002-2v-2z" />
+                </svg>
+                <p className="font-semibold text-gray-900">Collaboration</p>
+                <p className="text-gray-600 text-sm">Seamless team collaboration</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Features */}
+        {/* Footer */}
         <div>
-          <div className="flex gap-3 mb-12 flex-wrap">
-            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white flex items-center gap-2">
-              <BarChartIcon size={16} className="text-teal-700" />
-              Task Management
-            </button>
-            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white flex items-center gap-2">
-              <ChartIcon size={16} className="text-teal-700" />
-              Real Analytics
-            </button>
-            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white flex items-center gap-2">
-              <LightningIcon size={16} className="text-teal-700" />
-              Auto Workflows
-            </button>
-            <button className="px-6 py-2 border border-teal-300 text-teal-700 rounded-lg hover:bg-teal-100 transition bg-white flex items-center gap-2">
-              <ShieldIcon size={16} className="text-teal-700" />
-              Secure & Compliant
-            </button>
-          </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 pb-12 border-b border-sky-blue-100">
-            <div className="border border-sky-blue-100 rounded-lg p-6 text-center bg-white">
-              <p className="text-3xl font-bold mb-2 text-teal-500">500+</p>
-              <p className="text-gray-700 text-sm">Projects Managed</p>
-            </div>
-            <div className="border border-sky-blue-100 rounded-lg p-6 text-center bg-white">
-              <p className="text-3xl font-bold mb-2 text-teal-500">99%</p>
-              <p className="text-gray-700 text-sm">Uptime</p>
-            </div>
-            <div className="border border-sky-blue-100 rounded-lg p-6 text-center bg-white">
-              <p className="text-3xl font-bold mb-2 text-teal-500">4.9★</p>
-              <p className="text-gray-700 text-sm">User Rating</p>
-            </div>
-          </div>
-
-          {/* Security Notice */}
-          <div className="mt-12 p-4 bg-teal-50 border border-teal-200 rounded-lg">
-            <p className="text-gray-700 text-sm">
-              🔐 <span className="font-semibold">Restricted Access</span>
-              <br />
-              Login is limited to official cutm.ac.in / cutmap.ac.in accounts.
-            </p>
-          </div>
         </div>
       </div>
 
       {/* Right Section - Login Form */}
       <div className="w-1/2 bg-white p-12 flex flex-col justify-center items-center">
         <div className="w-full max-w-md">
-          <h3 className="text-3xl font-bold text-gray-900 mb-3">Welcome back</h3>
-          <p className="text-gray-600 mb-8">Sign in to your project dashboard</p>
+          <div className="mb-8">
+            <h3 className="text-3xl font-bold text-gray-900 mb-3">Welcome back</h3>
+            <p className="text-gray-600 text-base leading-relaxed">Sign in with Google to access your project dashboard</p>
+          </div>
+
+          <div className="w-12 h-1 bg-gradient-to-r from-teal-500 to-transparent mb-8"></div>
 
           {/* Error Message */}
-          {(localError || error || googleError) ? (
+          {(localError || googleError) ? (
             <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
               <p className="text-red-700 text-sm">
                 {errorMessage}
@@ -195,14 +138,30 @@ export default function LoginPage() {
 
           {/* Google Sign In Button */}
           <div className="w-full mb-6">
+            <style>{`
+              .google-signin-wrapper {
+                width: 100%;
+              }
+              .google-signin-wrapper > div {
+                width: 100% !important;
+              }
+              .google-signin-wrapper button {
+                width: 100% !important;
+                gap: 0px !important;
+                padding: 10px 16px !important;
+              }
+              .google-signin-wrapper svg {
+                margin-right: 4px !important;
+              }
+            `}</style>
             {import.meta.env.VITE_GOOGLE_CLIENT_ID ? (
-              <div className={isGoogleLoading ? 'opacity-50 pointer-events-none' : ''}>
+              <div className={`google-signin-wrapper ${isGoogleLoading ? 'opacity-50 pointer-events-none' : ''}`}>
                 <GoogleLogin
                   onSuccess={handleGoogleSignInSuccess}
                   onError={handleGoogleSignInError}
                   text="signin_with"
                   width="100%"
-                  
+
                 />
               </div>
             ) : (
@@ -234,77 +193,23 @@ export default function LoginPage() {
             )}
           </div>
 
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or use email</span>
-            </div>
-          </div>
 
-          {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-4 mb-6">
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-medium text-gray-900 mb-1">Email (cutm.ac.in / cutmap.ac.in)</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                placeholder="user@cutm.ac.in"
-              />
+
+          {/* Supported Domains */}
+          <div className="mt-8 p-4 bg-gradient-to-br from-teal-50 to-emerald-50 border border-teal-200 rounded-xl">
+            <div className="flex items-start gap-3">
+              <div className="text-teal-600 mt-0.5">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <p className="text-xs font-semibold text-teal-900 mb-2">Supported email domains</p>
+                <p className="text-xs text-teal-700 leading-relaxed">
+                  @cutm.ac.in • @cutmap.ac.in • @thegttech.com • @esse.co.in • @ftl.org.in
+                </p>
+              </div>
             </div>
-
-            {/* Password */}
-            <div>
-              <label className="block text-sm font-medium text-gray-900 mb-1">Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                placeholder="password123"
-              />
-            </div>
-
-            {/* Submit */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-teal-500 text-white py-2 rounded-lg font-semibold hover:bg-teal-600 disabled:opacity-50 disabled:cursor-not-allowed transition"
-            >
-              {isLoading ? 'Signing in...' : 'Sign In'}
-            </button>
-          </form>
-
-          {/* Demo Users */}
-          <div className="border-t border-gray-200 pt-6">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Demo Users (Development Only)</h3>
-            <div className="space-y-2">
-              {demoUsers.map((demoUser) => (
-                <button
-                  key={demoUser.email}
-                  onClick={() => {
-                    setEmail(demoUser.email);
-                    setPassword('password123');
-                  }}
-                  className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition border border-gray-200"
-                >
-                  <span className="font-medium">{demoUser.role}</span>
-                  <span className="text-gray-500 ml-2">{demoUser.email}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Info */}
-          <div className="mt-6 p-4 bg-sky-blue-50 border border-sky-blue-100 rounded-lg">
-            <p className="text-xs text-sky-blue-500">
-              💡 This is a demo using Mock Service Worker (MSW). All API calls are intercepted and mocked. No real
-              authentication occurs.
-            </p>
           </div>
         </div>
       </div>

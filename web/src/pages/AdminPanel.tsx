@@ -349,7 +349,7 @@ export default function AdminPanel() {
           <div className="space-y-6">
             <button
               onClick={handleAddDepartment}
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
+              className="px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 font-medium"
             >
               + Add Department
             </button>

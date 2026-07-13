@@ -92,7 +92,7 @@ export default function GanttChart({ projectId }: GanttChartProps) {
                   <td className="px-6 py-4">
                     <div className="relative h-8 bg-gray-100 rounded">
                       <div
-                        className="absolute top-0 h-full bg-blue-500 rounded flex items-center justify-center text-xs font-medium text-white"
+                        className="absolute top-0 h-full bg-teal-500 rounded flex items-center justify-center text-xs font-medium text-white"
                         style={{
                           left: `${position.left}%`,
                           width: `${position.width}%`,
@@ -113,7 +113,7 @@ export default function GanttChart({ projectId }: GanttChartProps) {
       <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
         <div className="flex gap-6 text-sm text-gray-600">
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-blue-500 rounded"></div>
+            <div className="w-4 h-4 bg-teal-500 rounded"></div>
             <span>Task Progress</span>
           </div>
         </div>

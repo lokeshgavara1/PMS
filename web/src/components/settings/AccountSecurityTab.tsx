@@ -103,7 +103,7 @@ export default function AccountSecurityTab() {
         {!showPasswordForm ? (
           <button
             onClick={() => setShowPasswordForm(true)}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+            className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium"
           >
             Update Password
           </button>
@@ -143,7 +143,7 @@ export default function AccountSecurityTab() {
             <div className="flex gap-2">
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+                className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium"
               >
                 Update Password
               </button>
@@ -178,7 +178,7 @@ export default function AccountSecurityTab() {
               className={`px-4 py-2 rounded-lg transition font-medium ${
                 twoFAEnabled
                   ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
-                  : 'bg-blue-600 text-white hover:bg-blue-700'
+                  : 'bg-teal-600 text-white hover:bg-teal-700'
               }`}
             >
               {twoFAEnabled ? 'Enabled' : 'Enable 2FA'}
@@ -202,7 +202,7 @@ export default function AccountSecurityTab() {
                 />
                 <button
                   onClick={handleConfirm2FA}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+                  className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium"
                 >
                   Verify & Enable
                 </button>
@@ -232,7 +232,7 @@ export default function AccountSecurityTab() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <p className="font-medium text-gray-900">{session.device}</p>
-                    {session.current && <span className="text-xs bg-sky-blue-100 text-teal-600 px-2 py-1 rounded">Current</span>}
+                    {session.current && <span className="text-xs bg-sky-teal-100 text-teal-600 px-2 py-1 rounded">Current</span>}
                   </div>
                   <p className="text-sm text-gray-600 mt-1">📍 {session.location}</p>
                   <p className="text-sm text-gray-500 mt-1">Last active: {session.lastActive}</p>
@@ -285,7 +285,7 @@ export default function AccountSecurityTab() {
           ))}
         </div>
 
-        <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
+        <button className="mt-4 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium">
           + Create New Token
         </button>
       </div>

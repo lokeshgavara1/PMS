@@ -27,7 +27,7 @@ export default function ProfilePage() {
     const colors: Record<string, string> = {
       admin: 'bg-red-100 text-red-700',
       hod: 'bg-purple-100 text-purple-700',
-      faculty: 'bg-sky-blue-100 text-teal-600',
+      faculty: 'bg-sky-teal-100 text-teal-600',
       pm: 'bg-green-100 text-green-700',
       student: 'bg-yellow-100 text-yellow-700',
     };
@@ -44,7 +44,7 @@ export default function ProfilePage() {
         </div>
         <button
           onClick={() => setIsEditing(!isEditing)}
-          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+          className="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium"
         >
           {isEditing ? 'Cancel' : 'Edit Profile'}
         </button>
@@ -53,7 +53,7 @@ export default function ProfilePage() {
       {/* Profile Card */}
       <div className="bg-gradient-to-br from-sky-blue-50 via-white to-beige-50 rounded-lg p-8 border border-teal-100">
         <div className="flex items-center gap-6">
-          <div className="w-24 h-24 bg-gradient-to-br from-sky-blue-500 to-navy-500 rounded-full flex items-center justify-center">
+          <div className="w-24 h-24 bg-gradient-to-br from-sky-teal-500 to-navy-500 rounded-full flex items-center justify-center">
             <span className="text-4xl">👤</span>
           </div>
           <div className="flex-1">
@@ -63,7 +63,7 @@ export default function ProfilePage() {
               <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getRoleColor(user?.system_role || '')}`}>
                 {user?.system_role?.toUpperCase() || 'ROLE'}
               </span>
-              <span className="px-3 py-1 bg-sky-blue-100 text-teal-600 rounded-full text-sm font-medium">
+              <span className="px-3 py-1 bg-sky-teal-100 text-teal-600 rounded-full text-sm font-medium">
                 Active
               </span>
             </div>
@@ -206,7 +206,7 @@ export default function ProfilePage() {
         </h3>
         <div className="space-y-4">
           <p className="text-gray-700 mb-4">Secure your account with a strong password</p>
-          <button className="px-6 py-2 border-2 border-blue-600 text-teal-500 rounded-lg hover:bg-teal-50 transition font-medium">
+          <button className="px-6 py-2 border-2 border-teal-600 text-teal-500 rounded-lg hover:bg-teal-50 transition font-medium">
             Change Password
           </button>
         </div>
@@ -217,7 +217,7 @@ export default function ProfilePage() {
         <div className="flex gap-4">
           <button
             onClick={handleSave}
-            className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"
+            className="flex-1 px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-semibold"
           >
             Save Changes
           </button>

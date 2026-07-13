@@ -11,21 +11,18 @@ const Comment = sequelize.define('Comment', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  user_id: {
+  author_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  content: {
+  body: {
     type: DataTypes.TEXT,
     allowNull: false,
-  },
-  parent_comment_id: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
   },
 }, {
   tableName: 'comments',
   timestamps: true,
+  underscored: true,
 });
 
 module.exports = Comment;

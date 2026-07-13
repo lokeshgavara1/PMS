@@ -93,7 +93,7 @@ export default function ProjectsPage() {
                   <h3 className="text-lg font-semibold text-gray-900 hover:text-teal-500">{project.name}</h3>
                   <p className="text-sm text-gray-600 mt-1">{project.description?.slice(0, 100)}</p>
                 </div>
-                <span className="ml-2 px-2 py-1 text-xs font-medium bg-sky-blue-100 text-sky-blue-500 rounded">
+                <span className="ml-2 px-2 py-1 text-xs font-medium bg-sky-teal-100 text-sky-teal-500 rounded">
                   {project.category}
                 </span>
               </div>
@@ -109,7 +109,7 @@ export default function ProjectsPage() {
           <p className="text-gray-600 mb-4">No projects yet. Create your first project to get started.</p>
           <button
             onClick={() => openModal('createProject')}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium inline-block"
+            className="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium inline-block"
           >
             Create Your First Project
           </button>
@@ -218,7 +218,7 @@ export default function ProjectsPage() {
                 <button
                   type="submit"
                   disabled={isCreating}
-                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition font-medium"
+                  className="flex-1 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition font-medium"
                 >
                   {isCreating ? 'Creating...' : 'Create'}
                 </button>
@@ -261,7 +261,7 @@ function ToastContainer() {
                 ? 'bg-red-500'
                 : toast.type === 'warning'
                   ? 'bg-yellow-500'
-                  : 'bg-sky-blue-500'
+                  : 'bg-sky-teal-500'
           }`}
         >
           {toast.message}

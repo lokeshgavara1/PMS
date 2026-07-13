@@ -73,7 +73,7 @@ export default function MyTasksPage() {
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
       backlog: 'bg-gray-100 text-gray-700',
-      todo: 'bg-sky-blue-100 text-sky-blue-500',
+      todo: 'bg-sky-teal-100 text-sky-teal-500',
       in_progress: 'bg-yellow-100 text-yellow-700',
       review: 'bg-purple-100 text-purple-700',
       done: 'bg-green-100 text-green-700',
@@ -254,7 +254,7 @@ export default function MyTasksPage() {
                         {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
                       </span>
                       {task.due_date && (
-                        <span className="text-xs px-3 py-1 bg-sky-blue-50 text-sky-blue-500 rounded-full">
+                        <span className="text-xs px-3 py-1 bg-sky-blue-50 text-sky-teal-500 rounded-full">
                           Due: {new Date(task.due_date).toLocaleDateString()}
                         </span>
                       )}
@@ -279,7 +279,7 @@ export default function MyTasksPage() {
                     <div className="flex gap-2 text-sm">
                       <button
                         onClick={() => handleViewDetails(task.id)}
-                        className="flex-1 px-3 py-2 bg-teal-50 text-teal-500 rounded-lg hover:bg-sky-blue-100 font-medium transition flex items-center justify-center gap-2"
+                        className="flex-1 px-3 py-2 bg-teal-50 text-teal-500 rounded-lg hover:bg-sky-teal-100 font-medium transition flex items-center justify-center gap-2"
                         title="View task details"
                       >
                         <ViewIcon size={16} className="text-teal-500" />

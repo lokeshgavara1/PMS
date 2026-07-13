@@ -29,20 +29,21 @@ sequelize.authenticate()
     process.exit(1);
   });
 
-// Sync models
-sequelize.sync({ alter: true })
-  .then(() => {
-    console.log('✅ Models synced with database');
-  })
-  .catch(err => {
-    console.error('❌ Failed to sync models:', err);
-  });
+// Sync models (disabled - using manual SQL schema)
+// sequelize.sync({ alter: false })
+//   .then(() => {
+//     console.log('✅ Models synced with database');
+//   })
+//   .catch(err => {
+//     console.error('❌ Failed to sync models:', err);
+//   });
 
 // Routes
 app.use('/api/v2/auth', require('./routes/auth.routes'));
 app.use('/api/v2/projects', require('./routes/projects.routes'));
 app.use('/api/v2/users', require('./routes/users.routes'));
 app.use('/api/v2/tasks', require('./routes/tasks.routes'));
+app.use('/api/v2/notifications', require('./routes/notifications.routes'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {

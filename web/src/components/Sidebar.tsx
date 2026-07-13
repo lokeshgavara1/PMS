@@ -123,8 +123,8 @@ export default function Sidebar() {
         {sidebarOpen && user && (
           <div className="px-2 py-3 bg-teal-500 bg-opacity-20 rounded-lg border border-teal-500 border-opacity-30">
             <p className="font-semibold text-white truncate text-sm">{user.name}</p>
-            <p className="text-sky-blue-500 text-xs truncate mt-1">{user.email}</p>
-            <span className="inline-block mt-2 px-2 py-1 bg-teal-500 bg-opacity-30 text-sky-blue-500 text-xs font-medium rounded-md capitalize">
+            <p className="text-sky-teal-500 text-xs truncate mt-1">{user.email}</p>
+            <span className="inline-block mt-2 px-2 py-1 bg-teal-500 bg-opacity-30 text-sky-teal-500 text-xs font-medium rounded-md capitalize">
               {user.system_role}
             </span>
           </div>

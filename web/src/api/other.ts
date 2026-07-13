@@ -61,7 +61,7 @@ export const useCreateComment = (taskId: number) => {
 // ============================================================================
 
 /**
- * GET /api/v2/tasks/:taskId/time-logs
+ * GET /api/v2/tasks/:taskId/timelogs
  * Fetch all time logs for a task
  */
 export const useTaskTimeLogs = (taskId: number | null) => {
@@ -69,7 +69,7 @@ export const useTaskTimeLogs = (taskId: number | null) => {
     ['timeLogs', taskId],
     async () => {
       const response = await apiClient.get<{ success: boolean; data: TimeLog[] }>(
-        `/tasks/${taskId}/time-logs`,
+        `/tasks/${taskId}/timelogs`,
       );
       return response.data.data;
     },
@@ -81,7 +81,7 @@ export const useTaskTimeLogs = (taskId: number | null) => {
 };
 
 /**
- * POST /api/v2/tasks/:taskId/time-logs
+ * POST /api/v2/tasks/:taskId/timelogs
  * Log hours on a task
  */
 export const useLogTime = (taskId: number) => {
@@ -90,7 +90,7 @@ export const useLogTime = (taskId: number) => {
   return useMutation(
     async (logData: LogTimeRequest) => {
       const response = await apiClient.post<{ success: boolean; data: TimeLog }>(
-        `/tasks/${taskId}/time-logs`,
+        `/tasks/${taskId}/timelogs`,
         logData,
       );
       return response.data.data;

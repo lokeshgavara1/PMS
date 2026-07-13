@@ -26,6 +26,7 @@ const ProjectMember = sequelize.define('ProjectMember', {
 }, {
   tableName: 'project_members',
   timestamps: true,
+  underscored: true,
 });
 
 module.exports = ProjectMember;

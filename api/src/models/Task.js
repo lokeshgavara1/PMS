@@ -74,6 +74,7 @@ const Task = sequelize.define('Task', {
 }, {
   tableName: 'tasks',
   timestamps: true,
+  underscored: true,
 });
 
 module.exports = Task;

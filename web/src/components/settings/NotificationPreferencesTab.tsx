@@ -165,7 +165,7 @@ export default function NotificationPreferencesTab() {
             <button
               onClick={handleToggleQuietHours}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-                quietHours.enabled ? 'bg-blue-600' : 'bg-gray-300'
+                quietHours.enabled ? 'bg-teal-600' : 'bg-gray-300'
               }`}
             >
               <span
@@ -323,7 +323,7 @@ export default function NotificationPreferencesTab() {
 
       {/* Save Button */}
       <div className="flex gap-3">
-        <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
+        <button className="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-medium">
           Save Preferences
         </button>
         <button className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-medium">

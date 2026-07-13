@@ -60,7 +60,7 @@ export default function BacklogView({ projectId, tasks, sprints }: BacklogViewPr
     <div className="space-y-6">
       {/* Create Task Form */}
       {showForm && (
-        <div className="bg-white rounded-lg shadow p-6 border-2 border-blue-200">
+        <div className="bg-white rounded-lg shadow p-6 border-2 border-teal-200">
           <h3 className="font-semibold text-gray-900 mb-4">Create New Task</h3>
           <form onSubmit={handleCreateTask} className="space-y-4">
             <input
@@ -68,21 +68,21 @@ export default function BacklogView({ projectId, tasks, sprints }: BacklogViewPr
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               placeholder="Task title"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
               required
             />
             <textarea
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               placeholder="Description (optional)"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
               rows={3}
             />
             <div className="flex gap-4">
               <button
                 type="submit"
                 disabled={isCreating}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:opacity-50"
               >
                 {isCreating ? 'Creating...' : 'Create Task'}
               </button>
@@ -101,7 +101,7 @@ export default function BacklogView({ projectId, tasks, sprints }: BacklogViewPr
       {!showForm && (
         <button
           onClick={() => setShowForm(true)}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700"
         >
           + New Task
         </button>
@@ -138,7 +138,7 @@ export default function BacklogView({ projectId, tasks, sprints }: BacklogViewPr
                   {sprints.length > 0 && (
                     <select
                       onChange={(e) => handleMoveToSprint(task.id, parseInt(e.target.value))}
-                      className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
                       defaultValue=""
                     >
                       <option value="">Move to sprint...</option>
